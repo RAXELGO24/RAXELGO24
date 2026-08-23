@@ -1,10 +1,151 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RAXEL GO 24</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f7fa;
+            color: #222;
+        }
+
+        header {
+            background: #111827;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 32px;
+        }
+
+        header p {
+            margin-top: 8px;
+            font-size: 16px;
+        }
+
+        .hero {
+            padding: 50px 20px;
+            text-align: center;
+            background: white;
+        }
+
+        .hero h2 {
+            font-size: 30px;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 17px;
+            color: #555;
+            margin-bottom: 25px;
+        }
+
+        .book-btn {
+            display: inline-block;
+            background: #16a34a;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .services {
+            padding: 35px 20px;
+            text-align: center;
+        }
+
+        .services h2 {
+            margin-bottom: 25px;
+        }
+
+        .cards {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background: white;
+            width: 280px;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: #666;
+        }
+
+        footer {
+            background: #111827;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+        }
+    </style>
 </head>
+
 <body>
-    <h1>RAXEL GO 24 🚗</h1>
-    <p>Auto Service for Rural Areas</p>
+
+    <header>
+        <h1>RAXEL GO 24 🚗</h1>
+        <p>Reliable Auto Service for Rural Areas</p>
+    </header>
+
+    <section class="hero">
+        <h2>Your Ride, Just a Call Away</h2>
+        <p>Fast, simple and reliable auto service for your local journey.</p>
+
+        <a class="book-btn" href="tel:+91XXXXXXXXXX">
+            📞 Book an Auto
+        </a>
+    </section>
+
+    <section class="services">
+        <h2>Our Services</h2>
+
+        <div class="cards">
+
+            <div class="card">
+                <h3>🚗 Auto Booking</h3>
+                <p>Book an auto for your local journey.</p>
+            </div>
+
+            <div class="card">
+                <h3>📍 Local Service</h3>
+                <p>Convenient rides for rural and nearby areas.</p>
+            </div>
+
+            <div class="card">
+                <h3>🕐 24/7 Support</h3>
+                <p>Get help whenever you need a ride.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 RAXEL GO 24. All Rights Reserved.</p>
+    </footer>
+
 </body>
 </html>
