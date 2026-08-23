@@ -21,12 +21,12 @@ body {
 header {
     background: #111827;
     color: white;
-    padding: 24px 20px;
     text-align: center;
+    padding: 25px 15px;
 }
 
 header h1 {
-    font-size: 30px;
+    font-size: 32px;
 }
 
 header p {
@@ -46,29 +46,30 @@ header p {
 
 .hero p {
     color: #666;
+    line-height: 1.5;
     margin-bottom: 25px;
 }
 
-.book-button,
-.support-button {
+.button {
     display: inline-block;
-    color: white;
-    padding: 14px 24px;
+    padding: 14px 22px;
+    margin: 5px;
     border-radius: 10px;
     text-decoration: none;
     font-weight: bold;
-    margin: 5px;
 }
 
-.book-button {
+.book {
     background: #16a34a;
+    color: white;
 }
 
-.support-button {
+.fare {
     background: #2563eb;
+    color: white;
 }
 
-.booking {
+.section {
     max-width: 520px;
     margin: 30px auto;
     background: white;
@@ -77,15 +78,15 @@ header p {
     box-shadow: 0 4px 15px rgba(0,0,0,0.08);
 }
 
-.booking h2 {
+.section h2 {
     text-align: center;
     margin-bottom: 20px;
 }
 
 label {
     display: block;
-    margin: 12px 0 6px;
     font-weight: bold;
+    margin: 12px 0 6px;
 }
 
 input {
@@ -100,9 +101,9 @@ input[readonly] {
     background: #eef2f7;
 }
 
-.submit-button {
+.action {
     width: 100%;
-    margin-top: 22px;
+    margin-top: 20px;
     padding: 14px;
     border: none;
     border-radius: 8px;
@@ -112,17 +113,42 @@ input[readonly] {
     font-weight: bold;
 }
 
+.fare-result {
+    margin-top: 18px;
+    padding: 15px;
+    background: #f1f5f9;
+    border-radius: 10px;
+    text-align: center;
+    display: none;
+}
+
 .services {
-    padding: 30px 20px;
+    padding: 25px 20px;
     text-align: center;
 }
 
 .card {
-    background: white;
-    max-width: 500px;
+    max-width: 520px;
     margin: 12px auto;
     padding: 20px;
+    background: white;
     border-radius: 12px;
+}
+
+.support {
+    text-align: center;
+    padding: 30px 20px;
+}
+
+.support a {
+    display: inline-block;
+    margin-top: 12px;
+    background: #2563eb;
+    color: white;
+    padding: 13px 22px;
+    border-radius: 9px;
+    text-decoration: none;
+    font-weight: bold;
 }
 
 footer {
@@ -130,7 +156,7 @@ footer {
     color: white;
     text-align: center;
     padding: 22px;
-    margin-top: 25px;
+    margin-top: 20px;
 }
 </style>
 </head>
@@ -143,21 +169,51 @@ footer {
 </header>
 
 <section class="hero">
-    <h2>Your Ride, Just a Call Away</h2>
-    <p>Book your auto online. We will arrange the driver for you.</p>
 
-    <a href="#booking" class="book-button">
+    <h2>Thanks for visiting our website ❤️</h2>
+
+    <p>
+        जहाँ चाहे, जब चाहे — हम हैं आपके साथ।
+        <br>
+        Safe • Reliable • On Time
+    </p>
+
+    <a href="#booking" class="button book">
         🚗 Book an Auto
     </a>
 
-    <a href="tel:+918294741267" class="support-button">
-        📞 Help / Support
+    <a href="#fare" class="button fare">
+        💰 Check Fare
     </a>
+
 </section>
 
-<section class="booking" id="booking">
+<section class="section" id="fare">
 
-    <h2>Book Your Auto</h2>
+    <h2>💰 Check Estimated Fare</h2>
+
+    <label>From</label>
+    <input type="text" value="Ranisagar" readonly>
+
+    <label>To</label>
+    <input type="text" id="fareTo" placeholder="Enter destination">
+
+    <label>Passengers</label>
+    <input type="number" id="farePassengers" min="1" max="10" placeholder="Number of passengers">
+
+    <button class="action" onclick="checkFare()">
+        Check Estimated Fare
+    </button>
+
+    <div class="fare-result" id="fareResult">
+        Estimated fare will be calculated after the route is connected.
+    </div>
+
+</section>
+
+<section class="section" id="booking">
+
+    <h2>🚗 Book Your Auto</h2>
 
     <label>From</label>
     <input type="text" value="Ranisagar" readonly>
@@ -180,7 +236,7 @@ footer {
     <label>Number of Passengers</label>
     <input type="number" min="1" max="10" placeholder="Passengers">
 
-    <button class="submit-button">
+    <button class="action">
         Request Booking
     </button>
 
@@ -192,26 +248,49 @@ footer {
 
     <div class="card">
         🚗 <strong>Auto Booking</strong>
-        <p>Book an auto from Ranisagar to your destination.</p>
+        <p>Easy booking from Ranisagar to your destination.</p>
     </div>
 
     <div class="card">
         📍 <strong>Rural Area Service</strong>
-        <p>Convenient transportation for local and nearby areas.</p>
+        <p>Reliable transportation for local and nearby areas.</p>
     </div>
 
     <div class="card">
-        🕐 <strong>RAXEL GO 24</strong>
-        <p>We receive your booking and arrange the driver.</p>
+        ⏱️ <strong>15 Minute Service</strong>
+        <p>After confirmation, we aim to have your auto at your door within 15 minutes.</p>
     </div>
 
 </section>
 
+<section class="support">
+
+    <h2>Need Help?</h2>
+
+    <p>Our support team is here for you.</p>
+
+    <a href="tel:+918294741267">
+        📞 Help / Support
+    </a>
+
+</section>
+
 <footer>
-    <p>Help / Support: 8294741267</p>
-    <br>
+
     <p>© 2026 RAXEL GO 24</p>
+
+    <p style="margin-top:8px;">
+        Managed by Imtiyaz Khan
+    </p>
+
 </footer>
+
+<script>
+function checkFare() {
+    const result = document.getElementById("fareResult");
+    result.style.display = "block";
+}
+</script>
 
 </body>
 </html>
