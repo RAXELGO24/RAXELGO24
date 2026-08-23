@@ -46,26 +46,17 @@ header p {
 
 .hero p {
     color: #666;
-    line-height: 1.5;
+    line-height: 1.6;
     margin-bottom: 25px;
 }
 
 .button {
     display: inline-block;
-    padding: 14px 22px;
-    margin: 5px;
+    padding: 14px 25px;
     border-radius: 10px;
     text-decoration: none;
     font-weight: bold;
-}
-
-.book {
     background: #16a34a;
-    color: white;
-}
-
-.fare {
-    background: #2563eb;
     color: white;
 }
 
@@ -89,7 +80,8 @@ label {
     margin: 12px 0 6px;
 }
 
-input {
+input,
+select {
     width: 100%;
     padding: 13px;
     border: 1px solid #ddd;
@@ -113,26 +105,35 @@ input[readonly] {
     font-weight: bold;
 }
 
-.fare-result {
-    margin-top: 18px;
-    padding: 15px;
-    background: #f1f5f9;
-    border-radius: 10px;
-    text-align: center;
+.review {
     display: none;
 }
 
-.services {
-    padding: 25px 20px;
-    text-align: center;
+.detail {
+    background: #f8fafc;
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 8px;
 }
 
-.card {
-    max-width: 520px;
-    margin: 12px auto;
-    padding: 20px;
-    background: white;
-    border-radius: 12px;
+.payment-option {
+    margin: 10px 0;
+    padding: 14px;
+    border: 1px solid #ddd;
+    border-radius: 9px;
+}
+
+.payment-option input {
+    width: auto;
+    margin-right: 8px;
+}
+
+.notice {
+    margin-top: 15px;
+    padding: 12px;
+    background: #fff7ed;
+    border-radius: 8px;
+    font-size: 14px;
 }
 
 .support {
@@ -156,7 +157,17 @@ footer {
     color: white;
     text-align: center;
     padding: 22px;
-    margin-top: 20px;
+}
+
+.success {
+    display: none;
+    text-align: center;
+}
+
+.booking-id {
+    font-size: 22px;
+    font-weight: bold;
+    margin: 15px 0;
 }
 </style>
 </head>
@@ -178,38 +189,13 @@ footer {
         Safe • Reliable • On Time
     </p>
 
-    <a href="#booking" class="button book">
+    <a href="#booking" class="button">
         🚗 Book an Auto
     </a>
 
-    <a href="#fare" class="button fare">
-        💰 Check Fare
-    </a>
-
 </section>
 
-<section class="section" id="fare">
-
-    <h2>💰 Check Estimated Fare</h2>
-
-    <label>From</label>
-    <input type="text" value="Ranisagar" readonly>
-
-    <label>To</label>
-    <input type="text" id="fareTo" placeholder="Enter destination">
-
-    <label>Passengers</label>
-    <input type="number" id="farePassengers" min="1" max="10" placeholder="Number of passengers">
-
-    <button class="action" onclick="checkFare()">
-        Check Estimated Fare
-    </button>
-
-    <div class="fare-result" id="fareResult">
-        Estimated fare will be calculated after the route is connected.
-    </div>
-
-</section>
+<!-- BOOKING FORM -->
 
 <section class="section" id="booking">
 
@@ -219,47 +205,112 @@ footer {
     <input type="text" value="Ranisagar" readonly>
 
     <label>To</label>
-    <input type="text" placeholder="Enter destination">
+    <input type="text" id="to" placeholder="Enter destination">
 
     <label>Your Name</label>
-    <input type="text" placeholder="Enter your name">
+    <input type="text" id="name" placeholder="Enter your name">
 
     <label>Mobile Number</label>
-    <input type="tel" placeholder="Enter mobile number">
+    <input type="tel" id="mobile" placeholder="Enter mobile number">
 
     <label>Date</label>
-    <input type="date">
+    <input type="date" id="date">
 
     <label>Time</label>
-    <input type="time">
+    <input type="time" id="time">
 
     <label>Number of Passengers</label>
-    <input type="number" min="1" max="10" placeholder="Passengers">
+    <input type="number" id="passengers" min="1" max="10" placeholder="Passengers">
 
-    <button class="action">
-        Request Booking
+    <button class="action" onclick="showReview()">
+        Review Booking
     </button>
 
 </section>
 
-<section class="services">
+<!-- REVIEW PAGE/SECTION -->
 
-    <h2>Our Services</h2>
+<section class="section review" id="review">
 
-    <div class="card">
-        🚗 <strong>Auto Booking</strong>
-        <p>Easy booking from Ranisagar to your destination.</p>
+    <h2>📋 Review Your Booking</h2>
+
+    <div class="detail">
+        <strong>From:</strong>
+        <span id="rFrom">Ranisagar</span>
     </div>
 
-    <div class="card">
-        📍 <strong>Rural Area Service</strong>
-        <p>Reliable transportation for local and nearby areas.</p>
+    <div class="detail">
+        <strong>To:</strong>
+        <span id="rTo"></span>
     </div>
 
-    <div class="card">
-        ⏱️ <strong>15 Minute Service</strong>
-        <p>After confirmation, we aim to have your auto at your door within 15 minutes.</p>
+    <div class="detail">
+        <strong>Name:</strong>
+        <span id="rName"></span>
     </div>
+
+    <div class="detail">
+        <strong>Mobile:</strong>
+        <span id="rMobile"></span>
+    </div>
+
+    <div class="detail">
+        <strong>Date:</strong>
+        <span id="rDate"></span>
+    </div>
+
+    <div class="detail">
+        <strong>Time:</strong>
+        <span id="rTime"></span>
+    </div>
+
+    <div class="detail">
+        <strong>Passengers:</strong>
+        <span id="rPassengers"></span>
+    </div>
+
+    <h3 style="margin-top:20px;">💳 Payment Mode</h3>
+
+    <div class="payment-option">
+        <label>
+            <input type="radio" name="payment" value="UPI">
+            UPI
+        </label>
+    </div>
+
+    <div class="payment-option">
+        <label>
+            <input type="radio" name="payment" value="COD">
+            COD / Cash
+        </label>
+    </div>
+
+    <div class="notice">
+        Your booking will be sent to RAXEL GO 24 for confirmation.
+        The booking is not confirmed until accepted by our team.
+    </div>
+
+    <button class="action" onclick="submitBooking()">
+        Submit Booking
+    </button>
+
+</section>
+
+<!-- SUCCESS -->
+
+<section class="section success" id="success">
+
+    <h2>⏳ Booking Request Sent</h2>
+
+    <p>Your booking request has been submitted successfully.</p>
+
+    <div class="booking-id">
+        Booking ID: <span id="bookingId"></span>
+    </div>
+
+    <p>
+        Please wait for RAXEL GO 24 to accept your booking.
+    </p>
 
 </section>
 
@@ -286,10 +337,60 @@ footer {
 </footer>
 
 <script>
-function checkFare() {
-    const result = document.getElementById("fareResult");
-    result.style.display = "block";
+
+function showReview() {
+
+    const to = document.getElementById("to").value;
+    const name = document.getElementById("name").value;
+    const mobile = document.getElementById("mobile").value;
+    const date = document.getElementById("date").value;
+    const time = document.getElementById("time").value;
+    const passengers = document.getElementById("passengers").value;
+
+    if (!to || !name || !mobile || !date || !time || !passengers) {
+        alert("Please fill all booking details.");
+        return;
+    }
+
+    document.getElementById("rTo").textContent = to;
+    document.getElementById("rName").textContent = name;
+    document.getElementById("rMobile").textContent = mobile;
+    document.getElementById("rDate").textContent = date;
+    document.getElementById("rTime").textContent = time;
+    document.getElementById("rPassengers").textContent = passengers;
+
+    document.getElementById("review").style.display = "block";
+
+    document.getElementById("review").scrollIntoView({
+        behavior: "smooth"
+    });
 }
+
+function submitBooking() {
+
+    const payment = document.querySelector(
+        'input[name="payment"]:checked'
+    );
+
+    if (!payment) {
+        alert("Please select a payment mode.");
+        return;
+    }
+
+    const bookingId =
+        "RAXEL" +
+        Math.floor(100000 + Math.random() * 900000);
+
+    document.getElementById("bookingId").textContent = bookingId;
+
+    document.getElementById("review").style.display = "none";
+    document.getElementById("success").style.display = "block";
+
+    document.getElementById("success").scrollIntoView({
+        behavior: "smooth"
+    });
+}
+
 </script>
 
 </body>
