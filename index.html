@@ -18,13 +18,47 @@ body {
     color: #111827;
 }
 
+/* TOP BRAND AREA */
 header {
     background: #111827;
     color: white;
     text-align: center;
-    padding: 25px 15px;
+    padding: 12px 15px 25px;
 }
 
+/* LOGO + MANAGED BY */
+.brand-top {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.brand-logo {
+    width: 95px;
+    height: 95px;
+    object-fit: contain;
+    background: white;
+    border-radius: 12px;
+    padding: 4px;
+}
+
+.managed-by {
+    flex: 1;
+    text-align: right;
+    font-size: 20px;
+    font-weight: bold;
+    color: #facc15;
+}
+
+.managed-by span {
+    color: white;
+}
+
+/* MAIN HEADER */
 header h1 {
     font-size: 32px;
 }
@@ -169,14 +203,64 @@ footer {
     font-weight: bold;
     margin: 15px 0;
 }
+
+/* MOBILE DESIGN */
+@media (max-width: 600px) {
+
+    .brand-top {
+        justify-content: flex-start;
+        text-align: left;
+    }
+
+    .brand-logo {
+        width: 75px;
+        height: 75px;
+    }
+
+    .managed-by {
+        text-align: left;
+        font-size: 16px;
+    }
+
+    header h1 {
+        font-size: 27px;
+    }
+
+    .hero h2 {
+        font-size: 24px;
+    }
+
+    .section {
+        margin: 20px 12px;
+        padding: 20px;
+    }
+}
 </style>
 </head>
 
 <body>
 
 <header>
+
+    <!-- LOGO + MANAGED BY -->
+    <div class="brand-top">
+
+        <img
+            src="raxelgo24-logo.png"
+            alt="RAXEL GO 24 Logo"
+            class="brand-logo"
+        >
+
+        <div class="managed-by">
+            <span>Managed by</span><br>
+            Imtiyaz Khan
+        </div>
+
+    </div>
+
     <h1>RAXEL GO 24 🚗</h1>
     <p>Reliable Auto Service for Rural Areas</p>
+
 </header>
 
 <section class="hero">
@@ -220,7 +304,13 @@ footer {
     <input type="time" id="time">
 
     <label>Number of Passengers</label>
-    <input type="number" id="passengers" min="1" max="10" placeholder="Passengers">
+    <input
+        type="number"
+        id="passengers"
+        min="1"
+        max="10"
+        placeholder="Passengers"
+    >
 
     <button class="action" onclick="showReview()">
         Review Booking
@@ -302,7 +392,9 @@ footer {
 
     <h2>⏳ Booking Request Sent</h2>
 
-    <p>Your booking request has been submitted successfully.</p>
+    <p>
+        Your booking request has been submitted successfully.
+    </p>
 
     <div class="booking-id">
         Booking ID: <span id="bookingId"></span>
@@ -340,23 +432,41 @@ footer {
 
 function showReview() {
 
-    const to = document.getElementById("to").value;
-    const name = document.getElementById("name").value;
-    const mobile = document.getElementById("mobile").value;
-    const date = document.getElementById("date").value;
-    const time = document.getElementById("time").value;
-    const passengers = document.getElementById("passengers").value;
+    const to =
+        document.getElementById("to").value;
+
+    const name =
+        document.getElementById("name").value;
+
+    const mobile =
+        document.getElementById("mobile").value;
+
+    const date =
+        document.getElementById("date").value;
+
+    const time =
+        document.getElementById("time").value;
+
+    const passengers =
+        document.getElementById("passengers").value;
 
     if (!to || !name || !mobile || !date || !time || !passengers) {
+
         alert("Please fill all booking details.");
+
         return;
     }
 
     document.getElementById("rTo").textContent = to;
+
     document.getElementById("rName").textContent = name;
+
     document.getElementById("rMobile").textContent = mobile;
+
     document.getElementById("rDate").textContent = date;
+
     document.getElementById("rTime").textContent = time;
+
     document.getElementById("rPassengers").textContent = passengers;
 
     document.getElementById("review").style.display = "block";
@@ -368,12 +478,15 @@ function showReview() {
 
 function submitBooking() {
 
-    const payment = document.querySelector(
-        'input[name="payment"]:checked'
-    );
+    const payment =
+        document.querySelector(
+            'input[name="payment"]:checked'
+        );
 
     if (!payment) {
+
         alert("Please select a payment mode.");
+
         return;
     }
 
@@ -381,10 +494,14 @@ function submitBooking() {
         "RAXEL" +
         Math.floor(100000 + Math.random() * 900000);
 
-    document.getElementById("bookingId").textContent = bookingId;
+    document.getElementById("bookingId").textContent =
+        bookingId;
 
-    document.getElementById("review").style.display = "none";
-    document.getElementById("success").style.display = "block";
+    document.getElementById("review").style.display =
+        "none";
+
+    document.getElementById("success").style.display =
+        "block";
 
     document.getElementById("success").scrollIntoView({
         behavior: "smooth"
