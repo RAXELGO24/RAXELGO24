@@ -21,7 +21,7 @@ body {
 header {
     background: #111827;
     color: white;
-    padding: 22px;
+    padding: 24px 20px;
     text-align: center;
 }
 
@@ -30,7 +30,7 @@ header h1 {
 }
 
 header p {
-    margin-top: 7px;
+    margin-top: 8px;
 }
 
 .hero {
@@ -40,7 +40,7 @@ header p {
 }
 
 .hero h2 {
-    font-size: 30px;
+    font-size: 28px;
     margin-bottom: 12px;
 }
 
@@ -49,18 +49,27 @@ header p {
     margin-bottom: 25px;
 }
 
-.book-button {
+.book-button,
+.support-button {
     display: inline-block;
-    background: #16a34a;
     color: white;
-    padding: 14px 28px;
+    padding: 14px 24px;
     border-radius: 10px;
     text-decoration: none;
     font-weight: bold;
+    margin: 5px;
+}
+
+.book-button {
+    background: #16a34a;
+}
+
+.support-button {
+    background: #2563eb;
 }
 
 .booking {
-    max-width: 500px;
+    max-width: 520px;
     margin: 30px auto;
     background: white;
     padding: 25px;
@@ -73,17 +82,27 @@ header p {
     margin-bottom: 20px;
 }
 
+label {
+    display: block;
+    margin: 12px 0 6px;
+    font-weight: bold;
+}
+
 input {
     width: 100%;
     padding: 13px;
-    margin-bottom: 15px;
     border: 1px solid #ddd;
     border-radius: 8px;
     font-size: 16px;
 }
 
+input[readonly] {
+    background: #eef2f7;
+}
+
 .submit-button {
     width: 100%;
+    margin-top: 22px;
     padding: 14px;
     border: none;
     border-radius: 8px;
@@ -110,7 +129,7 @@ footer {
     background: #111827;
     color: white;
     text-align: center;
-    padding: 20px;
+    padding: 22px;
     margin-top: 25px;
 }
 </style>
@@ -125,10 +144,14 @@ footer {
 
 <section class="hero">
     <h2>Your Ride, Just a Call Away</h2>
-    <p>Fast, simple and reliable auto service for your local journey.</p>
+    <p>Book your auto online. We will arrange the driver for you.</p>
 
     <a href="#booking" class="book-button">
         🚗 Book an Auto
+    </a>
+
+    <a href="tel:+918294741267" class="support-button">
+        📞 Help / Support
     </a>
 </section>
 
@@ -136,13 +159,26 @@ footer {
 
     <h2>Book Your Auto</h2>
 
-    <input type="text" placeholder="Your Name">
+    <label>From</label>
+    <input type="text" value="Ranisagar" readonly>
 
-    <input type="tel" placeholder="Mobile Number">
+    <label>To</label>
+    <input type="text" placeholder="Enter destination">
 
-    <input type="text" placeholder="Pickup Location">
+    <label>Your Name</label>
+    <input type="text" placeholder="Enter your name">
 
-    <input type="text" placeholder="Destination">
+    <label>Mobile Number</label>
+    <input type="tel" placeholder="Enter mobile number">
+
+    <label>Date</label>
+    <input type="date">
+
+    <label>Time</label>
+    <input type="time">
+
+    <label>Number of Passengers</label>
+    <input type="number" min="1" max="10" placeholder="Passengers">
 
     <button class="submit-button">
         Request Booking
@@ -155,23 +191,25 @@ footer {
     <h2>Our Services</h2>
 
     <div class="card">
-        🚗 <strong>Local Auto Booking</strong>
-        <p>Easy rides for nearby destinations.</p>
+        🚗 <strong>Auto Booking</strong>
+        <p>Book an auto from Ranisagar to your destination.</p>
     </div>
 
     <div class="card">
         📍 <strong>Rural Area Service</strong>
-        <p>Convenient transportation for rural areas.</p>
+        <p>Convenient transportation for local and nearby areas.</p>
     </div>
 
     <div class="card">
-        🕐 <strong>24/7 Service</strong>
-        <p>Reliable assistance whenever you need a ride.</p>
+        🕐 <strong>RAXEL GO 24</strong>
+        <p>We receive your booking and arrange the driver.</p>
     </div>
 
 </section>
 
 <footer>
+    <p>Help / Support: 8294741267</p>
+    <br>
     <p>© 2026 RAXEL GO 24</p>
 </footer>
 
