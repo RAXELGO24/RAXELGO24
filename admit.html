@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>RAXEL GO 24 - Admin</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+}
+
+.booking {
+    background: white;
+    margin: 15px auto;
+    padding: 18px;
+    border-radius: 12px;
+    max-width: 600px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+}
+
+.booking p {
+    margin: 7px 0;
+}
+
+.loading {
+    text-align: center;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🚗 RAXEL GO 24 — Bookings</h1>
+
+<div id="bookings">
+    <p class="loading">Loading bookings...</p>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+const SUPABASE_URL =
+    "https://phrlnhzbqqzeoxhpdeyt.supabase.co";
+
+const SUPABASE_KEY =
+    "sb_publishable_cLNIvPuSPOrU6Ro6Leq9Hg_45You9FO";
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+
+async function loadBookings() {
+
+    const { data, error } =
+        await supabaseClient
+        .from("bookings")
+        .select("*")
+        .order("id", { ascending: false });
+
+
+    const container =
+        document.getElementById("bookings");
+
+
+    if (error) {
+
+        container.innerHTML =
+            "<p>Bookings load nahi ho paayi.</p>";
+
+        console.error(error);
+
+        return;
+    }
+
+
+    if (!data || data.length === 0) {
+
+        container.innerHTML =
+            "<p>No bookings found.</p>";
+
+        return;
+    }
+
+
+    container.innerHTML = "";
+
+
+    data.forEach(function(booking) {
+
+        const box =
+            document.createElement("div");
+
+        box.className = "booking";
+
+
+        box.innerHTML = `
+            <p><strong>ID:</strong> ${booking.id ?? ""}</p>
+
+            <p>
+                <strong>Customer:</strong>
+                ${booking.customer_name ?? ""}
+            </p>
+
+            <p>
+                <strong>Phone:</strong>
+                ${booking.phone ?? ""}
+            </p>
+
+            <p>
+                <strong>Pickup:</strong>
+                ${booking.pickup ?? "Ranisagar"}
+            </p>
+
+            <p>
+                <strong>Destination:</strong>
+                ${booking.destination ?? ""}
+            </p>
+
+            <p>
+                <strong>Date:</strong>
+                ${booking.booking_date ?? ""}
+            </p>
+
+            <p>
+                <strong>Time:</strong>
+                ${booking.booking_time ?? ""}
+            </p>
+
+            <p>
+                <strong>Status:</strong>
+                ${booking.status ?? "pending"}
+            </p>
+        `;
+
+
+        container.appendChild(box);
+
+    });
+
+}
+
+
+loadBookings();
+
+</script>
+
+</body>
+</html>
