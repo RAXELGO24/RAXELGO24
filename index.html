@@ -427,46 +427,35 @@ footer {
     </p>
 
 </footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
+const SUPABASE_URL = "https://phrlnhzbqqzeoxhpdeyt.supabase.co";
+const SUPABASE_KEY = "sb_publishable_cLNIvPuSPOrU6Ro6Leq9Hg_45You9FO";
+
+const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
 
 function showReview() {
-
-    const to =
-        document.getElementById("to").value;
-
-    const name =
-        document.getElementById("name").value;
-
-    const mobile =
-        document.getElementById("mobile").value;
-
-    const date =
-        document.getElementById("date").value;
-
-    const time =
-        document.getElementById("time").value;
-
-    const passengers =
-        document.getElementById("passengers").value;
+    const to = document.getElementById("to").value;
+    const name = document.getElementById("name").value;
+    const mobile = document.getElementById("mobile").value;
+    const date = document.getElementById("date").value;
+    const time = document.getElementById("time").value;
+    const passengers = document.getElementById("passengers").value;
 
     if (!to || !name || !mobile || !date || !time || !passengers) {
-
         alert("Please fill all booking details.");
-
         return;
     }
 
     document.getElementById("rTo").textContent = to;
-
     document.getElementById("rName").textContent = name;
-
     document.getElementById("rMobile").textContent = mobile;
-
     document.getElementById("rDate").textContent = date;
-
     document.getElementById("rTime").textContent = time;
-
     document.getElementById("rPassengers").textContent = passengers;
 
     document.getElementById("review").style.display = "block";
@@ -476,38 +465,53 @@ function showReview() {
     });
 }
 
-function submitBooking() {
-
-    const payment =
-        document.querySelector(
-            'input[name="payment"]:checked'
-        );
+async function submitBooking() {
+    const payment = document.querySelector(
+        'input[name="payment"]:checked'
+    );
 
     if (!payment) {
-
         alert("Please select a payment mode.");
-
         return;
     }
 
     const bookingId =
-        "RAXEL" +
-        Math.floor(100000 + Math.random() * 900000);
+        "RAXEL" + Math.floor(100000 + Math.random() * 900000);
 
-    document.getElementById("bookingId").textContent =
-        bookingId;
+    const name = document.getElementById("name").value;
+    const mobile = document.getElementById("mobile").value;
+    const to = document.getElementById("to").value;
+    const date = document.getElementById("date").value;
+    const time = document.getElementById("time").value;
+    const passengers = document.getElementById("passengers").value;
 
-    document.getElementById("review").style.display =
-        "none";
+    const { error } = await supabaseClient
+        .from("bookings")
+        .insert({
+            customer_name: name,
+            phone: mobile,
+            pickup: "Ranisagar",
+            destination: to,
+            booking_date: date,
+            booking_time: time,
+            status: "pending"
+        });
 
-    document.getElementById("success").style.display =
-        "block";
+    if (error) {
+        console.error(error);
+        alert("Booking submit nahi ho paayi. Please try again.");
+        return;
+    }
+
+    document.getElementById("bookingId").textContent = bookingId;
+
+    document.getElementById("review").style.display = "none";
+    document.getElementById("success").style.display = "block";
 
     document.getElementById("success").scrollIntoView({
         behavior: "smooth"
     });
 }
-
 </script>
 
 </body>
