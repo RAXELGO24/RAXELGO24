@@ -89,6 +89,8 @@ header p {
     font-weight: bold;
     background: #16a34a;
     color: white;
+    border: none;
+    cursor: pointer;
 }
 
 .section {
@@ -111,8 +113,7 @@ label {
     margin: 12px 0 6px;
 }
 
-input,
-select {
+input {
     width: 100%;
     padding: 13px;
     border: 1px solid #ddd;
@@ -151,7 +152,7 @@ input[readonly] {
 }
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 .detail {
@@ -219,6 +220,7 @@ footer {
 }
 
 @media (max-width: 600px) {
+
     .brand-top {
         justify-content: flex-start;
         text-align: left;
@@ -274,7 +276,10 @@ footer {
 
 </header>
 
-<section class="hero">
+
+<!-- HOME PAGE -->
+
+<section class="hero" id="home">
 
     <h2>Thanks for visiting our website ❤️</h2>
 
@@ -284,36 +289,58 @@ footer {
         Safe • Reliable • On Time
     </p>
 
-    <a href="#booking" class="button">
+    <button class="button" onclick="openBooking()">
         🚗 Book an Auto
-    </a>
+    </button>
 
 </section>
 
 
 <!-- STEP 1: BOOKING DETAILS -->
 
-<section class="section" id="booking">
+<section class="section hidden" id="booking">
 
     <h2>🚗 Book Your Auto</h2>
 
     <label>From</label>
-    <input type="text" value="Ranisagar" readonly>
+    <input
+        type="text"
+        value="Ranisagar"
+        readonly
+    >
 
     <label>To</label>
-    <input type="text" id="to" placeholder="Enter destination">
+    <input
+        type="text"
+        id="to"
+        placeholder="Enter destination"
+    >
 
     <label>Your Name</label>
-    <input type="text" id="name" placeholder="Enter your name">
+    <input
+        type="text"
+        id="name"
+        placeholder="Enter your name"
+    >
 
     <label>Mobile Number</label>
-    <input type="tel" id="mobile" placeholder="Enter mobile number">
+    <input
+        type="tel"
+        id="mobile"
+        placeholder="Enter mobile number"
+    >
 
     <label>Date</label>
-    <input type="date" id="date">
+    <input
+        type="date"
+        id="date"
+    >
 
     <label>Time</label>
-    <input type="time" id="time">
+    <input
+        type="time"
+        id="time"
+    >
 
     <label>Number of Passengers</label>
     <input
@@ -390,29 +417,52 @@ footer {
     <h2>💳 Payment Mode</h2>
 
     <div class="payment-option">
+
         <label>
-            <input type="radio" name="payment" value="UPI">
+            <input
+                type="radio"
+                name="payment"
+                value="UPI"
+            >
             UPI
         </label>
+
     </div>
 
     <div class="payment-option">
+
         <label>
-            <input type="radio" name="payment" value="COD">
+            <input
+                type="radio"
+                name="payment"
+                value="COD"
+            >
             COD / Cash
         </label>
+
     </div>
 
     <div class="notice">
-        Your booking will be sent to RAXEL GO 24 for confirmation.
-        The booking is not confirmed until accepted by our team.
+
+        Your booking will be sent to RAXEL GO 24
+        for confirmation.
+
+        The booking is not confirmed until accepted
+        by our team.
+
     </div>
 
-    <button class="action" onclick="submitBooking()">
+    <button
+        class="action"
+        onclick="submitBooking()"
+    >
         🚗 Submit Booking
     </button>
 
-    <button class="secondary" onclick="backToReview()">
+    <button
+        class="secondary"
+        onclick="backToReview()"
+    >
         ← Back to Review
     </button>
 
@@ -430,7 +480,8 @@ footer {
     </p>
 
     <div class="booking-id">
-        Booking ID: <span id="bookingId"></span>
+        Booking ID:
+        <span id="bookingId"></span>
     </div>
 
     <p>
@@ -483,6 +534,9 @@ const supabaseClient =
 
 function hideAllSteps() {
 
+    document.getElementById("home")
+        .classList.add("hidden");
+
     document.getElementById("booking")
         .classList.add("hidden");
 
@@ -494,6 +548,20 @@ function hideAllSteps() {
 
     document.getElementById("success")
         .classList.add("hidden");
+}
+
+
+function openBooking() {
+
+    hideAllSteps();
+
+    document.getElementById("booking")
+        .classList.remove("hidden");
+
+    document.getElementById("booking")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
 }
 
 
