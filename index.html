@@ -1,420 +1,709 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>RAXEL GO 24 | Auto Booking</title>
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
-
-        body {
-            background: #f7f9fc;
-            color: #111827;
-        }
-
-        header {
-            background: #ffffff;
-            padding: 15px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .logo {
-            height: 48px;
-            width: auto;
-            object-fit: contain;
-        }
-
-        .hero {
-            min-height: calc(100vh - 78px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 40px 20px;
-            background: linear-gradient(135deg, #fff7d6, #ffffff);
-        }
-
-        .hero-content {
-            max-width: 600px;
-            width: 100%;
-        }
-
-        .hero h1 {
-            font-size: 42px;
-            font-weight: 800;
-            margin-bottom: 15px;
-        }
-
-        .hero h1 span {
-            color: #f59e0b;
-        }
-
-        .hero p {
-            font-size: 18px;
-            line-height: 1.6;
-            color: #4b5563;
-            margin-bottom: 30px;
-        }
-
-        .book-btn {
-            display: inline-block;
-            border: none;
-            background: #f59e0b;
-            color: #111827;
-            padding: 16px 35px;
-            border-radius: 12px;
-            font-size: 18px;
-            font-weight: 700;
-            cursor: pointer;
-            box-shadow: 0 8px 20px rgba(245,158,11,0.25);
-        }
-
-        .book-btn:hover {
-            background: #d97706;
-            color: #ffffff;
-        }
-
-        .booking-section {
-            display: none;
-            min-height: 100vh;
-            padding: 35px 20px;
-            background: #f7f9fc;
-        }
-
-        .booking-box {
-            max-width: 550px;
-            margin: auto;
-            background: #ffffff;
-            padding: 28px;
-            border-radius: 20px;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
-        }
-
-        .booking-box h2 {
-            font-size: 28px;
-            margin-bottom: 8px;
-        }
-
-        .booking-box .subtitle {
-            color: #6b7280;
-            margin-bottom: 25px;
-        }
-
-        label {
-            display: block;
-            font-weight: 700;
-            margin: 16px 0 7px;
-        }
-
-        input,
-        select,
-        textarea {
-            width: 100%;
-            padding: 14px;
-            border: 1px solid #d1d5db;
-            border-radius: 10px;
-            outline: none;
-            font-size: 16px;
-            background: #ffffff;
-        }
-
-        input:focus,
-        select:focus,
-        textarea:focus {
-            border-color: #f59e0b;
-        }
-
-        textarea {
-            min-height: 90px;
-            resize: vertical;
-        }
-
-        .submit-btn {
-            width: 100%;
-            margin-top: 25px;
-            padding: 15px;
-            border: none;
-            border-radius: 11px;
-            background: #111827;
-            color: #ffffff;
-            font-size: 17px;
-            font-weight: 700;
-            cursor: pointer;
-        }
-
-        .submit-btn:hover {
-            background: #000000;
-        }
-
-        .back-btn {
-            border: none;
-            background: transparent;
-            color: #6b7280;
-            font-size: 15px;
-            cursor: pointer;
-            margin-bottom: 20px;
-        }
-
-        .success-box {
-            display: none;
-            text-align: center;
-            padding: 30px 10px;
-        }
-
-        .success-icon {
-            font-size: 55px;
-            margin-bottom: 15px;
-        }
-
-        .success-box h2 {
-            margin-bottom: 10px;
-        }
-
-        .success-box p {
-            color: #6b7280;
-            line-height: 1.6;
-        }
-
-        .booking-id {
-            margin-top: 20px;
-            padding: 14px;
-            background: #fff7d6;
-            border-radius: 10px;
-            font-weight: 700;
-        }
-
-        footer {
-            text-align: center;
-            padding: 25px 15px;
-            color: #6b7280;
-            background: #ffffff;
-            font-size: 14px;
-        }
-
-        @media (max-width: 600px) {
-            .hero h1 {
-                font-size: 34px;
-            }
-
-            .hero p {
-                font-size: 16px;
-            }
-
-            .booking-box {
-                padding: 22px;
-            }
-        }
-    </style>
-</head>
-
-<body>
-
-    <!-- HEADER -->
-    <header>
-        <img src="raxelgo24-logo.png" alt="RAXEL GO 24 Logo" class="logo">
-    </header>
-
-
-    <!-- HOME SCREEN -->
-    <section class="hero" id="home">
-        <div class="hero-content">
-
-            <h1>
-                Your Ride,
-                <span>Our Responsibility.</span>
-            </h1>
-
-            <p>
-                Reliable auto service for rural areas.
-                Book your ride easily with RAXEL GO 24.
-            </p>
-
-            <button class="book-btn" onclick="showBooking()">
-                🚕 Book an Auto
-            </button>
-
-        </div>
-    </section>
-
-
-    <!-- BOOKING SCREEN -->
-    <section class="booking-section" id="booking">
-
-        <div class="booking-box">
-
-            <button class="back-btn" onclick="showHome()">
-                ← Back
-            </button>
-
-            <div id="bookingForm">
-
-                <h2>Book Your Auto</h2>
-
-                <p class="subtitle">
-                    Fill in your details and our team will arrange your ride.
-                </p>
-
-                <form onsubmit="submitBooking(event)">
-
-                    <label for="name">Your Name</label>
-                    <input
-                        type="text"
-                        id="name"
-                        placeholder="Enter your name"
-                        required
-                    >
-
-                    <label for="phone">Mobile Number</label>
-                    <input
-                        type="tel"
-                        id="phone"
-                        placeholder="Enter mobile number"
-                        maxlength="10"
-                        required
-                    >
-
-                    <label for="from">From</label>
-                    <input
-                        type="text"
-                        id="from"
-                        value="Ranisagar"
-                        readonly
-                    >
-
-                    <label for="to">To</label>
-                    <input
-                        type="text"
-                        id="to"
-                        placeholder="Enter destination"
-                        required
-                    >
-
-                    <label for="date">Journey Date</label>
-                    <input
-                        type="date"
-                        id="date"
-                        required
-                    >
-
-                    <label for="time">Preferred Time</label>
-                    <input
-                        type="time"
-                        id="time"
-                        required
-                    >
-
-                    <label for="message">Additional Note</label>
-                    <textarea
-                        id="message"
-                        placeholder="Any additional information..."
-                    ></textarea>
-
-                    <button type="submit" class="submit-btn">
-                        Submit Booking
-                    </button>
-
-                </form>
-
-            </div>
-
-
-            <!-- SUCCESS MESSAGE -->
-            <div class="success-box" id="successBox">
-
-                <div class="success-icon">✅</div>
-
-                <h2>Booking Request Received!</h2>
-
-                <p>
-                    Thank you for choosing RAXEL GO 24.
-                    Our team will contact you and arrange your auto.
-                </p>
-
-                <div class="booking-id">
-                    Booking ID: <span id="bookingId"></span>
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- FOOTER -->
-    <footer>
-        © 2026 RAXEL GO 24. All rights reserved.
-    </footer>
-
-
-    <script>
-
-        function showBooking() {
-            document.getElementById("home").style.display = "none";
-            document.getElementById("booking").style.display = "block";
-
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth"
-            });
-        }
-
-
-        function showHome() {
-            document.getElementById("booking").style.display = "none";
-            document.getElementById("home").style.display = "flex";
-
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth"
-            });
-        }
-
-
-        function submitBooking(event) {
-
-            event.preventDefault();
-
-            const bookingId =
-                "RG24-" +
-                Math.floor(100000 + Math.random() * 900000);
-
-            document.getElementById("bookingId").textContent = bookingId;
-
-            document.getElementById("bookingForm").style.display = "none";
-            document.getElementById("successBox").style.display = "block";
-
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth"
-            });
-        }
-
-
-        // Set minimum date to today
-        const dateInput = document.getElementById("date");
-
-        const today = new Date();
-        const year = today.getFullYear();
-        const month = String(today.getMonth() + 1).padStart(2, "0");
-        const day = String(today.getDate()).padStart(2, "0");
-
-        dateInput.min = `${year}-${month}-${day}`;
-
-    </script>
-
-</body>
+<!DOCTYPE html>  <html lang="en">  
+<head>  
+<meta charset="UTF-8">  
+<meta name="viewport" content="width=device-width, initial-scale=1.0">  
+<title>RAXEL GO 24</title>  <style>  
+* {  
+    box-sizing: border-box;  
+    margin: 0;  
+    padding: 0;  
+    font-family: Arial, sans-serif;  
+}  
+  
+body {  
+    background: #f4f6f8;  
+    color: #111827;  
+}  
+  
+header {  
+    background: #111827;  
+    color: white;  
+    text-align: center;  
+    padding: 12px 15px 25px;  
+}  
+  
+.brand-top {  
+    width: 100%;  
+    max-width: 900px;  
+    margin: 0 auto 15px;  
+    display: flex;  
+    align-items: center;  
+    justify-content: space-between;  
+    gap: 15px;  
+}  
+  
+.brand-logo {  
+    width: 95px;  
+    height: 95px;  
+    object-fit: contain;  
+    background: white;  
+    border-radius: 12px;  
+    padding: 4px;  
+}  
+  
+.managed-by {  
+    flex: 1;  
+    text-align: right;  
+    font-size: 20px;  
+    font-weight: bold;  
+    color: #facc15;  
+}  
+  
+.managed-by span {  
+    color: white;  
+}  
+  
+header h1 {  
+    font-size: 32px;  
+}  
+  
+header p {  
+    margin-top: 8px;  
+}  
+  
+.hero {  
+    background: white;  
+    text-align: center;  
+    padding: 45px 20px;  
+}  
+  
+.hero h2 {  
+    font-size: 28px;  
+    margin-bottom: 12px;  
+}  
+  
+.hero p {  
+    color: #666;  
+    line-height: 1.6;  
+    margin-bottom: 25px;  
+}  
+  
+.button {  
+    display: inline-block;  
+    padding: 14px 25px;  
+    border-radius: 10px;  
+    text-decoration: none;  
+    font-weight: bold;  
+    background: #16a34a;  
+    color: white;  
+    border: none;  
+    cursor: pointer;  
+}  
+  
+.section {  
+    max-width: 520px;  
+    margin: 30px auto;  
+    background: white;  
+    padding: 25px;  
+    border-radius: 15px;  
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);  
+}  
+  
+.section h2 {  
+    text-align: center;  
+    margin-bottom: 20px;  
+}  
+  
+label {  
+    display: block;  
+    font-weight: bold;  
+    margin: 12px 0 6px;  
+}  
+  
+input {  
+    width: 100%;  
+    padding: 13px;  
+    border: 1px solid #ddd;  
+    border-radius: 8px;  
+    font-size: 16px;  
+}  
+  
+input[readonly] {  
+    background: #eef2f7;  
+}  
+  
+.action {  
+    width: 100%;  
+    margin-top: 20px;  
+    padding: 14px;  
+    border: none;  
+    border-radius: 8px;  
+    background: #111827;  
+    color: white;  
+    font-size: 17px;  
+    font-weight: bold;  
+    cursor: pointer;  
+}  
+  
+.secondary {  
+    width: 100%;  
+    margin-top: 10px;  
+    padding: 13px;  
+    border: 1px solid #111827;  
+    border-radius: 8px;  
+    background: white;  
+    color: #111827;  
+    font-size: 16px;  
+    font-weight: bold;  
+    cursor: pointer;  
+}  
+  
+.hidden {  
+    display: none !important;  
+}  
+  
+.detail {  
+    background: #f8fafc;  
+    padding: 12px;  
+    margin: 8px 0;  
+    border-radius: 8px;  
+}  
+  
+.payment-option {  
+    margin: 10px 0;  
+    padding: 14px;  
+    border: 1px solid #ddd;  
+    border-radius: 9px;  
+}  
+  
+.payment-option label {  
+    margin: 0;  
+}  
+  
+.payment-option input {  
+    width: auto;  
+    margin-right: 8px;  
+}  
+  
+.notice {  
+    margin-top: 15px;  
+    padding: 12px;  
+    background: #fff7ed;  
+    border-radius: 8px;  
+    font-size: 14px;  
+}  
+  
+.success {  
+    text-align: center;  
+}  
+  
+.booking-id {  
+    font-size: 22px;  
+    font-weight: bold;  
+    margin: 15px 0;  
+}  
+  
+.support {  
+    text-align: center;  
+    padding: 30px 20px;  
+}  
+  
+.support a {  
+    display: inline-block;  
+    margin-top: 12px;  
+    background: #2563eb;  
+    color: white;  
+    padding: 13px 22px;  
+    border-radius: 9px;  
+    text-decoration: none;  
+    font-weight: bold;  
+}  
+  
+footer {  
+    background: #111827;  
+    color: white;  
+    text-align: center;  
+    padding: 22px;  
+}  
+  
+@media (max-width: 600px) {  
+  
+    .brand-top {  
+        justify-content: flex-start;  
+        text-align: left;  
+    }  
+  
+    .brand-logo {  
+        width: 75px;  
+        height: 75px;  
+    }  
+  
+    .managed-by {  
+        text-align: left;  
+        font-size: 16px;  
+    }  
+  
+    header h1 {  
+        font-size: 27px;  
+    }  
+  
+    .hero h2 {  
+        font-size: 24px;  
+    }  
+  
+    .section {  
+        margin: 20px 12px;  
+        padding: 20px;  
+    }  
+}  
+</style>  </head>  <body>  <header>  <div class="brand-top">  
+
+    <img  
+        src="raxelgo24-logo.png"  
+        alt="RAXEL GO 24 Logo"  
+        class="brand-logo"  
+    >  
+
+    <div class="managed-by">  
+        <span>Managed by</span><br>  
+        Imtiyaz Khan  
+    </div>  
+
+</div>  
+
+<h1>RAXEL GO 24 🚗</h1>  
+<p>Reliable Auto Service for Rural Areas</p>
+
+</header>  <!-- HOME PAGE -->  <section class="hero" id="home">  <h2>Thanks for visiting our website ❤️</h2>  
+
+<p>  
+    जहाँ चाहे, जब चाहे — हम हैं आपके साथ।  
+    <br>  
+    Safe • Reliable • On Time  
+</p>  
+
+<button class="button" onclick="openBooking()">  
+    🚗 Book an Auto  
+</button>
+
+</section>  <!-- STEP 1: BOOKING DETAILS -->  <section class="section hidden" id="booking">  <h2>🚗 Book Your Auto</h2>  
+
+<label>From</label>  
+<input  
+    type="text"  
+    value="Ranisagar"  
+    readonly  
+>  
+
+<label>To</label>  
+<input  
+    type="text"  
+    id="to"  
+    placeholder="Enter destination"  
+>  
+
+<label>Your Name</label>  
+<input  
+    type="text"  
+    id="name"  
+    placeholder="Enter your name"  
+>  
+
+<label>Mobile Number</label>  
+<input  
+    type="tel"  
+    id="mobile"  
+    placeholder="Enter mobile number"  
+>  
+
+<label>Date</label>  
+<input  
+    type="date"  
+    id="date"  
+>  
+
+<label>Time</label>  
+<input  
+    type="time"  
+    id="time"  
+>  
+
+<label>Number of Passengers</label>  
+<input  
+    type="number"  
+    id="passengers"  
+    min="1"  
+    max="10"  
+    placeholder="Passengers"  
+>  
+
+<button class="action" onclick="goToReview()">  
+    Review Booking  
+</button>
+
+</section>  <!-- STEP 2: REVIEW -->  <section class="section hidden" id="review">  <h2>📋 Review Your Booking</h2>  
+
+<div class="detail">  
+    <strong>From:</strong>  
+    <span>Ranisagar</span>  
+</div>  
+
+<div class="detail">  
+    <strong>To:</strong>  
+    <span id="rTo"></span>  
+</div>  
+
+<div class="detail">  
+    <strong>Name:</strong>  
+    <span id="rName"></span>  
+</div>  
+
+<div class="detail">  
+    <strong>Mobile:</strong>  
+    <span id="rMobile"></span>  
+</div>  
+
+<div class="detail">  
+    <strong>Date:</strong>  
+    <span id="rDate"></span>  
+</div>  
+
+<div class="detail">  
+    <strong>Time:</strong>  
+    <span id="rTime"></span>  
+</div>  
+
+<div class="detail">  
+    <strong>Passengers:</strong>  
+    <span id="rPassengers"></span>  
+</div>  
+
+<button class="action" onclick="goToPayment()">  
+    Confirm & Continue  
+</button>  
+
+<button class="secondary" onclick="backToBooking()">  
+    ← Edit Details  
+</button>
+
+</section>  <!-- STEP 3: PAYMENT -->  <section class="section hidden" id="payment">  <h2>💳 Payment Mode</h2>  
+
+<div class="payment-option">  
+
+    <label>  
+        <input  
+            type="radio"  
+            name="payment"  
+            value="UPI"  
+        >  
+        UPI  
+    </label>  
+
+</div>  
+
+<div class="payment-option">  
+
+    <label>  
+        <input  
+            type="radio"  
+            name="payment"  
+            value="COD"  
+        >  
+        COD / Cash  
+    </label>  
+
+</div>  
+
+<div class="notice">  
+
+    Your booking will be sent to RAXEL GO 24  
+    for confirmation.  
+
+    The booking is not confirmed until accepted  
+    by our team.  
+
+</div>  
+
+<button  
+    class="action"  
+    onclick="submitBooking()"  
+>  
+    🚗 Submit Booking  
+</button>  
+
+<button  
+    class="secondary"  
+    onclick="backToReview()"  
+>  
+    ← Back to Review  
+</button>
+
+</section>  <!-- STEP 4: SUCCESS -->  <section class="section success hidden" id="success">  <h2>⏳ Booking Request Sent</h2>  
+
+<p>  
+    Your booking request has been submitted successfully.  
+</p>  
+
+<div class="booking-id">  
+    Booking ID:  
+    <span id="bookingId"></span>  
+</div>  
+
+<p>  
+    Please wait for RAXEL GO 24 to accept your booking.  
+</p>
+
+</section>  <section class="support">  <h2>Need Help?</h2>  
+
+<p>Our support team is here for you.</p>  
+
+<a href="tel:+918294741267">  
+    📞 Help / Support  
+</a>
+
+</section>  <footer>  <p>© 2026 RAXEL GO 24</p>  
+
+<p style="margin-top:8px;">  
+    Managed by Imtiyaz Khan  
+</p>
+
+</footer>  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>  <script>  
+  
+const SUPABASE_URL =  
+    "https://phrlnhzbqqzeoxhpdeyt.supabase.co";  
+  
+const SUPABASE_KEY =  
+    "sb_publishable_cLNIvPuSPOrU6Ro6Leq9Hg_45You9FO";  
+  
+const supabaseClient =  
+    window.supabase.createClient(  
+        SUPABASE_URL,  
+        SUPABASE_KEY  
+    );  
+  
+  
+function hideAllSteps() {  
+  
+    document.getElementById("home")  
+        .classList.add("hidden");  
+  
+    document.getElementById("booking")  
+        .classList.add("hidden");  
+  
+    document.getElementById("review")  
+        .classList.add("hidden");  
+  
+    document.getElementById("payment")  
+        .classList.add("hidden");  
+  
+    document.getElementById("success")  
+        .classList.add("hidden");  
+}  
+  
+  
+function openBooking() {  
+  
+    hideAllSteps();  
+  
+    document.getElementById("booking")  
+        .classList.remove("hidden");  
+  
+    document.getElementById("booking")  
+        .scrollIntoView({  
+            behavior: "smooth"  
+        });  
+}  
+  
+  
+function goToReview() {  
+  
+    const to =  
+        document.getElementById("to").value;  
+  
+    const name =  
+        document.getElementById("name").value;  
+  
+    const mobile =  
+        document.getElementById("mobile").value;  
+  
+    const date =  
+        document.getElementById("date").value;  
+  
+    const time =  
+        document.getElementById("time").value;  
+  
+    const passengers =  
+        document.getElementById("passengers").value;  
+  
+  
+    if (  
+        !to ||  
+        !name ||  
+        !mobile ||  
+        !date ||  
+        !time ||  
+        !passengers  
+    ) {  
+  
+        alert("Please fill all booking details.");  
+  
+        return;  
+    }  
+  
+  
+    document.getElementById("rTo").textContent =  
+        to;  
+  
+    document.getElementById("rName").textContent =  
+        name;  
+  
+    document.getElementById("rMobile").textContent =  
+        mobile;  
+  
+    document.getElementById("rDate").textContent =  
+        date;  
+  
+    document.getElementById("rTime").textContent =  
+        time;  
+  
+    document.getElementById("rPassengers").textContent =  
+        passengers;  
+  
+  
+    hideAllSteps();  
+  
+    document.getElementById("review")  
+        .classList.remove("hidden");  
+  
+    document.getElementById("review")  
+        .scrollIntoView({  
+            behavior: "smooth"  
+        });  
+}  
+  
+  
+function goToPayment() {  
+  
+    hideAllSteps();  
+  
+    document.getElementById("payment")  
+        .classList.remove("hidden");  
+  
+    document.getElementById("payment")  
+        .scrollIntoView({  
+            behavior: "smooth"  
+        });  
+}  
+  
+  
+function backToBooking() {  
+  
+    hideAllSteps();  
+  
+    document.getElementById("booking")  
+        .classList.remove("hidden");  
+  
+    document.getElementById("booking")  
+        .scrollIntoView({  
+            behavior: "smooth"  
+        });  
+}  
+  
+  
+function backToReview() {  
+  
+    hideAllSteps();  
+  
+    document.getElementById("review")  
+        .classList.remove("hidden");  
+  
+    document.getElementById("review")  
+        .scrollIntoView({  
+            behavior: "smooth"  
+        });  
+}  
+  
+  
+async function submitBooking() {  
+  
+    const payment =  
+        document.querySelector(  
+            'input[name="payment"]:checked'  
+        );  
+  
+  
+    if (!payment) {  
+  
+        alert("Please select a payment mode.");  
+  
+        return;  
+    }  
+  
+  
+    const bookingId =  
+        "RAXEL" +  
+        Math.floor(  
+            100000 +  
+            Math.random() * 900000  
+        );  
+  
+  
+    const name =  
+        document.getElementById("name").value;  
+  
+    const mobile =  
+        document.getElementById("mobile").value;  
+  
+    const to =  
+        document.getElementById("to").value;  
+  
+    const date =  
+        document.getElementById("date").value;  
+  
+    const time =  
+        document.getElementById("time").value;  
+  
+  
+    const { error } =  
+        await supabaseClient  
+        .from("bookings")  
+        .insert({  
+  
+            customer_name: name,  
+  
+            phone: mobile,  
+  
+            pickup: "Ranisagar",  
+  
+            destination: to,  
+  
+            booking_date: date,  
+  
+            booking_time: time,  
+  
+            status: "pending"  
+  
+        });  
+  
+  
+    if (error) {  
+  
+        console.error(error);  
+  
+        alert(  
+            "Booking submit nahi ho paayi. Please try again."  
+        );  
+  
+        return;  
+    }  
+  
+  
+    document.getElementById("bookingId")  
+        .textContent = bookingId;  
+  
+  
+    hideAllSteps();  
+  
+  
+    document.getElementById("success")  
+        .classList.remove("hidden");  
+  
+  
+    document.getElementById("success")  
+        .scrollIntoView({  
+            behavior: "smooth"  
+        });  
+}  
+  
+</script>  </body>  
 </html>
