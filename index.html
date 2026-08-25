@@ -1,1287 +1,438 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>RAXEL GO 24 | Rural Auto Service</title>
+<title>RAXEL GO 24</title>
 
 <style>
+
 *{
-    box-sizing:border-box;
     margin:0;
     padding:0;
-}
-
-html{
-    scroll-behavior:smooth;
+    box-sizing:border-box;
 }
 
 body{
-    font-family:Arial,Helvetica,sans-serif;
-    background:#f6f8f4;
-    color:#17210f;
-    line-height:1.6;
-}
-
-a{
-    text-decoration:none;
-    color:inherit;
-}
-
-button,
-input,
-select{
-    font:inherit;
+    font-family:Arial, sans-serif;
+    background:#ffffff;
+    color:#111111;
 }
 
 /* ================= HEADER ================= */
 
-header{
-    background:#173d1b;
-    color:white;
-    position:sticky;
-    top:0;
-    z-index:1000;
-    box-shadow:0 3px 15px rgba(0,0,0,.15);
-}
-
-.navbar{
-    max-width:1150px;
-    margin:auto;
-    padding:12px 20px;
+.header{
+    background:#005b3f;
+    min-height:110px;
+    padding:16px 18px;
     display:flex;
     align-items:center;
     justify-content:space-between;
-    gap:20px;
 }
 
-.brand{
+.header-left{
     display:flex;
     align-items:center;
-    gap:12px;
+    gap:14px;
 }
 
 .logo{
-    width:58px;
-    height:58px;
-    object-fit:contain;
-    background:white;
-    border-radius:10px;
-    padding:3px;
+    width:72px;
+    height:72px;
+    border-radius:50%;
+    object-fit:cover;
+    background:#ffffff;
+    border:3px solid #facc15;
 }
 
-.brand-text h1{
-    font-size:23px;
-    color:#ffd91a;
-    line-height:1.1;
+.manager{
+    color:#ffffff;
+    font-size:18px;
+    line-height:1.4;
 }
 
-.brand-text small{
-    color:white;
-    font-size:12px;
+.manager strong{
+    color:#facc15;
+    font-size:20px;
 }
 
-.managed{
-    font-size:13px;
-    color:#ffd91a;
-    margin-top:2px;
-}
+/* ================= MENU ================= */
 
-.nav-links{
+.menu{
+    width:48px;
+    height:48px;
     display:flex;
-    gap:18px;
+    flex-direction:column;
+    justify-content:center;
     align-items:center;
+    gap:7px;
 }
 
-.nav-links a{
-    color:white;
-    font-size:14px;
-    font-weight:bold;
-}
-
-.nav-links a:hover{
-    color:#ffd91a;
-}
-
-.nav-book{
-    background:#ffd91a;
-    color:#173d1b !important;
-    padding:9px 15px;
-    border-radius:8px;
+.menu span{
+    width:40px;
+    height:4px;
+    background:#facc15;
+    border-radius:10px;
 }
 
 /* ================= HERO ================= */
 
 .hero{
-    background:
-    linear-gradient(135deg,#174719,#2f751f);
-    color:white;
-    padding:70px 20px;
+    width:100%;
+    background:#005b3f;
 }
 
-.hero-inner{
-    max-width:1150px;
-    margin:auto;
-    display:grid;
-    grid-template-columns:1.1fr .9fr;
-    gap:40px;
-    align-items:center;
+.hero-image{
+    width:100%;
+    height:auto;
+    display:block;
 }
 
-.hero h2{
-    font-size:48px;
-    line-height:1.12;
-    margin-bottom:18px;
-}
+/* ================= LOCATION ================= */
 
-.hero h2 span{
-    color:#ffd91a;
-}
-
-.hero p{
+.location{
+    position:relative;
+    margin:-42px auto 0;
+    width:86%;
     max-width:600px;
+    background:#063e38;
+    border:2px solid #facc15;
+    border-radius:50px;
+    padding:15px 18px;
+    color:#ffffff;
+    text-align:center;
     font-size:18px;
-    color:#edf7e9;
-    margin-bottom:28px;
-}
-
-.hero-buttons{
-    display:flex;
-    gap:12px;
-    flex-wrap:wrap;
-}
-
-.primary-btn{
-    background:#ffd91a;
-    color:#173d1b;
-    border:none;
-    padding:14px 24px;
-    border-radius:9px;
     font-weight:bold;
-    cursor:pointer;
+    z-index:5;
+    box-shadow:0 5px 15px rgba(0,0,0,0.25);
 }
 
-.secondary-btn{
-    background:white;
-    color:#173d1b;
-    border:none;
-    padding:14px 24px;
-    border-radius:9px;
-    font-weight:bold;
-    cursor:pointer;
+.location .pin{
+    color:#facc15;
+    font-size:27px;
+    margin-right:5px;
 }
 
-.hero-card{
-    background:white;
-    color:#17210f;
-    border-radius:18px;
-    padding:28px;
-    box-shadow:0 12px 35px rgba(0,0,0,.2);
+.location strong{
+    color:#facc15;
 }
 
-.hero-card h3{
-    color:#173d1b;
-    font-size:23px;
-    margin-bottom:10px;
-}
+/* ================= INTRO ================= */
 
-.hero-card p{
-    color:#687268;
-    font-size:14px;
-    margin-bottom:18px;
-}
-
-/* ================= SECTION ================= */
-
-.section-wrap{
-    max-width:1150px;
-    margin:auto;
-    padding:65px 20px;
-}
-
-.section-title{
+.intro{
+    background:#ffffff;
     text-align:center;
-    margin-bottom:38px;
+    padding:75px 18px 55px;
 }
 
-.section-title h2{
-    font-size:32px;
-    color:#173d1b;
-}
-
-.section-title p{
-    color:#687268;
-    margin-top:8px;
-}
-
-/* ================= ABOUT ================= */
-
-.about{
-    background:white;
-}
-
-.about-grid{
-    max-width:1150px;
-    margin:auto;
-    padding:65px 20px;
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:45px;
-    align-items:center;
-}
-
-.about-text h2{
-    font-size:34px;
-    color:#173d1b;
-    margin-bottom:15px;
-}
-
-.about-text p{
-    color:#59645a;
-    margin-bottom:15px;
-}
-
-.about-box{
-    background:#edf7e8;
-    border-left:6px solid #ffd91a;
-    padding:25px;
-    border-radius:12px;
-}
-
-.about-box strong{
-    color:#173d1b;
-}
-
-/* ================= FEATURES ================= */
-
-.features{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:18px;
-}
-
-.feature{
-    background:white;
-    padding:25px 18px;
-    border-radius:14px;
-    text-align:center;
-    box-shadow:0 5px 20px rgba(0,0,0,.06);
-    border-top:4px solid #ffd91a;
-}
-
-.feature-icon{
-    font-size:34px;
-    margin-bottom:10px;
-}
-
-.feature h3{
-    color:#173d1b;
+.intro-small{
     font-size:18px;
-    margin-bottom:7px;
-}
-
-.feature p{
-    color:#69736a;
-    font-size:14px;
-}
-
-/* ================= HOW IT WORKS ================= */
-
-.how{
-    background:#173d1b;
-    color:white;
-}
-
-.how .section-title h2{
-    color:#ffd91a;
-}
-
-.how .section-title p{
-    color:#dce8d8;
-}
-
-.steps{
-    max-width:900px;
-    margin:auto;
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:25px;
-}
-
-.step{
-    text-align:center;
-    padding:25px;
-}
-
-.step-number{
-    width:58px;
-    height:58px;
-    margin:0 auto 15px;
-    border-radius:50%;
-    background:#ffd91a;
-    color:#173d1b;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:23px;
-    font-weight:bold;
-}
-
-.step h3{
-    color:white;
-    margin-bottom:8px;
-}
-
-.step p{
-    color:#d9e4d7;
-    font-size:14px;
-}
-
-/* ================= BOOKING ================= */
-
-.booking-area{
-    background:#f6f8f4;
-}
-
-.booking-card{
-    max-width:650px;
-    margin:auto;
-    background:white;
-    padding:30px;
-    border-radius:18px;
-    box-shadow:0 8px 30px rgba(0,0,0,.08);
-}
-
-.booking-card h2{
-    text-align:center;
-    color:#173d1b;
-    margin-bottom:7px;
-}
-
-.booking-card > p{
-    text-align:center;
-    color:#687268;
     margin-bottom:22px;
 }
 
-.form-group{
-    margin-bottom:15px;
+.green-line{
+    display:inline-block;
+    width:45px;
+    height:5px;
+    background:#16a34a;
+    border-radius:10px;
+    margin-left:8px;
+    vertical-align:middle;
 }
 
-.form-group label{
-    display:block;
-    font-weight:bold;
-    margin-bottom:6px;
-    color:#273427;
+.intro h1{
+    font-size:42px;
+    font-weight:800;
+    line-height:1.25;
+    margin-bottom:25px;
 }
 
-.form-group input,
-.form-group select{
-    width:100%;
-    padding:13px;
-    border:1px solid #d4ddd2;
-    border-radius:8px;
-    background:white;
-    outline:none;
+.heart{
+    color:#facc15;
 }
 
-.form-group input:focus,
-.form-group select:focus{
-    border-color:#2f751f;
-}
-
-.form-row{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:14px;
-}
-
-.readonly{
-    background:#edf1eb !important;
-}
-
-.full-btn{
-    width:100%;
-    border:none;
-    background:#173d1b;
-    color:white;
-    padding:14px;
-    border-radius:9px;
-    font-weight:bold;
-    cursor:pointer;
-    margin-top:8px;
-}
-
-.full-btn:hover{
-    background:#245d29;
-}
-
-/* ================= REVIEW/PAYMENT ================= */
-
-.booking-step{
-    max-width:650px;
-    margin:30px auto 0;
-    background:white;
-    padding:28px;
-    border-radius:18px;
-    box-shadow:0 8px 30px rgba(0,0,0,.08);
-}
-
-.hidden{
-    display:none !important;
-}
-
-.booking-step h2{
-    color:#173d1b;
-    text-align:center;
-    margin-bottom:20px;
-}
-
-.detail{
-    background:#f3f7f0;
-    padding:12px;
-    border-radius:8px;
-    margin:8px 0;
-}
-
-.detail strong{
-    color:#173d1b;
-}
-
-.payment-option{
-    border:1px solid #d8e0d5;
-    border-radius:9px;
-    padding:14px;
-    margin:10px 0;
-}
-
-.payment-option input{
-    margin-right:8px;
-}
-
-.notice{
-    margin-top:15px;
-    padding:14px;
-    background:#fff8d9;
-    border-left:4px solid #ffd91a;
-    border-radius:8px;
-    font-size:14px;
-}
-
-.secondary-full{
-    width:100%;
-    border:1px solid #173d1b;
-    background:white;
-    color:#173d1b;
-    padding:13px;
-    border-radius:9px;
-    font-weight:bold;
-    cursor:pointer;
-    margin-top:10px;
-}
-
-.success-box{
-    text-align:center;
-    background:#edf8e9;
-    border:2px solid #63a853;
-}
-
-.booking-id{
-    font-size:24px;
-    font-weight:bold;
-    color:#173d1b;
-    margin:15px 0;
-}
-
-/* ================= NEED A RIDE ================= */
-
-.ride-banner{
-    background:#ffd91a;
-    padding:55px 20px;
-    text-align:center;
-}
-
-.ride-banner h2{
-    color:#173d1b;
-    font-size:32px;
-    margin-bottom:10px;
-}
-
-.ride-banner p{
-    color:#34422f;
-    margin-bottom:20px;
+.intro p{
+    font-size:21px;
+    line-height:1.7;
 }
 
 /* ================= SUPPORT ================= */
 
 .support{
-    background:white;
+    background:#003f32;
+    padding:0 0 35px;
 }
 
-.support-grid{
-    max-width:850px;
-    margin:auto;
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:20px;
+.support-image{
+    width:100%;
+    height:auto;
+    display:block;
 }
 
-.support-card{
-    background:#f2f7ef;
-    padding:25px;
-    border-radius:14px;
+.support-button-box{
     text-align:center;
+    padding:20px;
 }
 
-.support-card h3{
-    color:#173d1b;
-    margin-bottom:8px;
-}
-
-.support-card p{
-    color:#657064;
-}
-
-.support-btn{
+.support-button{
     display:inline-block;
-    margin-top:13px;
-    background:#173d1b;
-    color:white;
-    padding:12px 20px;
-    border-radius:8px;
+    background:#3030d9;
+    color:#ffffff;
+    text-decoration:none;
+    padding:14px 30px;
+    border-radius:9px;
+    font-size:18px;
     font-weight:bold;
 }
 
 /* ================= FOOTER ================= */
 
-footer{
-    background:#102c13;
-    color:white;
+.footer{
+    background:#003f32;
+    color:#ffffff;
     text-align:center;
-    padding:35px 20px;
+    padding:25px 15px;
 }
 
-footer h3{
-    color:#ffd91a;
-    margin-bottom:8px;
+.footer .trust{
+    color:#facc15;
+    font-size:18px;
+    font-weight:bold;
+    margin-bottom:12px;
 }
 
-.footer-links{
-    margin:15px 0;
+.footer .safe{
+    font-size:16px;
+    margin-bottom:22px;
 }
 
-.footer-links a{
-    margin:0 8px;
-    color:#e5efe2;
-    font-size:14px;
+.footer-line{
+    width:90%;
+    height:1px;
+    background:rgba(255,255,255,0.25);
+    margin:0 auto 20px;
 }
 
-.footer-links a:hover{
-    color:#ffd91a;
-}
-
-.footer-manager{
-    color:#ffd91a;
-    margin-top:7px;
+.footer p{
+    font-size:15px;
+    line-height:1.7;
 }
 
 /* ================= MOBILE ================= */
 
-@media(max-width:800px){
+@media(max-width:600px){
 
-    .navbar{
-        flex-wrap:wrap;
-    }
-
-    .nav-links{
-        width:100%;
-        justify-content:center;
-        flex-wrap:wrap;
-    }
-
-    .hero-inner{
-        grid-template-columns:1fr;
-    }
-
-    .hero h2{
-        font-size:36px;
-    }
-
-    .about-grid{
-        grid-template-columns:1fr;
-    }
-
-    .features{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .steps{
-        grid-template-columns:1fr;
-    }
-
-    .support-grid{
-        grid-template-columns:1fr;
-    }
-}
-
-@media(max-width:520px){
-
-    .brand-text h1{
-        font-size:19px;
+    .header{
+        min-height:105px;
+        padding:14px;
     }
 
     .logo{
-        width:48px;
-        height:48px;
+        width:65px;
+        height:65px;
     }
 
-    .managed{
-        font-size:11px;
-    }
-
-    .nav-links{
-        gap:10px;
-    }
-
-    .nav-links a{
-        font-size:12px;
-    }
-
-    .hero{
-        padding:50px 15px;
-    }
-
-    .hero h2{
-        font-size:31px;
-    }
-
-    .hero p{
+    .manager{
         font-size:16px;
     }
 
-    .features{
-        grid-template-columns:1fr;
+    .manager strong{
+        font-size:18px;
     }
 
-    .form-row{
-        grid-template-columns:1fr;
+    .menu span{
+        width:38px;
     }
 
-    .booking-card,
-    .booking-step{
-        margin-left:12px;
-        margin-right:12px;
-        padding:20px;
+    .location{
+        width:88%;
+        font-size:16px;
+        padding:13px 10px;
     }
 
-    .section-wrap{
-        padding:50px 15px;
+    .intro{
+        padding:65px 15px 45px;
     }
 
-    .about-grid{
-        padding:50px 15px;
+    .intro-small{
+        font-size:16px;
     }
+
+    .intro h1{
+        font-size:36px;
+    }
+
+    .intro p{
+        font-size:19px;
+    }
+
 }
+
 </style>
 </head>
 
+
 <body>
 
-<!-- ================= HEADER ================= -->
 
-<header>
+<!-- ================= TOP HEADER ================= -->
 
-<nav class="navbar">
+<header class="header">
 
-    <a href="#home" class="brand">
+    <div class="header-left">
 
         <img
-            src="raxelgo24-logo.png"
-            class="logo"
+            src="logo.png"
             alt="RAXEL GO 24 Logo"
+            class="logo"
         >
 
-        <div class="brand-text">
+        <div class="manager">
 
-            <h1>RAXEL GO 24</h1>
+            Managed by<br>
 
-            <small>Rural Auto Service</small>
-
-            <div class="managed">
-                Managed by Imtiyaz Khan
-            </div>
+            <strong>Imtiyaz Khan</strong>
 
         </div>
 
-    </a>
-
-    <div class="nav-links">
-
-        <a href="#home">Home</a>
-
-        <a href="#about">About</a>
-
-        <a href="#how">How It Works</a>
-
-        <a href="#help">Help / Support</a>
-
-        <a href="#booking-area" class="nav-book">
-            Book an Auto
-        </a>
-
     </div>
 
-</nav>
+
+    <!-- MENU -->
+
+    <div class="menu">
+
+        <span></span>
+        <span></span>
+        <span></span>
+
+    </div>
 
 </header>
 
 
-<!-- ================= HOME ================= -->
 
-<section class="hero" id="home">
+<!-- ================= MAIN HERO IMAGE ================= -->
 
-<div class="hero-inner">
+<section class="hero">
 
-    <div>
-
-        <h2>
-            जहाँ चाहे, जब चाहे —
-            <span>हम हैं आपके साथ।</span>
-        </h2>
-
-        <p>
-            RAXEL GO 24 brings reliable auto service
-            to rural areas. Book your ride easily,
-            get confirmation and travel safely.
-        </p>
-
-        <div class="hero-buttons">
-
-            <button
-                class="primary-btn"
-                onclick="openBooking()"
-            >
-                🚗 Book an Auto
-            </button>
-
-            <a
-                href="#about"
-                class="secondary-btn"
-            >
-                Know More
-            </a>
-
-        </div>
-
-    </div>
-
-
-    <div class="hero-card">
-
-        <h3>🚕 Need a Ride?</h3>
-
-        <p>
-            School, college, railway station,
-            hospital or anywhere you need to go —
-            RAXEL GO 24 is ready to help.
-        </p>
-
-        <button
-            class="primary-btn"
-            onclick="openBooking()"
-        >
-            Book Your Auto
-        </button>
-
-    </div>
-
-</div>
+    <img
+        src="hero.png"
+        alt="RAXEL GO 24 Reliable Auto Service"
+        class="hero-image"
+    >
 
 </section>
 
 
-<!-- ================= ABOUT ================= -->
 
-<section id="about" class="about">
+<!-- ================= PICKUP LOCATION ================= -->
 
-<div class="about-grid">
+<div class="location">
 
-    <div class="about-text">
+    <span class="pin">📍</span>
 
-        <h2>About RAXEL GO 24</h2>
+    Pickup Location:
 
-        <p>
-            RAXEL GO 24 is a rural-area auto service
-            created to make local travel easier,
-            safer and more reliable.
-        </p>
-
-        <p>
-            Customers can request an auto online
-            without directly contacting the driver.
-            Our team receives the booking and
-            manages the ride.
-        </p>
-
-        <div class="about-box">
-
-            <strong>
-                Safe • Reliable • On Time
-            </strong>
-
-            <br>
-
-            We connect customers with available
-            drivers according to their booking.
-
-        </div>
-
-    </div>
-
-
-    <div>
-
-        <div class="features">
-
-            <div class="feature">
-
-                <div class="feature-icon">📍</div>
-
-                <h3>Rural Coverage</h3>
-
-                <p>
-                    Service focused on rural areas.
-                </p>
-
-            </div>
-
-
-            <div class="feature">
-
-                <div class="feature-icon">⚡</div>
-
-                <h3>Quick Booking</h3>
-
-                <p>
-                    Simple online booking process.
-                </p>
-
-            </div>
-
-
-            <div class="feature">
-
-                <div class="feature-icon">🤝</div>
-
-                <h3>Trusted Service</h3>
-
-                <p>
-                    Booking handled by our team.
-                </p>
-
-            </div>
-
-
-            <div class="feature">
-
-                <div class="feature-icon">❤️</div>
-
-                <h3>Customer First</h3>
-
-                <p>
-                    Your convenience matters to us.
-                </p>
-
-            </div>
-
-        </div>
-
-    </div>
+    <strong>Ranisagar</strong>
 
 </div>
+
+
+
+<!-- ================= INTRO SECTION ================= -->
+
+<section class="intro">
+
+    <div class="intro-small">
+
+        Your Ride, Just One Tap Away
+
+        <span class="green-line"></span>
+
+    </div>
+
+
+    <h1>
+
+        हम हैं आपके साथ
+
+        <span class="heart">💛</span>
+
+    </h1>
+
+
+    <p>
+
+        जहाँ चाहें, जब चाहें — हम हैं आपके साथ।
+
+    </p>
 
 </section>
 
 
-<!-- ================= HOW IT WORKS ================= -->
 
-<section id="how" class="how">
+<!-- ================= SUPPORT SECTION ================= -->
 
-<div class="section-wrap">
+<section class="support">
 
-    <div class="section-title">
-
-        <h2>How It Works</h2>
-
-        <p>
-            Booking your ride is simple.
-        </p>
-
-    </div>
+    <img
+        src="support.png"
+        alt="RAXEL GO 24 Help Support"
+        class="support-image"
+    >
 
 
-    <div class="steps">
+    <div class="support-button-box">
 
-        <div class="step">
+        <a
+            href="tel:+918294741267"
+            class="support-button"
+        >
 
-            <div class="step-number">1</div>
+            📞 Help / Support
 
-            <h3>Book</h3>
-
-            <p>
-                Enter your destination,
-                details, date and time.
-            </p>
-
-        </div>
-
-
-        <div class="step">
-
-            <div class="step-number">2</div>
-
-            <h3>Confirm</h3>
-
-            <p>
-                Our team receives and
-                confirms your booking.
-            </p>
-
-        </div>
-
-
-        <div class="step">
-
-            <div class="step-number">3</div>
-
-            <h3>Ride</h3>
-
-            <p>
-                An available driver is
-                sent for your journey.
-            </p>
-
-        </div>
+        </a>
 
     </div>
-
-</div>
 
 </section>
 
 
-<!-- ================= BOOKING ================= -->
 
-<section
-    class="booking-area"
-    id="booking-area"
->
+<!-- ================= FOOTER ================= -->
 
-<div class="section-wrap">
+<footer class="footer">
 
-    <div class="section-title">
+    <div class="trust">
 
-        <h2>🚗 Book an Auto</h2>
-
-        <p>
-            Fill your journey details below.
-        </p>
+        🛡️ आपका भरोसा, हमारी जिम्मेदारी
 
     </div>
 
 
-    <!-- BOOKING FORM -->
+    <div class="safe">
 
-    <div
-        class="booking-card"
-        id="booking"
-    >
-
-        <h2>Your Journey</h2>
-
-        <p>
-            Currently available from Ranisagar.
-        </p>
-
-
-        <div class="form-group">
-
-            <label>From</label>
-
-            <input
-                type="text"
-                value="Ranisagar"
-                readonly
-                class="readonly"
-            >
-
-        </div>
-
-
-        <div class="form-group">
-
-            <label>To / Destination</label>
-
-            <input
-                type="text"
-                id="to"
-                placeholder="Enter destination"
-            >
-
-        </div>
-
-
-        <div class="form-group">
-
-            <label>Customer Name</label>
-
-            <input
-                type="text"
-                id="name"
-                placeholder="Enter your name"
-            >
-
-        </div>
-
-
-        <div class="form-group">
-
-            <label>Mobile Number</label>
-
-            <input
-                type="tel"
-                id="mobile"
-                placeholder="Enter mobile number"
-            >
-
-        </div>
-
-
-        <div class="form-row">
-
-            <div class="form-group">
-
-                <label>Date</label>
-
-                <input
-                    type="date"
-                    id="date"
-                >
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>Time</label>
-
-                <input
-                    type="time"
-                    id="time"
-                >
-
-            </div>
-
-        </div>
-
-
-        <div class="form-group">
-
-            <label>Number of Passengers</label>
-
-            <input
-                type="number"
-                id="passengers"
-                min="1"
-                max="10"
-                placeholder="Passengers"
-            >
-
-        </div>
-
-
-        <button
-            class="full-btn"
-            onclick="goToReview()"
-        >
-            Review Booking
-        </button>
+        Safe • Reliable • On Time
 
     </div>
 
 
-    <!-- REVIEW -->
-
-    <div
-        class="booking-step hidden"
-        id="review"
-    >
-
-        <h2>📋 Review Booking</h2>
+    <div class="footer-line"></div>
 
 
-        <div class="detail">
-            <strong>From:</strong>
-            Ranisagar
-        </div>
-
-        <div class="detail">
-            <strong>To:</strong>
-            <span id="rTo"></span>
-        </div>
-
-        <div class="detail">
-            <strong>Name:</strong>
-            <span id="rName"></span>
-        </div>
-
-        <div class="detail">
-            <strong>Mobile:</strong>
-            <span id="rMobile"></span>
-        </div>
-
-        <div class="detail">
-            <strong>Date:</strong>
-            <span id="rDate"></span>
-        </div>
-
-        <div class="detail">
-            <strong>Time:</strong>
-            <span id="rTime"></span>
-        </div>
-
-        <div class="detail">
-            <strong>Passengers:</strong>
-            <span id="rPassengers"></span>
-        </div>
+    <p>
+        © 2026 RAXEL GO 24
+    </p>
 
 
-        <button
-            class="full-btn"
-            onclick="goToPayment()"
-        >
-            Confirm & Continue
-        </button>
+    <p>
+        Managed by Imtiyaz Khan
+    </p>
+
+</footer>
 
 
-        <button
-            class="secondary-full"
-            onclick="backToBooking()"
-        >
-            ← Edit Details
-        </button>
-
-    </div>
-
-
-    <!-- PAYMENT -->
-
-    <div
-        class="booking-step hidden"
-        id="payment"
-    >
-
-        <h2>💳 Payment Mode</h2>
-
-
-        <div class="payment-option">
-
-            <label>
-
-                <input
-                    type="radio"
-                    name="payment"
-                    value="UPI"
-                >
-
-                UPI
-
-            </label>
-
-        </div>
-
-
-        <div class="payment-option">
-
-            <label>
-
-                <input
-                    type="radio"
-                    name="payment"
-                    value="COD"
-                >
-
-                COD / Cash
-
-            </label>
-
-        </div>
-
-
-        <div class="notice">
-
-            Your booking request will be sent
-            to RAXEL GO 24.
-
-            <br><br>
-
-            Booking is confirmed only after
-            our team accepts it.
-
-        </div>
-
-
-        <button
-            class="full-btn"
-            onclick="submitBooking()"
-        >
-            🚗 Submit Booking
-        </button>
-
-
-        <button
-            class="secondary-full"
-            onclick="backToReview()"
-        >
-            ← Back to Review
-        </button>
-
-    </div>
-
-
-    <!-- SUCCESS -->
-
-    <div
-        class="booking-step success-box hidden"
-        id="success"
-    >
-
-        <h2>✅ Booking Request Sent</h2>
-
-        <p>
-            Your booking request has been
-            submitted successfully.
-        </p>
-
-
-        <div class="booking-id">
-
-            Booking ID:
-            <br>
-
-            <span id="bookingId"></span>
-
-        </div>
-
-
-        <p>
-            Please wait for RAXEL GO 24
-            confirmation.
-        </p>
-
-    </div>
-
-</div>
-
-</sect
+</body>
+</html>
