@@ -18,7 +18,6 @@ body {
     color: #111827;
 }
 
-/* TOP BRAND AREA */
 header {
     background: #111827;
     color: white;
@@ -26,7 +25,6 @@ header {
     padding: 12px 15px 25px;
 }
 
-/* LOGO + MANAGED BY */
 .brand-top {
     width: 100%;
     max-width: 900px;
@@ -58,7 +56,6 @@ header {
     color: white;
 }
 
-/* MAIN HEADER */
 header h1 {
     font-size: 32px;
 }
@@ -137,9 +134,23 @@ input[readonly] {
     color: white;
     font-size: 17px;
     font-weight: bold;
+    cursor: pointer;
 }
 
-.review {
+.secondary {
+    width: 100%;
+    margin-top: 10px;
+    padding: 13px;
+    border: 1px solid #111827;
+    border-radius: 8px;
+    background: white;
+    color: #111827;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.hidden {
     display: none;
 }
 
@@ -157,6 +168,10 @@ input[readonly] {
     border-radius: 9px;
 }
 
+.payment-option label {
+    margin: 0;
+}
+
 .payment-option input {
     width: auto;
     margin-right: 8px;
@@ -168,6 +183,16 @@ input[readonly] {
     background: #fff7ed;
     border-radius: 8px;
     font-size: 14px;
+}
+
+.success {
+    text-align: center;
+}
+
+.booking-id {
+    font-size: 22px;
+    font-weight: bold;
+    margin: 15px 0;
 }
 
 .support {
@@ -193,20 +218,7 @@ footer {
     padding: 22px;
 }
 
-.success {
-    display: none;
-    text-align: center;
-}
-
-.booking-id {
-    font-size: 22px;
-    font-weight: bold;
-    margin: 15px 0;
-}
-
-/* MOBILE DESIGN */
 @media (max-width: 600px) {
-
     .brand-top {
         justify-content: flex-start;
         text-align: left;
@@ -242,7 +254,6 @@ footer {
 
 <header>
 
-    <!-- LOGO + MANAGED BY -->
     <div class="brand-top">
 
         <img
@@ -279,7 +290,8 @@ footer {
 
 </section>
 
-<!-- BOOKING FORM -->
+
+<!-- STEP 1: BOOKING DETAILS -->
 
 <section class="section" id="booking">
 
@@ -312,21 +324,22 @@ footer {
         placeholder="Passengers"
     >
 
-    <button class="action" onclick="showReview()">
+    <button class="action" onclick="goToReview()">
         Review Booking
     </button>
 
 </section>
 
-<!-- REVIEW PAGE/SECTION -->
 
-<section class="section review" id="review">
+<!-- STEP 2: REVIEW -->
+
+<section class="section hidden" id="review">
 
     <h2>📋 Review Your Booking</h2>
 
     <div class="detail">
         <strong>From:</strong>
-        <span id="rFrom">Ranisagar</span>
+        <span>Ranisagar</span>
     </div>
 
     <div class="detail">
@@ -359,7 +372,22 @@ footer {
         <span id="rPassengers"></span>
     </div>
 
-    <h3 style="margin-top:20px;">💳 Payment Mode</h3>
+    <button class="action" onclick="goToPayment()">
+        Confirm & Continue
+    </button>
+
+    <button class="secondary" onclick="backToBooking()">
+        ← Edit Details
+    </button>
+
+</section>
+
+
+<!-- STEP 3: PAYMENT -->
+
+<section class="section hidden" id="payment">
+
+    <h2>💳 Payment Mode</h2>
 
     <div class="payment-option">
         <label>
@@ -381,14 +409,19 @@ footer {
     </div>
 
     <button class="action" onclick="submitBooking()">
-        Submit Booking
+        🚗 Submit Booking
+    </button>
+
+    <button class="secondary" onclick="backToReview()">
+        ← Back to Review
     </button>
 
 </section>
 
-<!-- SUCCESS -->
 
-<section class="section success" id="success">
+<!-- STEP 4: SUCCESS -->
+
+<section class="section success hidden" id="success">
 
     <h2>⏳ Booking Request Sent</h2>
 
@@ -406,6 +439,7 @@ footer {
 
 </section>
 
+
 <section class="support">
 
     <h2>Need Help?</h2>
@@ -418,6 +452,7 @@ footer {
 
 </section>
 
+
 <footer>
 
     <p>© 2026 RAXEL GO 24</p>
@@ -427,91 +462,241 @@ footer {
     </p>
 
 </footer>
+
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
-const SUPABASE_URL = "https://phrlnhzbqqzeoxhpdeyt.supabase.co";
-const SUPABASE_KEY = "sb_publishable_cLNIvPuSPOrU6Ro6Leq9Hg_45You9FO";
 
-const supabaseClient = window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-);
+const SUPABASE_URL =
+    "https://phrlnhzbqqzeoxhpdeyt.supabase.co";
 
-function showReview() {
-    const to = document.getElementById("to").value;
-    const name = document.getElementById("name").value;
-    const mobile = document.getElementById("mobile").value;
-    const date = document.getElementById("date").value;
-    const time = document.getElementById("time").value;
-    const passengers = document.getElementById("passengers").value;
+const SUPABASE_KEY =
+    "sb_publishable_cLNIvPuSPOrU6Ro6Leq9Hg_45You9FO";
 
-    if (!to || !name || !mobile || !date || !time || !passengers) {
-        alert("Please fill all booking details.");
-        return;
-    }
-
-    document.getElementById("rTo").textContent = to;
-    document.getElementById("rName").textContent = name;
-    document.getElementById("rMobile").textContent = mobile;
-    document.getElementById("rDate").textContent = date;
-    document.getElementById("rTime").textContent = time;
-    document.getElementById("rPassengers").textContent = passengers;
-
-    document.getElementById("review").style.display = "block";
-
-    document.getElementById("review").scrollIntoView({
-        behavior: "smooth"
-    });
-}
-
-async function submitBooking() {
-    const payment = document.querySelector(
-        'input[name="payment"]:checked'
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
     );
 
-    if (!payment) {
-        alert("Please select a payment mode.");
+
+function hideAllSteps() {
+
+    document.getElementById("booking")
+        .classList.add("hidden");
+
+    document.getElementById("review")
+        .classList.add("hidden");
+
+    document.getElementById("payment")
+        .classList.add("hidden");
+
+    document.getElementById("success")
+        .classList.add("hidden");
+}
+
+
+function goToReview() {
+
+    const to =
+        document.getElementById("to").value;
+
+    const name =
+        document.getElementById("name").value;
+
+    const mobile =
+        document.getElementById("mobile").value;
+
+    const date =
+        document.getElementById("date").value;
+
+    const time =
+        document.getElementById("time").value;
+
+    const passengers =
+        document.getElementById("passengers").value;
+
+
+    if (
+        !to ||
+        !name ||
+        !mobile ||
+        !date ||
+        !time ||
+        !passengers
+    ) {
+
+        alert("Please fill all booking details.");
+
         return;
     }
+
+
+    document.getElementById("rTo").textContent =
+        to;
+
+    document.getElementById("rName").textContent =
+        name;
+
+    document.getElementById("rMobile").textContent =
+        mobile;
+
+    document.getElementById("rDate").textContent =
+        date;
+
+    document.getElementById("rTime").textContent =
+        time;
+
+    document.getElementById("rPassengers").textContent =
+        passengers;
+
+
+    hideAllSteps();
+
+    document.getElementById("review")
+        .classList.remove("hidden");
+
+    document.getElementById("review")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+}
+
+
+function goToPayment() {
+
+    hideAllSteps();
+
+    document.getElementById("payment")
+        .classList.remove("hidden");
+
+    document.getElementById("payment")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+}
+
+
+function backToBooking() {
+
+    hideAllSteps();
+
+    document.getElementById("booking")
+        .classList.remove("hidden");
+
+    document.getElementById("booking")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+}
+
+
+function backToReview() {
+
+    hideAllSteps();
+
+    document.getElementById("review")
+        .classList.remove("hidden");
+
+    document.getElementById("review")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+}
+
+
+async function submitBooking() {
+
+    const payment =
+        document.querySelector(
+            'input[name="payment"]:checked'
+        );
+
+
+    if (!payment) {
+
+        alert("Please select a payment mode.");
+
+        return;
+    }
+
 
     const bookingId =
-        "RAXEL" + Math.floor(100000 + Math.random() * 900000);
+        "RAXEL" +
+        Math.floor(
+            100000 +
+            Math.random() * 900000
+        );
 
-    const name = document.getElementById("name").value;
-    const mobile = document.getElementById("mobile").value;
-    const to = document.getElementById("to").value;
-    const date = document.getElementById("date").value;
-    const time = document.getElementById("time").value;
-    const passengers = document.getElementById("passengers").value;
 
-    const { error } = await supabaseClient
+    const name =
+        document.getElementById("name").value;
+
+    const mobile =
+        document.getElementById("mobile").value;
+
+    const to =
+        document.getElementById("to").value;
+
+    const date =
+        document.getElementById("date").value;
+
+    const time =
+        document.getElementById("time").value;
+
+
+    const { error } =
+        await supabaseClient
         .from("bookings")
         .insert({
+
             customer_name: name,
+
             phone: mobile,
+
             pickup: "Ranisagar",
+
             destination: to,
+
             booking_date: date,
+
             booking_time: time,
+
             status: "pending"
+
         });
 
+
     if (error) {
+
         console.error(error);
-        alert("Booking submit nahi ho paayi. Please try again.");
+
+        alert(
+            "Booking submit nahi ho paayi. Please try again."
+        );
+
         return;
     }
 
-    document.getElementById("bookingId").textContent = bookingId;
 
-    document.getElementById("review").style.display = "none";
-    document.getElementById("success").style.display = "block";
+    document.getElementById("bookingId")
+        .textContent = bookingId;
 
-    document.getElementById("success").scrollIntoView({
-        behavior: "smooth"
-    });
+
+    hideAllSteps();
+
+
+    document.getElementById("success")
+        .classList.remove("hidden");
+
+
+    document.getElementById("success")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
 }
+
 </script>
 
 </body>
