@@ -1,63 +1,68 @@
-CTYPE html>  
-<html lang="en">  
-<head>  
-<meta charset="UTF-8">  
-<meta name="viewport" content="width=device-width, initial-scale=1.0">  
-<title>RAXEL GO 24</title>  
-<style>  
-* {  
-    box-sizing: border-box;  
-    margin: 0;  
-    padding: 0;  
-    font-family: Arial, sans-serif;  
-}  
-  
-body {  
-    background: #f4f6f8;  
-    color: #111827;  
-}  
-  
-header {  
-    background: #111827;  
-    color: white;  
-    text-align: center;  
-    padding: 12px 15px 25px;  
-    position: relative;
-}  
-  
-.brand-top {  
-    width: 100%;  
-    max-width: 900px;  
-    margin: 0 auto 15px;  
-    display: flex;  
-    align-items: center;  
-    justify-content: space-between;  
-    gap: 15px;  
-}  
-  
-.brand-logo {  
-    width: 95px;  
-    height: 95px;  
-    object-fit: contain;  
-    background: white;  
-    border-radius: 12px;  
-    padding: 4px;  
-}  
-  
-.managed-by {  
-    flex: 1;  
-    text-align: right;  
-    font-size: 20px;  
-    font-weight: bold;  
-    color: #facc15;  
-    padding-right: 35px;
-}  
-  
-.managed-by span {  
-    color: white;  
-}  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RAXEL GO 24</title>
 
-/* 3 Lines Menu Button */
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f4f6f8;
+    color: #111827;
+}
+
+/* ================= HEADER ================= */
+
+header {
+    background: #111827;
+    color: white;
+    text-align: center;
+    padding: 12px 15px 25px;
+    position: relative;
+}
+
+.brand-top {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.brand-logo {
+    width: 95px;
+    height: 95px;
+    object-fit: contain;
+    background: white;
+    border-radius: 12px;
+    padding: 4px;
+}
+
+.managed-by {
+    flex: 1;
+    text-align: right;
+    font-size: 20px;
+    font-weight: bold;
+    color: #facc15;
+    padding-right: 35px;
+}
+
+.managed-by span {
+    color: white;
+}
+
+/* ================= MENU BUTTON ================= */
+
 .menu-btn {
     position: absolute;
     top: 15px;
@@ -70,7 +75,8 @@ header {
     z-index: 1001;
 }
 
-/* Slide Menu Overlay */
+/* ================= MENU DRAWER ================= */
+
 .menu-drawer {
     display: none;
     position: fixed;
@@ -90,12 +96,13 @@ header {
     display: flex;
 }
 
-/* Menu Top Header */
+/* ================= DRAWER HEADER ================= */
+
 .drawer-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    border-bottom: 1px solid rgba(255,255,255,0.15);
     padding-bottom: 15px;
     position: relative;
 }
@@ -134,7 +141,8 @@ header {
     cursor: pointer;
 }
 
-/* Menu Links List */
+/* ================= MENU LINKS ================= */
+
 .menu-links-list {
     list-style: none;
     width: 100%;
@@ -142,7 +150,7 @@ header {
 }
 
 .menu-links-list li {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 
 .menu-links-list a {
@@ -171,10 +179,11 @@ header {
     font-size: 16px;
 }
 
-/* Menu Bottom Section */
+/* ================= DRAWER FOOTER ================= */
+
 .drawer-footer-card {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
     border-radius: 12px;
     padding: 15px;
     text-align: center;
@@ -222,565 +231,1333 @@ header {
     display: block;
 }
 
+/* ================= SOCIAL ICONS ================= */
+
 .drawer-social-icons {
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 15px;
     margin-bottom: 12px;
 }
 
 .drawer-social-icons a {
-    font-size: 22px;
+    width: 46px;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
     text-decoration: none;
+    border-radius: 50%;
+    transition: transform 0.2s ease;
 }
+
+.drawer-social-icons a:hover {
+    transform: scale(1.08);
+}
+
+.drawer-social-icons svg {
+    display: block;
+}
+
+/* ================= DRAWER COPY ================= */
 
 .drawer-copy {
     color: #9ca3af;
     font-size: 11px;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-top: 1px solid rgba(255,255,255,0.08);
     padding-top: 8px;
 }
-  
-header h1 {  
-    font-size: 32px;  
-}  
-  
-header p {  
-    margin-top: 8px;  
-}  
-  
-.hero {  
-    background: white;  
-    text-align: center;  
-    padding: 45px 20px;  
-}  
-  
-.hero h2 {  
-    font-size: 28px;  
-    margin-bottom: 12px;  
-}  
-  
-.hero p {  
-    color: #666;  
-    line-height: 1.6;  
-    margin-bottom: 25px;  
-}  
-  
-.button {  
-    display: inline-block;  
-    padding: 14px 25px;  
-    border-radius: 10px;  
-    text-decoration: none;  
-    font-weight: bold;  
-    background: #16a34a;  
-    color: white;  
-    border: none;  
-    cursor: pointer;  
-}  
-  
-.section {  
-    max-width: 520px;  
-    margin: 30px auto;  
-    background: white;  
-    padding: 25px;  
-    border-radius: 15px;  
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08);  
-}  
-  
-.section h2 {  
-    text-align: center;  
-    margin-bottom: 20px;  
-}  
-  
-label {  
-    display: block;  
-    font-weight: bold;  
-    margin: 12px 0 6px;  
-}  
-  
-input {  
-    width: 100%;  
-    padding: 13px;  
-    border: 1px solid #ddd;  
-    border-radius: 8px;  
-    font-size: 16px;  
-}  
-  
-input[readonly] {  
-    background: #eef2f7;  
-}  
-  
-.action {  
-    width: 100%;  
-    margin-top: 20px;  
-    padding: 14px;  
-    border: none;  
-    border-radius: 8px;  
-    background: #111827;  
-    color: white;  
-    font-size: 17px;  
-    font-weight: bold;  
-    cursor: pointer;  
-}  
-  
-.secondary {  
-    width: 100%;  
-    margin-top: 10px;  
-    padding: 13px;  
-    border: 1px solid #111827;  
-    border-radius: 8px;  
-    background: white;  
-    color: #111827;  
-    font-size: 16px;  
-    font-weight: bold;  
-    cursor: pointer;  
-}  
-  
-.hidden {  
-    display: none !important;  
-}  
-  
-.detail {  
-    background: #f8fafc;  
-    padding: 12px;  
-    margin: 8px 0;  
-    border-radius: 8px;  
-}  
-  
-.payment-option {  
-    margin: 10px 0;  
-    padding: 14px;  
-    border: 1px solid #ddd;  
-    border-radius: 9px;  
-}  
-  
-.payment-option label {  
-    margin: 0;  
-}  
-  
-.payment-option input {  
-    width: auto;  
-    margin-right: 8px;  
-}  
-  
-.notice {  
-    margin-top: 15px;  
-    padding: 12px;  
-    background: #fff7ed;  
-    border-radius: 8px;  
-    font-size: 14px;  
-}  
-  
-.success {  
-    text-align: center;  
-}  
-  
-.booking-id {  
-    font-size: 22px;  
-    font-weight: bold;  
-    margin: 15px 0;  
-}  
-  
-.support {  
-    text-align: center;  
-    padding: 30px 20px;  
-}  
-  
-.support a {  
-    display: inline-block;  
-    margin-top: 12px;  
-    background: #2563eb;  
-    color: white;  
-    padding: 13px 22px;  
-    border-radius: 9px;  
-    text-decoration: none;  
-    font-weight: bold;  
-}  
-  
-footer {  
-    background: #111827;  
-    color: white;  
-    text-align: center;  
-    padding: 22px;  
-}  
-  
-@media (max-width: 600px) {  
-    .brand-top {  
-        justify-content: flex-start;  
-        text-align: left;  
-    }  
-  
-    .brand-logo {  
-        width: 75px;  
-        height: 75px;  
-    }  
-  
-    .managed-by {  
-        text-align: left;  
-        font-size: 16px;  
-        padding-right: 35px;
-    }  
-  
-    header h1 {  
-        font-size: 27px;  
-    }  
-  
-    .hero h2 {  
-        font-size: 24px;  
-    }  
-  
-    .section {  
-        margin: 20px 12px;  
-        padding: 20px;  
-    }  
-}  
-</style>  
-</head>  
-<body>  
 
-<header>  
+/* ================= HEADER TEXT ================= */
+
+header h1 {
+    font-size: 32px;
+}
+
+header p {
+    margin-top: 8px;
+}
+
+/* ================= HERO ================= */
+
+.hero {
+    background: white;
+    text-align: center;
+    padding: 45px 20px;
+}
+
+.hero h2 {
+    font-size: 28px;
+    margin-bottom: 12px;
+}
+
+.hero p {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+/* ================= BUTTON ================= */
+
+.button {
+    display: inline-block;
+    padding: 14px 25px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    background: #16a34a;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+/* ================= SECTIONS ================= */
+
+.section {
+    max-width: 520px;
+    margin: 30px auto;
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.section h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* ================= FORM ================= */
+
+label {
+    display: block;
+    font-weight: bold;
+    margin: 12px 0 6px;
+}
+
+input {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+input[readonly] {
+    background: #eef2f7;
+}
+
+/* ================= ACTION BUTTON ================= */
+
+.action {
+    width: 100%;
+    margin-top: 20px;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    background: #111827;
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.secondary {
+    width: 100%;
+    margin-top: 10px;
+    padding: 13px;
+    border: 1px solid #111827;
+    border-radius: 8px;
+    background: white;
+    color: #111827;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* ================= HIDDEN ================= */
+
+.hidden {
+    display: none !important;
+}
+
+/* ================= REVIEW ================= */
+
+.detail {
+    background: #f8fafc;
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 8px;
+}
+
+/* ================= PAYMENT ================= */
+
+.payment-option {
+    margin: 10px 0;
+    padding: 14px;
+    border: 1px solid #ddd;
+    border-radius: 9px;
+}
+
+.payment-option label {
+    margin: 0;
+}
+
+.payment-option input {
+    width: auto;
+    margin-right: 8px;
+}
+
+.notice {
+    margin-top: 15px;
+    padding: 12px;
+    background: #fff7ed;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+/* ================= SUCCESS ================= */
+
+.success {
+    text-align: center;
+}
+
+.booking-id {
+    font-size: 22px;
+    font-weight: bold;
+    margin: 15px 0;
+}
+
+/* ================= SUPPORT ================= */
+
+.support {
+    text-align: center;
+    padding: 30px 20px;
+}
+
+.support a {
+    display: inline-block;
+    margin-top: 12px;
+    background: #2563eb;
+    color: white;
+    padding: 13px 22px;
+    border-radius: 9px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* ================= FOOTER ================= */
+
+footer {
+    background: #111827;
+    color: white;
+    text-align: center;
+    padding: 22px;
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 600px) {
+
+    .brand-top {
+        justify-content: flex-start;
+        text-align: left;
+    }
+
+    .brand-logo {
+        width: 75px;
+        height: 75px;
+    }
+
+    .managed-by {
+        text-align: left;
+        font-size: 16px;
+        padding-right: 35px;
+    }
+
+    header h1 {
+        font-size: 27px;
+    }
+
+    .hero h2 {
+        font-size: 24px;
+    }
+
+    .section {
+        margin: 20px 12px;
+        padding: 20px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
 <button class="menu-btn" onclick="toggleMenu()">☰</button>
 
-<div class="brand-top">  
-    <img src="https://i.ibb.co/qLnzFL22/raxelgo24-logo.png" alt="RAXEL GO 24 Logo" class="brand-logo">  
-    <div class="managed-by">  
-        <span>Managed by</span><br>  
-        Imtiyaz Khan  
-    </div>  
-</div>  
+<div class="brand-top">
 
-<h1>RAXEL GO 24 🚗</h1>  
-<p>Reliable Auto Service for Rural Areas</p>
-</header>  
+    <img
+        src="https://i.ibb.co/qLnzFL22/raxelgo24-logo.png"
+        alt="RAXEL GO 24 Logo"
+        class="brand-logo"
+    >
 
-<!-- MENU DRAWER OVERLAY -->
-<div class="menu-drawer" id="menuDrawer">
-    <div>
-        <div class="drawer-header">
-            <div class="drawer-brand-info">
-                <img src="https://i.ibb.co/qLnzFL22/raxelgo24-logo.png" alt="Logo" class="drawer-logo">
-                <div class="drawer-title">
-                    <h3>RAXEL GO 24</h3>
-                    <p>Reliable Auto Service for Rural Areas</p>
-                </div>
-            </div>
-            <button class="close-btn" onclick="toggleMenu()">✕</button>
-        </div>
-
-        <ul class="menu-links-list">
-            <li>
-                <a href="#home" onclick="toggleMenu()">
-                    <div class="menu-item-left">
-                        <span>ℹ️</span>
-                        <span>About RAXEL GO 24</span>
-                    </div>
-                    <span class="arrow-icon">&gt;</span>
-                </a>
-            </li>
-            <li>
-                <a href="#booking" onclick="toggleMenu(); openBooking();">
-                    <div class="menu-item-left">
-                        <span>⚙️</span>
-                        <span>How it works ?</span>
-                    </div>
-                    <span class="arrow-icon">&gt;</span>
-                </a>
-            </li>
-            <li>
-                <a href="#booking" onclick="toggleMenu(); openBooking();">
-                    <div class="menu-item-left">
-                        <span>🛺</span>
-                        <span>Need a ride ?</span>
-                    </div>
-                    <span class="arrow-icon">&gt;</span>
-                </a>
-            </li>
-            <li>
-                <a href="tel:+918294741267" onclick="toggleMenu()">
-                    <div class="menu-item-left">
-                        <span>🎧</span>
-                        <span>Help / support</span>
-                    </div>
-                    <span class="arrow-icon">&gt;</span>
-                </a>
-            </li>
-        </ul>
+    <div class="managed-by">
+        <span>Managed by</span><br>
+        Imtiyaz Khan
     </div>
 
-    <div class="drawer-footer-card">
-        <img src="https://i.ibb.co/qLnzFL22/raxelgo24-logo.png" alt="Logo">
-        <h4>RAXEL GO 24</h4>
-        <p>Reliable Auto Service for Rural Areas</p>
-        
-        <div class="drawer-footer-links">
-            <a href="#home" onclick="toggleMenu()">Home</a> | 
-            <a href="#booking" onclick="toggleMenu(); openBooking();">Book an Auto</a> | 
-            <a href="tel:+918294741267" onclick="toggleMenu()">Help / Support</a>
-        </div>
-
-        <span class="drawer-queries">Any queries?</span>
-
-        <div class="drawer-social-icons">
-            <a href="https://wa.me/918294741267" target="_blank">🟢</a>
-            <a href="tel:+918294741267">🔵</a>
-            <a href="https://instagram.com/__al3x__07" target="_blank">🟣</a>
-        </div>
-
-        <div class="drawer-copy">
-            © 2026 RAXEL GO 24<br>Managed by Imtiyaz Khan
-        </div>
-    </div>
 </div>
 
-<!-- HOME PAGE -->  
-<section class="hero" id="home">  
-    <h2>Thanks for visiting our website ❤️</h2>  
-    <p>  
-        जहाँ चाहे, जब चाहे — हम हैं आपके साथ।  
-        <br>  
-        Safe • Reliable • On Time  
-    </p>  
-    <button class="button" onclick="openBooking()">  
-        🚗 Book an Auto  
+<h1>RAXEL GO 24 🚗</h1>
+
+<p>Reliable Auto Service for Rural Areas</p>
+
+</header>
+
+
+<!-- ================= MENU DRAWER ================= -->
+
+<div class="menu-drawer" id="menuDrawer">
+
+    <div>
+
+        <div class="drawer-header">
+
+            <div class="drawer-brand-info">
+
+                <img
+                    src="https://i.ibb.co/qLnzFL22/raxelgo24-logo.png"
+                    alt="Logo"
+                    class="drawer-logo"
+                >
+
+                <div class="drawer-title">
+
+                    <h3>RAXEL GO 24</h3>
+
+                    <p>
+                        Reliable Auto Service for Rural Areas
+                    </p>
+
+                </div>
+
+            </div>
+
+            <button
+                class="close-btn"
+                onclick="toggleMenu()"
+            >
+                ✕
+            </button>
+
+        </div>
+
+
+        <!-- MENU OPTIONS -->
+
+        <ul class="menu-links-list">
+
+            <li>
+
+                <a
+                    href="#home"
+                    onclick="toggleMenu()"
+                >
+
+                    <div class="menu-item-left">
+
+                        <span>ℹ️</span>
+
+                        <span>
+                            About RAXEL GO 24
+                        </span>
+
+                    </div>
+
+                    <span class="arrow-icon">
+                        &gt;
+                    </span>
+
+                </a>
+
+            </li>
+
+
+            <li>
+
+                <a
+                    href="#booking"
+                    onclick="toggleMenu(); openBooking();"
+                >
+
+                    <div class="menu-item-left">
+
+                        <span>⚙️</span>
+
+                        <span>
+                            How it works ?
+                        </span>
+
+                    </div>
+
+                    <span class="arrow-icon">
+                        &gt;
+                    </span>
+
+                </a>
+
+            </li>
+
+
+            <li>
+
+                <a
+                    href="#booking"
+                    onclick="toggleMenu(); openBooking();"
+                >
+
+                    <div class="menu-item-left">
+
+                        <span>🛺</span>
+
+                        <span>
+                            Need a ride ?
+                        </span>
+
+                    </div>
+
+                    <span class="arrow-icon">
+                        &gt;
+                    </span>
+
+                </a>
+
+            </li>
+
+
+            <li>
+
+                <a
+                    href="tel:+918294741267"
+                    onclick="toggleMenu()"
+                >
+
+                    <div class="menu-item-left">
+
+                        <span>🎧</span>
+
+                        <span>
+                            Help / support
+                        </span>
+
+                    </div>
+
+                    <span class="arrow-icon">
+                        &gt;
+                    </span>
+
+                </a>
+
+            </li>
+
+        </ul>
+
+    </div>
+
+
+    <!-- ================= MENU FOOTER ================= -->
+
+    <div class="drawer-footer-card">
+
+        <img
+            src="https://i.ibb.co/qLnzFL22/raxelgo24-logo.png"
+            alt="Logo"
+        >
+
+        <h4>
+            RAXEL GO 24
+        </h4>
+
+        <p>
+            Reliable Auto Service for Rural Areas
+        </p>
+
+
+        <div class="drawer-footer-links">
+
+            <a
+                href="#home"
+                onclick="toggleMenu()"
+            >
+                Home
+            </a>
+
+            |
+
+            <a
+                href="#booking"
+                onclick="toggleMenu(); openBooking();"
+            >
+                Book an Auto
+            </a>
+
+            |
+
+            <a
+                href="tel:+918294741267"
+                onclick="toggleMenu()"
+            >
+                Help / Support
+            </a>
+
+        </div>
+
+
+        <span class="drawer-queries">
+            Any queries?
+        </span>
+
+
+        <!-- ================= REAL ICONS ================= -->
+
+        <div class="drawer-social-icons">
+
+            <!-- WHATSAPP -->
+
+            <a
+                href="https://wa.me/918294741267"
+                target="_blank"
+                aria-label="WhatsApp"
+            >
+
+                <svg
+                    viewBox="0 0 24 24"
+                    width="26"
+                    height="26"
+                    fill="currentColor"
+                >
+
+                    <path d="M20.52 3.48A11.86 11.86 0 0 0 12.05 0C5.5 0 .18 5.32.18 11.87c0 2.09.55 4.13 1.59 5.93L.08 24l6.34-1.66a11.86 11.86 0 0 0 5.63 1.43h.01c6.55 0 11.87-5.32 11.87-11.87 0-3.17-1.24-6.15-3.41-8.42zM12.06 21.75h-.01a9.85 9.85 0 0 1-5.02-1.37l-.36-.21-3.76.98 1-3.67-.23-.38a9.86 9.86 0 1 1 8.38 4.65zm5.41-7.39c-.3-.15-1.77-.87-2.05-.97-.28-.1-.48-.15-.68.15-.2.3-.78.97-.95 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.68-1.64-.93-2.25-.25-.6-.5-.52-.68-.53h-.58c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.49s1.07 2.89 1.22 3.09c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.5 1.69.64.71.23 1.36.2 1.87.12.57-.08 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.13-.27-.2-.57-.35z"/>
+
+                </svg>
+
+            </a>
+
+
+            <!-- CALL -->
+
+            <a
+                href="tel:+918294741267"
+                aria-label="Call"
+            >
+
+                <svg
+                    viewBox="0 0 24 24"
+                    width="26"
+                    height="26"
+                    fill="currentColor"
+                >
+
+                    <path d="M6.62 10.79a15.46 15.46 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.61 21 3 13.39 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.24.2 2.45.57 3.57a1 1 0 0 1-.25 1.02l-2.2 2.2z"/>
+
+                </svg>
+
+            </a>
+
+
+            <!-- INSTAGRAM -->
+
+            <a
+                href="https://instagram.com/__al3x__07"
+                target="_blank"
+                aria-label="Instagram"
+            >
+
+                <svg
+                    viewBox="0 0 24 24"
+                    width="26"
+                    height="26"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                >
+
+                    <rect
+                        x="3"
+                        y="3"
+                        width="18"
+                        height="18"
+                        rx="5"
+                    />
+
+                    <circle
+                        cx="12"
+                        cy="12"
+                        r="4"
+                    />
+
+                    <circle
+                        cx="17.5"
+                        cy="6.5"
+                        r="1"
+                        fill="currentColor"
+                        stroke="none"
+                    />
+
+                </svg>
+
+            </a>
+
+        </div>
+
+
+        <div class="drawer-copy">
+
+            © 2026 RAXEL GO 24
+            <br>
+            Managed by Imtiyaz Khan
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= HOME PAGE ================= -->
+
+<section
+    class="hero"
+    id="home"
+>
+
+    <h2>
+        Thanks for visiting our website ❤️
+    </h2>
+
+    <p>
+
+        जहाँ चाहे, जब चाहे — हम हैं आपके साथ।
+
+        <br>
+
+        Safe • Reliable • On Time
+
+    </p>
+
+    <button
+        class="button"
+        onclick="openBooking()"
+    >
+
+        🚗 Book an Auto
+
     </button>
-</section>  
 
-<!-- STEP 1: BOOKING DETAILS -->  
-<section class="section hidden" id="booking">  
-    <h2>🚗 Book Your Auto</h2>  
+</section>
 
-    <label>From</label>  
-    <input type="text" value="Ranisagar" readonly>  
 
-    <label>To</label>  
-    <input type="text" id="to" placeholder="Enter destination">  
+<!-- ================= STEP 1: BOOKING ================= -->
 
-    <label>Your Name</label>  
-    <input type="text" id="name" placeholder="Enter your name">  
+<section
+    class="section hidden"
+    id="booking"
+>
 
-    <label>Mobile Number</label>  
-    <input type="tel" id="mobile" placeholder="Enter mobile number">  
+    <h2>
+        🚗 Book Your Auto
+    </h2>
 
-    <label>Date</label>  
-    <input type="date" id="date">  
 
-    <label>Time</label>  
-    <input type="time" id="time">  
+    <label>
+        From
+    </label>
 
-    <label>Number of Passengers</label>  
-    <input type="number" id="passengers" min="1" max="10" placeholder="Passengers">  
+    <input
+        type="text"
+        value="Ranisagar"
+        readonly
+    >
 
-    <button class="action" onclick="goToReview()">  
-        Review Booking  
+
+    <label>
+        To
+    </label>
+
+    <input
+        type="text"
+        id="to"
+        placeholder="Enter destination"
+    >
+
+
+    <label>
+        Your Name
+    </label>
+
+    <input
+        type="text"
+        id="name"
+        placeholder="Enter your name"
+    >
+
+
+    <label>
+        Mobile Number
+    </label>
+
+    <input
+        type="tel"
+        id="mobile"
+        placeholder="Enter mobile number"
+    >
+
+
+    <label>
+        Date
+    </label>
+
+    <input
+        type="date"
+        id="date"
+    >
+
+
+    <label>
+        Time
+    </label>
+
+    <input
+        type="time"
+        id="time"
+    >
+
+
+    <label>
+        Number of Passengers
+    </label>
+
+    <input
+        type="number"
+        id="passengers"
+        min="1"
+        max="10"
+        placeholder="Passengers"
+    >
+
+
+    <button
+        class="action"
+        onclick="goToReview()"
+    >
+
+        Review Booking
+
     </button>
-</section>  
 
-<!-- STEP 2: REVIEW -->  
-<section class="section hidden" id="review">  
-    <h2>📋 Review Your Booking</h2>  
+</section>
 
-    <div class="detail">  
-        <strong>From:</strong>  
-        <span>Ranisagar</span>  
-    </div>  
 
-    <div class="detail">  
-        <strong>To:</strong>  
-        <span id="rTo"></span>  
-    </div>  
+<!-- ================= STEP 2: REVIEW ================= -->
 
-    <div class="detail">  
-        <strong>Name:</strong>  
-        <span id="rName"></span>  
-    </div>  
+<section
+    class="section hidden"
+    id="review"
+>
 
-    <div class="detail">  
-        <strong>Mobile:</strong>  
-        <span id="rMobile"></span>  
-    </div>  
+    <h2>
+        📋 Review Your Booking
+    </h2>
 
-    <div class="detail">  
-        <strong>Date:</strong>  
-        <span id="rDate"></span>  
-    </div>  
 
-    <div class="detail">  
-        <strong>Time:</strong>  
-        <span id="rTime"></span>  
-    </div>  
+    <div class="detail">
 
-    <div class="detail">  
-        <strong>Passengers:</strong>  
-        <span id="rPassengers"></span>  
-    </div>  
+        <strong>
+            From:
+        </strong>
 
-    <button class="action" onclick="goToPayment()">  
-        Confirm & Continue  
-    </button>  
+        <span>
+            Ranisagar
+        </span>
 
-    <button class="secondary" onclick="backToBooking()">  
-        ← Edit Details  
+    </div>
+
+
+    <div class="detail">
+
+        <strong>
+            To:
+        </strong>
+
+        <span id="rTo"></span>
+
+    </div>
+
+
+    <div class="detail">
+
+        <strong>
+            Name:
+        </strong>
+
+        <span id="rName"></span>
+
+    </div>
+
+
+    <div class="detail">
+
+        <strong>
+            Mobile:
+        </strong>
+
+        <span id="rMobile"></span>
+
+    </div>
+
+
+    <div class="detail">
+
+        <strong>
+            Date:
+        </strong>
+
+        <span id="rDate"></span>
+
+    </div>
+
+
+    <div class="detail">
+
+        <strong>
+            Time:
+        </strong>
+
+        <span id="rTime"></span>
+
+    </div>
+
+
+    <div class="detail">
+
+        <strong>
+            Passengers:
+        </strong>
+
+        <span id="rPassengers"></span>
+
+    </div>
+
+
+    <button
+        class="action"
+        onclick="goToPayment()"
+    >
+
+        Confirm & Continue
+
     </button>
-</section>  
 
-<!-- STEP 3: PAYMENT -->  
-<section class="section hidden" id="payment">  
-    <h2>💳 Payment Mode</h2>  
 
-    <div class="payment-option">  
-        <label>  
-            <input type="radio" name="payment" value="UPI">  
-            UPI  
-        </label>  
-    </div>  
+    <button
+        class="secondary"
+        onclick="backToBooking()"
+    >
 
-    <div class="payment-option">  
-        <label>  
-            <input type="radio" name="payment" value="COD">  
-            COD / Cash  
-        </label>  
-    </div>  
+        ← Edit Details
 
-    <div class="notice">  
-        Your booking will be sent to RAXEL GO 24 for confirmation.  
-        The booking is not confirmed until accepted by our team.  
-    </div>  
-
-    <button class="action" onclick="submitBooking()">  
-        🚗 Submit Booking  
-    </button>  
-
-    <button class="secondary" onclick="backToReview()">  
-        ← Back to Review  
     </button>
-</section>  
 
-<!-- STEP 4: SUCCESS -->  
-<section class="section success hidden" id="success">  
-    <h2>⏳ Booking Request Sent</h2>  
-    <p>Your booking request has been submitted successfully.</p>  
-    <div class="booking-id">  
-        Booking ID:  
-        <span id="bookingId"></span>  
-    </div>  
-    <p>Please wait for RAXEL GO 24 to accept your booking.</p>
-</section>  
+</section>
 
-<section class="support">  
-    <h2>Need Help?</h2>  
-    <p>Our support team is here for you.</p>  
-    <a href="tel:+918294741267">📞 Help / Support</a>
-</section>  
 
-<footer>  
-    <p>© 2026 RAXEL GO 24</p>  
-    <p style="margin-top:8px;">Managed by Imtiyaz Khan</p>
-</footer>  
+<!-- ================= STEP 3: PAYMENT ================= -->
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>  
-<script>  
-const SUPABASE_URL = "https://phrlnhzbqqzeoxhpdeyt.supabase.co";  
-const SUPABASE_KEY = "sb_publishable_cLNIvPuSPOrU6Ro6Leq9Hg_45You9FO";  
-const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);  
-  
+<section
+    class="section hidden"
+    id="payment"
+>
+
+    <h2>
+        💳 Payment Mode
+    </h2>
+
+
+    <div class="payment-option">
+
+        <label>
+
+            <input
+                type="radio"
+                name="payment"
+                value="UPI"
+            >
+
+            UPI
+
+        </label>
+
+    </div>
+
+
+    <div class="payment-option">
+
+        <label>
+
+            <input
+                type="radio"
+                name="payment"
+                value="COD"
+            >
+
+            COD / Cash
+
+        </label>
+
+    </div>
+
+
+    <div class="notice">
+
+        Your booking will be sent to
+        RAXEL GO 24 for confirmation.
+
+        The booking is not confirmed until
+        accepted by our team.
+
+    </div>
+
+
+    <button
+        class="action"
+        onclick="submitBooking()"
+    >
+
+        🚗 Submit Booking
+
+    </button>
+
+
+    <button
+        class="secondary"
+        onclick="backToReview()"
+    >
+
+        ← Back to Review
+
+    </button>
+
+</section>
+
+
+<!-- ================= STEP 4: SUCCESS ================= -->
+
+<section
+    class="section success hidden"
+    id="success"
+>
+
+    <h2>
+        ⏳ Booking Request Sent
+    </h2>
+
+    <p>
+        Your booking request has been submitted successfully.
+    </p>
+
+
+    <div class="booking-id">
+
+        Booking ID:
+
+        <span id="bookingId"></span>
+
+    </div>
+
+
+    <p>
+        Please wait for RAXEL GO 24
+        to accept your booking.
+    </p>
+
+</section>
+
+
+<!-- ================= SUPPORT ================= -->
+
+<section class="support">
+
+    <h2>
+        Need Help?
+    </h2>
+
+    <p>
+        Our support team is here for you.
+    </p>
+
+    <a
+        href="tel:+918294741267"
+    >
+
+        📞 Help / Support
+
+    </a>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <p>
+        © 2026 RAXEL GO 24
+    </p>
+
+    <p style="margin-top:8px;">
+
+        Managed by Imtiyaz Khan
+
+    </p>
+
+</footer>
+
+
+<!-- ================= SUPABASE ================= -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+const SUPABASE_URL =
+    "https://phrlnhzbqqzeoxhpdeyt.supabase.co";
+
+const SUPABASE_KEY =
+    "sb_publishable_cLNIvPuSPOrU6Ro6Leq9Hg_45You9FO";
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+
+/* ================= MENU ================= */
+
 function toggleMenu() {
-    const drawer = document.getElementById("menuDrawer");
+
+    const drawer =
+        document.getElementById("menuDrawer");
+
     drawer.classList.toggle("active");
+
 }
-  
-function hideAllSteps() {  
-    document.getElementById("home").classList.add("hidden");  
-    document.getElementById("booking").classList.add("hidden");  
-    document.getElementById("review").classList.add("hidden");  
-    document.getElementById("payment").classList.add("hidden");  
-    document.getElementById("success").classList.add("hidden");  
-}  
-  
-function openBooking() {  
-    hideAllSteps();  
-    document.getElementById("booking").classList.remove("hidden");  
-    document.getElementById("booking").scrollIntoView({ behavior: "smooth" });  
-}  
-  
-function goToReview() {  
-    const to = document.getElementById("to").value;  
-    const name = document.getElementById("name").value;  
-    const mobile = document.getElementById("mobile").value;  
-    const date = document.getElementById("date").value;  
-    const time = document.getElementById("time").value;  
-    const passengers = document.getElementById("passengers").value;  
-  
-    if (!to || !name || !mobile || !date || !time || !passengers) {  
-        alert("Please fill all booking details.");  
-        return;  
-    }  
-  
-    document.getElementById("rTo").textContent = to;  
-    document.getElementById("rName").textContent = name;  
-    document.getElementById("rMobile").textContent = mobile;  
-    document.getElementById("rDate").textContent = date;  
-    document.getElementById("rTime").textContent = time;  
-    document.getElementById("rPassengers").textContent = passengers;  
-  
-    hideAllSteps();  
-    document.getElementById("review").classList.remove("hidden");  
-    document.getElementById("review").scrollIntoView({ behavior: "smooth" });  
-}  
-  
-function goToPayment() {  
-    hideAllSteps();  
-    document.getElementById("payment").classList.remove("hidden");  
-    document.getElementById("payment").scrollIntoView({ behavior: "smooth" });  
-}  
-  
-function backToBooking() {  
-    hideAllSteps();  
-    document.getElementById("booking").classList.remove("hidden");  
-    document.getElementById("booking").scrollIntoView({ behavior: "smooth" });  
-}  
-  
-function backToReview() {  
-    hideAllSteps();  
-    document.getElementById("review").classList.remove("hidden");  
-    document.getElementById("review").scrollIntoView({ behavior: "smooth" });  
-}  
-  
-async function submitBooking() {  
-    const payment = document.querySelector('input[name="payment"]:checked');  
-  
-    if (!payment) {  
-        alert("Please select a payment mode.");  
-        return;  
-    }  
-  
-    const bookingId = "RAXEL" + Math.floor(100000 + Math.random() * 900000);  
-    const name = document.getElementById("name").value;  
-    const mobile = document.getElementById("mobile").value;  
-    const to = document.getElementById("to").value;  
-    const date = document.getElementById("date").value;  
-    const time = document.getElementById("time").value;  
-  
-    const { error } = await supabaseClient.from("bookings").insert({  
-        customer_name: name,  
-        phone: mobile,  
-        pickup: "Ranisagar",  
-        destination: to,  
-        booking_date: date,  
-        booking_time: time,  
-        status: "pending"  
-    });  
-  
-    if (error) {  
-        console.error(error);  
-        alert("Booking submit nahi ho paayi. Please try again.");  
-        return;  
-    }  
-  
-    document.getElementById("bookingId").textContent = bookingId;  
-    hideAllSteps();  
-    document.getElementById("success").classList.remove("hidden");  
-    document.getElementById("success").scrollIntoView({ behavior: "smooth" });  
-}  
-</script>  
-</body>  
-                                                                       </html>
+
+
+/* ================= HIDE ALL STEPS ================= */
+
+function hideAllSteps() {
+
+    document
+        .getElementById("home")
+        .classList.add("hidden");
+
+    document
+        .getElementById("booking")
+        .classList.add("hidden");
+
+    document
+        .getElementById("review")
+        .classList.add("hidden");
+
+    document
+        .getElementById("payment")
+        .classList.add("hidden");
+
+    document
+        .getElementById("success")
+        .classList.add("hidden");
+
+}
+
+
+/* ================= OPEN BOOKING ================= */
+
+function openBooking() {
+
+    hideAllSteps();
+
+    document
+        .getElementById("booking")
+        .classList.remove("hidden");
+
+    document
+        .getElementById("booking")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+
+}
+
+
+/* ================= GO TO REVIEW ================= */
+
+function goToReview() {
+
+    const to =
+        document.getElementById("to").value;
+
+    const name =
+        document.getElementById("name").value;
+
+    const mobile =
+        document.getElementById("mobile").value;
+
+    const date =
+        document.getElementById("date").value;
+
+    const time =
+        document.getElementById("time").value;
+
+    const passengers =
+        document.getElementById("passengers").value;
+
+
+    if (
+        !to ||
+        !name ||
+        !mobile ||
+        !date ||
+        !time ||
+        !passengers
+    ) {
+
+        alert(
+            "Please fill all booking details."
+        );
+
+        return;
+
+    }
+
+
+    document
+        .getElementById("rTo")
+        .textContent = to;
+
+    document
+        .getElementById("rName")
+        .textContent = name;
+
+    document
+        .getElementById("rMobile")
+        .textContent = mobile;
+
+    document
+        .getElementById("rDate")
+        .textContent = date;
+
+    document
+        .getElementById("rTime")
+        .textContent = time;
+
+    document
+        .getElementById("rPassengers")
+        .textContent = passengers;
+
+
+    hideAllSteps();
+
+
+    document
+        .getElementById("review")
+        .classList.remove("hidden");
+
+
+    document
+        .getElementById("review")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+
+}
+
+
+/* ================= GO TO PAYMENT ================= */
+
+function goToPayment() {
+
+    hideAllSteps();
+
+    document
+        .getElementById("payment")
+        .classList.remove("hidden");
+
+    document
+        .getElementById("payment")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+
+}
+
+
+/* ================= BACK TO BOOKING ================= */
+
+function backToBooking() {
+
+    hideAllSteps();
+
+    document
+        .getElementById("booking")
+        .classList.remove("hidden");
+
+    document
+        .getElementById("booking")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+
+}
+
+
+/* ================= BACK TO REVIEW ================= */
+
+function backToReview() {
+
+    hideAllSteps();
+
+    document
+        .getElementById("review")
+        .classList.remove("hidden");
+
+    document
+        .getElementById("review")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+
+}
+
+
+/* ================= SUBMIT BOOKING ================= */
+
+async function submitBooking() {
+
+    const payment =
+        document.querySelector(
+            'input[name="payment"]:checked'
+        );
+
+
+    if (!payment) {
+
+        alert(
+            "Please select a payment mode."
+        );
+
+        return;
+
+    }
+
+
+    const bookingId =
+        "RAXEL" +
+        Math.floor(
+            100000 +
+            Math.random() * 900000
+        );
+
+
+    const name =
+        document.getElementById("name").value;
+
+    const mobile =
+        document.getElementById("mobile").value;
+
+    const to =
+        document.getElementById("to").value;
+
+    const date =
+        document.getElementById("date").value;
+
+    const time =
+        document.getElementById("time").value;
+
+
+    const { error } =
+        await supabaseClient
+        .from("bookings")
+        .insert({
+
+            customer_name:
+                name,
+
+            phone:
+                mobile,
+
+            pickup:
+                "Ranisagar",
+
+            destination:
+                to,
+
+            booking_date:
+                date,
+
+            booking_time:
+                time,
+
+            status:
+                "pending"
+
+        });
+
+
+    if (error) {
+
+        console.error(error);
+
+        alert(
+            "Booking submit nahi ho paayi. Please try again."
+        );
+
+        return;
+
+    }
+
+
+    document
+        .getElementById("bookingId")
+        .textContent = bookingId;
+
+
+    hideAllSteps();
+
+
+    document
+        .getElementById("success")
+        .classList.remove("hidden");
+
+
+    document
+        .getElementById("success")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+
+}
+
+</script>
+
+</body>
+</html>
