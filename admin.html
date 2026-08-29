@@ -14,10 +14,12 @@
 }
 
 body{
-    min-height:100vh;
     background:#f4f6f8;
     color:#111827;
+    min-height:100vh;
 }
+
+/* LOGIN */
 
 .login-screen{
     min-height:100vh;
@@ -78,10 +80,6 @@ input{
     outline:none;
 }
 
-input:focus{
-    border-color:#16a34a;
-}
-
 .password-box{
     position:relative;
 }
@@ -96,7 +94,7 @@ input:focus{
     top:50%;
     transform:translateY(-50%);
     border:0;
-    background:transparent;
+    background:none;
     font-size:19px;
     cursor:pointer;
 }
@@ -108,7 +106,7 @@ input:focus{
     border:0;
     border-radius:9px;
     background:#16a34a;
-    color:#fff;
+    color:white;
     font-size:17px;
     font-weight:bold;
     cursor:pointer;
@@ -133,6 +131,7 @@ input:focus{
     font-size:12px;
 }
 
+
 /* DASHBOARD */
 
 .dashboard{
@@ -142,7 +141,7 @@ input:focus{
 
 .topbar{
     background:#111827;
-    color:#fff;
+    color:white;
     padding:18px 20px;
     display:flex;
     align-items:center;
@@ -155,15 +154,15 @@ input:focus{
 }
 
 .topbar p{
-    margin-top:4px;
     color:#d1d5db;
     font-size:12px;
+    margin-top:4px;
 }
 
 .logout{
     border:0;
     background:#dc2626;
-    color:#fff;
+    color:white;
     padding:10px 14px;
     border-radius:8px;
     font-weight:bold;
@@ -172,15 +171,15 @@ input:focus{
 
 .container{
     width:100%;
-    max-width:1100px;
+    max-width:1150px;
     margin:auto;
     padding:20px;
 }
 
 .welcome{
-    background:#fff;
-    border-radius:15px;
+    background:white;
     padding:22px;
+    border-radius:15px;
     box-shadow:0 4px 15px rgba(0,0,0,.07);
 }
 
@@ -189,9 +188,12 @@ input:focus{
 }
 
 .welcome p{
-    margin-top:8px;
+    margin-top:7px;
     color:#6b7280;
 }
+
+
+/* STATS */
 
 .stats{
     display:grid;
@@ -201,7 +203,7 @@ input:focus{
 }
 
 .stat{
-    background:#fff;
+    background:white;
     border-radius:14px;
     padding:20px;
     box-shadow:0 4px 15px rgba(0,0,0,.06);
@@ -217,36 +219,112 @@ input:focus{
     font-size:28px;
 }
 
-.bookings{
+
+/* BOOKINGS */
+
+.booking-section{
+    background:white;
     margin-top:20px;
-    background:#fff;
     border-radius:15px;
-    padding:22px;
+    padding:20px;
     box-shadow:0 4px 15px rgba(0,0,0,.07);
 }
 
-.bookings h2{
+.booking-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    margin-bottom:15px;
+}
+
+.booking-header h2{
     font-size:20px;
 }
 
-.empty{
-    margin-top:15px;
-    padding:20px;
-    background:#f8fafc;
-    border-radius:10px;
+.refresh-btn{
+    border:0;
+    background:#111827;
+    color:white;
+    padding:10px 14px;
+    border-radius:8px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.loading{
     text-align:center;
+    padding:25px;
     color:#6b7280;
 }
 
-@media(max-width:650px){
+.empty{
+    text-align:center;
+    padding:25px;
+    background:#f8fafc;
+    border-radius:10px;
+    color:#6b7280;
+}
 
-    .topbar{
-        align-items:flex-start;
-    }
 
-    .topbar h1{
-        font-size:19px;
-    }
+/* BOOKING CARD */
+
+.booking-card{
+    border:1px solid #e5e7eb;
+    border-radius:12px;
+    padding:17px;
+    margin-top:12px;
+    background:#fff;
+}
+
+.booking-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    margin-bottom:12px;
+}
+
+.booking-id{
+    font-weight:bold;
+    font-size:15px;
+}
+
+.status{
+    padding:6px 10px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+    background:#f3f4f6;
+}
+
+.booking-info{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:8px;
+}
+
+.info{
+    background:#f8fafc;
+    padding:10px;
+    border-radius:8px;
+    font-size:14px;
+}
+
+.info strong{
+    display:block;
+    margin-bottom:3px;
+    color:#374151;
+}
+
+.destination{
+    grid-column:1 / -1;
+}
+
+
+/* MOBILE */
+
+@media(max-width:700px){
 
     .container{
         padding:14px;
@@ -263,14 +341,44 @@ input:focus{
     .stat strong{
         font-size:24px;
     }
+
+    .booking-info{
+        grid-template-columns:1fr;
+    }
+
+    .destination{
+        grid-column:auto;
+    }
+
+    .booking-header{
+        align-items:flex-start;
+    }
+
 }
 
+@media(max-width:450px){
+
+    .topbar{
+        padding:15px;
+    }
+
+    .topbar h1{
+        font-size:18px;
+    }
+
+    .logout{
+        padding:8px 10px;
+        font-size:12px;
+    }
+
+}
 </style>
 </head>
 
 <body>
 
-<!-- LOGIN -->
+
+<!-- ================= LOGIN ================= -->
 
 <div class="login-screen" id="loginScreen">
 
@@ -346,7 +454,7 @@ input:focus{
 </div>
 
 
-<!-- DASHBOARD -->
+<!-- ================= DASHBOARD ================= -->
 
 <div
     class="dashboard"
@@ -379,11 +487,13 @@ input:focus{
             </h2>
 
             <p>
-                Your RAXEL GO 24 management dashboard is ready.
+                Live booking management
             </p>
 
         </section>
 
+
+        <!-- STATS -->
 
         <section class="stats">
 
@@ -420,14 +530,31 @@ input:focus{
         </section>
 
 
-        <section class="bookings">
+        <!-- BOOKINGS -->
 
-            <h2>
-                📋 Booking Management
-            </h2>
+        <section class="booking-section">
 
-            <div class="empty">
-                Booking management will be connected to Supabase in the next step.
+            <div class="booking-header">
+
+                <h2>
+                    📋 Live Bookings
+                </h2>
+
+                <button
+                    class="refresh-btn"
+                    onclick="loadBookings()"
+                >
+                    🔄 Refresh
+                </button>
+
+            </div>
+
+            <div id="bookingList">
+
+                <div class="loading">
+                    Loading bookings...
+                </div>
+
             </div>
 
         </section>
@@ -436,6 +563,8 @@ input:focus{
 
 </div>
 
+
+<!-- ================= SUPABASE ================= -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -454,6 +583,8 @@ const supabaseClient =
     );
 
 
+/* ================= PASSWORD ================= */
+
 function togglePassword(){
 
     const input =
@@ -466,6 +597,8 @@ function togglePassword(){
 
 }
 
+
+/* ================= LOGIN ================= */
 
 async function login(){
 
@@ -504,8 +637,8 @@ async function login(){
     const { error } =
         await supabaseClient.auth.signInWithPassword({
 
-            email: email,
-            password: password
+            email:email,
+            password:password
 
         });
 
@@ -537,6 +670,8 @@ async function login(){
 }
 
 
+/* ================= SHOW DASHBOARD ================= */
+
 function showDashboard(){
 
     document
@@ -547,8 +682,216 @@ function showDashboard(){
         .getElementById("dashboard")
         .style.display = "block";
 
+    loadBookings();
+
 }
 
+
+/* ================= LOAD BOOKINGS ================= */
+
+async function loadBookings(){
+
+    const list =
+        document.getElementById("bookingList");
+
+    list.innerHTML =
+        '<div class="loading">Loading bookings...</div>';
+
+
+    const { data, error } =
+        await supabaseClient
+        .from("bookings")
+        .select(
+            "id, customer_name, phone, pickup, destination, booking_date, booking_time, status"
+        )
+        .order(
+            "id",
+            { ascending:false }
+        );
+
+
+    if(error){
+
+        console.error(error);
+
+        list.innerHTML =
+            '<div class="empty">Unable to load bookings. Please check Supabase permissions.</div>';
+
+        return;
+
+    }
+
+
+    updateStats(data || []);
+
+    renderBookings(data || []);
+
+}
+
+
+/* ================= STATS ================= */
+
+function updateStats(bookings){
+
+    document.getElementById("totalBookings").textContent =
+        bookings.length;
+
+    document.getElementById("pendingBookings").textContent =
+        bookings.filter(
+            b => String(b.status).toLowerCase() === "pending"
+        ).length;
+
+    document.getElementById("acceptedBookings").textContent =
+        bookings.filter(
+            b => String(b.status).toLowerCase() === "accepted"
+        ).length;
+
+    document.getElementById("rejectedBookings").textContent =
+        bookings.filter(
+            b => String(b.status).toLowerCase() === "rejected"
+        ).length;
+
+    document.getElementById("cancelledBookings").textContent =
+        bookings.filter(
+            b => String(b.status).toLowerCase() === "cancelled"
+        ).length;
+
+    document.getElementById("completedBookings").textContent =
+        bookings.filter(
+            b => String(b.status).toLowerCase() === "completed"
+        ).length;
+
+}
+
+
+/* ================= RENDER BOOKINGS ================= */
+
+function renderBookings(bookings){
+
+    const list =
+        document.getElementById("bookingList");
+
+
+    if(!bookings.length){
+
+        list.innerHTML =
+            '<div class="empty">No bookings found.</div>';
+
+        return;
+
+    }
+
+
+    list.innerHTML =
+        bookings.map(
+            booking => {
+
+                const status =
+                    booking.status || "pending";
+
+
+                return `
+
+                <div class="booking-card">
+
+                    <div class="booking-top">
+
+                        <div class="booking-id">
+                            🆔 Booking #${escapeHtml(booking.id)}
+                        </div>
+
+                        <div class="status">
+                            ${escapeHtml(status)}
+                        </div>
+
+                    </div>
+
+
+                    <div class="booking-info">
+
+                        <div class="info">
+
+                            <strong>
+                                Customer
+                            </strong>
+
+                            ${escapeHtml(booking.customer_name || "-")}
+
+                        </div>
+
+
+                        <div class="info">
+
+                            <strong>
+                                Mobile
+                            </strong>
+
+                            ${escapeHtml(booking.phone || "-")}
+
+                        </div>
+
+
+                        <div class="info">
+
+                            <strong>
+                                Date
+                            </strong>
+
+                            ${escapeHtml(booking.booking_date || "-")}
+
+                        </div>
+
+
+                        <div class="info">
+
+                            <strong>
+                                Time
+                            </strong>
+
+                            ${escapeHtml(booking.booking_time || "-")}
+
+                        </div>
+
+
+                        <div class="info destination">
+
+                            <strong>
+                                Route
+                            </strong>
+
+                            📍 ${escapeHtml(booking.pickup || "Ranisagar")}
+                            →
+                            ${escapeHtml(booking.destination || "-")}
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                `;
+
+            }
+        ).join("");
+
+}
+
+
+/* ================= SAFE HTML ================= */
+
+function escapeHtml(value){
+
+    return String(value)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+/* ================= LOGOUT ================= */
 
 async function logout(){
 
@@ -572,6 +915,8 @@ async function logout(){
 
 }
 
+
+/* ================= EXISTING SESSION ================= */
 
 async function checkSession(){
 
