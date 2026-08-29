@@ -6,6 +6,7 @@
 <title>RAXEL GO 24 - Admin</title>
 
 <style>
+
 *{
     box-sizing:border-box;
     margin:0;
@@ -19,7 +20,7 @@ body{
     min-height:100vh;
 }
 
-/* LOGIN */
+/* ================= LOGIN ================= */
 
 .login-screen{
     min-height:100vh;
@@ -132,7 +133,7 @@ input{
 }
 
 
-/* DASHBOARD */
+/* ================= DASHBOARD ================= */
 
 .dashboard{
     display:none;
@@ -193,7 +194,7 @@ input{
 }
 
 
-/* STATS */
+/* ================= STATS ================= */
 
 .stats{
     display:grid;
@@ -220,7 +221,7 @@ input{
 }
 
 
-/* BOOKINGS */
+/* ================= BOOKINGS ================= */
 
 .booking-section{
     background:white;
@@ -267,7 +268,7 @@ input{
 }
 
 
-/* BOOKING CARD */
+/* ================= BOOKING CARD ================= */
 
 .booking-card{
     border:1px solid #e5e7eb;
@@ -296,6 +297,7 @@ input{
     font-size:12px;
     font-weight:bold;
     background:#f3f4f6;
+    text-transform:capitalize;
 }
 
 .booking-info{
@@ -322,7 +324,50 @@ input{
 }
 
 
-/* MOBILE */
+/* ================= ACTION BUTTONS ================= */
+
+.booking-actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:14px;
+}
+
+.action-btn{
+    flex:1;
+    min-width:110px;
+    padding:11px 12px;
+    border:0;
+    border-radius:8px;
+    color:white;
+    font-weight:bold;
+    font-size:13px;
+    cursor:pointer;
+}
+
+.action-btn:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+}
+
+.accept-btn{
+    background:#16a34a;
+}
+
+.reject-btn{
+    background:#dc2626;
+}
+
+.cancel-btn{
+    background:#f59e0b;
+}
+
+.complete-btn{
+    background:#2563eb;
+}
+
+
+/* ================= MOBILE ================= */
 
 @media(max-width:700px){
 
@@ -371,7 +416,16 @@ input{
         font-size:12px;
     }
 
+    .booking-actions{
+        flex-direction:column;
+    }
+
+    .action-btn{
+        width:100%;
+    }
+
 }
+
 </style>
 </head>
 
@@ -493,7 +547,7 @@ input{
         </section>
 
 
-        <!-- STATS -->
+        <!-- ================= STATS ================= -->
 
         <section class="stats">
 
@@ -530,7 +584,7 @@ input{
         </section>
 
 
-        <!-- BOOKINGS -->
+        <!-- ================= BOOKINGS ================= -->
 
         <section class="booking-section">
 
@@ -787,7 +841,70 @@ function renderBookings(bookings){
             booking => {
 
                 const status =
-                    booking.status || "pending";
+                    String(
+                        booking.status || "pending"
+                    ).toLowerCase();
+
+
+                let actions = "";
+
+
+                /* PENDING */
+
+                if(status === "pending"){
+
+                    actions = `
+
+                        <div class="booking-actions">
+
+                            <button
+                                class="action-btn accept-btn"
+                                onclick="updateBookingStatus('${escapeHtml(booking.id)}','accepted')"
+                            >
+                                ✅ Accept
+                            </button>
+
+                            <button
+                                class="action-btn reject-btn"
+                                onclick="updateBookingStatus('${escapeHtml(booking.id)}','rejected')"
+                            >
+                                ❌ Reject
+                            </button>
+
+                        </div>
+
+                    `;
+
+                }
+
+
+                /* ACCEPTED */
+
+                else if(status === "accepted"){
+
+                    actions = `
+
+                        <div class="booking-actions">
+
+                            <button
+                                class="action-btn cancel-btn"
+                                onclick="updateBookingStatus('${escapeHtml(booking.id)}','cancelled')"
+                            >
+                                🚫 Cancel
+                            </button>
+
+                            <button
+                                class="action-btn complete-btn"
+                                onclick="updateBookingStatus('${escapeHtml(booking.id)}','completed')"
+                            >
+                                🏁 Complete
+                            </button>
+
+                        </div>
+
+                    `;
+
+                }
 
 
                 return `
@@ -815,7 +932,9 @@ function renderBookings(bookings){
                                 Customer
                             </strong>
 
-                            ${escapeHtml(booking.customer_name || "-")}
+                            ${escapeHtml(
+                                booking.customer_name || "-"
+                            )}
 
                         </div>
 
@@ -826,7 +945,9 @@ function renderBookings(bookings){
                                 Mobile
                             </strong>
 
-                            ${escapeHtml(booking.phone || "-")}
+                            ${escapeHtml(
+                                booking.phone || "-"
+                            )}
 
                         </div>
 
@@ -837,7 +958,9 @@ function renderBookings(bookings){
                                 Date
                             </strong>
 
-                            ${escapeHtml(booking.booking_date || "-")}
+                            ${escapeHtml(
+                                booking.booking_date || "-"
+                            )}
 
                         </div>
 
@@ -848,7 +971,9 @@ function renderBookings(bookings){
                                 Time
                             </strong>
 
-                            ${escapeHtml(booking.booking_time || "-")}
+                            ${escapeHtml(
+                                booking.booking_time || "-"
+                            )}
 
                         </div>
 
@@ -859,20 +984,88 @@ function renderBookings(bookings){
                                 Route
                             </strong>
 
-                            📍 ${escapeHtml(booking.pickup || "Ranisagar")}
+                            📍 ${escapeHtml(
+                                booking.pickup || "Ranisagar"
+                            )}
+
                             →
-                            ${escapeHtml(booking.destination || "-")}
+
+                            ${escapeHtml(
+                                booking.destination || "-"
+                            )}
 
                         </div>
 
                     </div>
+
+
+                    ${actions}
 
                 </div>
 
                 `;
 
             }
+
         ).join("");
+
+}
+
+
+/* ================= UPDATE STATUS ================= */
+
+async function updateBookingStatus(
+    bookingId,
+    newStatus
+){
+
+    const buttons =
+        document.querySelectorAll(
+            ".action-btn"
+        );
+
+
+    buttons.forEach(
+        button => {
+            button.disabled = true;
+        }
+    );
+
+
+    const { error } =
+        await supabaseClient
+        .from("bookings")
+        .update({
+
+            status:newStatus
+
+        })
+        .eq(
+            "id",
+            bookingId
+        );
+
+
+    if(error){
+
+        console.error(error);
+
+        alert(
+            "Unable to update booking status. Please check Supabase permissions."
+        );
+
+        buttons.forEach(
+            button => {
+                button.disabled = false;
+            }
+        );
+
+        return;
+
+    }
+
+
+    await loadBookings();
 
 }
 
