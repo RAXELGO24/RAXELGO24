@@ -6,11 +6,16 @@
 <title>RAXEL GO 24</title>
 
 <style>
+
 *{
     box-sizing:border-box;
     margin:0;
     padding:0;
     font-family:Arial,sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
 }
 
 body{
@@ -70,6 +75,14 @@ header{
     border:none;
     cursor:pointer;
     z-index:1001;
+}
+
+header h1{
+    font-size:32px;
+}
+
+header p{
+    margin-top:8px;
 }
 
 /* ================= MENU ================= */
@@ -171,6 +184,8 @@ header{
     font-size:16px;
 }
 
+/* ================= DRAWER FOOTER ================= */
+
 .drawer-footer-card{
     background:rgba(255,255,255,.05);
     border:1px solid rgba(255,255,255,.1);
@@ -251,16 +266,6 @@ header{
     padding-top:8px;
 }
 
-/* ================= HEADER TEXT ================= */
-
-header h1{
-    font-size:32px;
-}
-
-header p{
-    margin-top:8px;
-}
-
 /* ================= HERO ================= */
 
 .hero{
@@ -325,6 +330,28 @@ header p{
     margin-bottom:20px;
 }
 
+.hidden{
+    display:none !important;
+}
+
+/* ================= BACK BUTTON ================= */
+
+.page-back{
+    width:100%;
+    margin-bottom:18px;
+    padding:11px 14px;
+    border:1px solid #d1d5db;
+    border-radius:8px;
+    background:#f8fafc;
+    color:#111827;
+    font-size:15px;
+    font-weight:bold;
+    cursor:pointer;
+    text-align:left;
+}
+
+/* ================= FORM ================= */
+
 label{
     display:block;
     font-weight:bold;
@@ -369,10 +396,6 @@ input[readonly]{
     cursor:pointer;
 }
 
-.hidden{
-    display:none !important;
-}
-
 /* ================= REVIEW ================= */
 
 .detail{
@@ -380,6 +403,11 @@ input[readonly]{
     padding:12px;
     margin:8px 0;
     border-radius:8px;
+}
+
+.detail strong{
+    display:block;
+    margin-bottom:4px;
 }
 
 /* ================= PAYMENT ================= */
@@ -464,6 +492,117 @@ input[readonly]{
     border-radius:8px;
 }
 
+/* ================= ABOUT ================= */
+
+.about-title{
+    text-align:center;
+    font-size:25px;
+    margin-bottom:8px;
+}
+
+.about-subtitle{
+    text-align:center;
+    font-size:21px;
+    font-weight:bold;
+    margin-bottom:12px;
+}
+
+.about-text{
+    text-align:center;
+    color:#4b5563;
+    line-height:1.7;
+    margin-bottom:22px;
+}
+
+.about-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+}
+
+.about-card{
+    border:1px solid #d1d5db;
+    border-radius:12px;
+    padding:20px 10px;
+    text-align:center;
+    background:#fff;
+    min-height:130px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+}
+
+.about-icon{
+    font-size:32px;
+    margin-bottom:8px;
+}
+
+.about-card h3{
+    font-size:16px;
+    margin-bottom:5px;
+}
+
+.about-card p{
+    font-size:12px;
+    color:#6b7280;
+    line-height:1.4;
+}
+
+/* ================= HOW IT WORKS ================= */
+
+.how-title{
+    text-align:center;
+    font-size:25px;
+    margin-bottom:25px;
+}
+
+.work-step{
+    position:relative;
+    padding:0 5px 28px 65px;
+    min-height:100px;
+}
+
+.work-step:last-child{
+    padding-bottom:5px;
+}
+
+.step-number{
+    position:absolute;
+    left:0;
+    top:0;
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    background:#111827;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
+    font-size:17px;
+}
+
+.work-step:not(:last-child)::after{
+    content:"";
+    position:absolute;
+    left:23px;
+    top:50px;
+    height:50px;
+    border-left:2px dashed #9ca3af;
+}
+
+.work-step h3{
+    font-size:18px;
+    margin-bottom:6px;
+}
+
+.work-step p{
+    color:#4b5563;
+    line-height:1.5;
+    font-size:14px;
+}
+
 /* ================= SUPPORT ================= */
 
 .support{
@@ -523,7 +662,18 @@ footer{
         margin:20px 12px;
         padding:20px;
     }
+
+    .about-grid{
+        gap:10px;
+    }
+
+    .about-card{
+        padding:15px 8px;
+        min-height:120px;
+    }
+
 }
+
 </style>
 </head>
 
@@ -595,6 +745,8 @@ onclick="toggleMenu()"
 
 <ul class="menu-links-list">
 
+<!-- HOME -->
+
 <li>
 
 <a
@@ -614,11 +766,13 @@ onclick="goHome(); toggleMenu();"
 </li>
 
 
+<!-- ABOUT -->
+
 <li>
 
 <a
 href="#about"
-onclick="toggleMenu();"
+onclick="openAbout(); toggleMenu();"
 >
 
 <div class="menu-item-left">
@@ -633,11 +787,34 @@ onclick="toggleMenu();"
 </li>
 
 
+<!-- HOW IT WORKS -->
+
+<li>
+
+<a
+href="#how"
+onclick="openHow(); toggleMenu();"
+>
+
+<div class="menu-item-left">
+<span>⚙️</span>
+<span>How it works?</span>
+</div>
+
+<span class="arrow-icon">&gt;</span>
+
+</a>
+
+</li>
+
+
+<!-- BOOK -->
+
 <li>
 
 <a
 href="#booking"
-onclick="toggleMenu(); openBooking();"
+onclick="openBooking(); toggleMenu();"
 >
 
 <div class="menu-item-left">
@@ -652,11 +829,13 @@ onclick="toggleMenu(); openBooking();"
 </li>
 
 
+<!-- TRACK -->
+
 <li>
 
 <a
 href="#track"
-onclick="toggleMenu(); openTrack();"
+onclick="openTrack(); toggleMenu();"
 >
 
 <div class="menu-item-left">
@@ -670,6 +849,8 @@ onclick="toggleMenu(); openTrack();"
 
 </li>
 
+
+<!-- SUPPORT -->
 
 <li>
 
@@ -693,6 +874,8 @@ onclick="toggleMenu()"
 
 </div>
 
+
+<!-- ================= MENU FOOTER ================= -->
 
 <div class="drawer-footer-card">
 
@@ -718,16 +901,16 @@ Home
 
 <a
 href="#booking"
-onclick="toggleMenu(); openBooking();"
+onclick="openBooking(); toggleMenu();"
 >
-Book an Auto
+Book
 </a>
 
 |
 
 <a
 href="#track"
-onclick="toggleMenu(); openTrack();"
+onclick="openTrack(); toggleMenu();"
 >
 Track
 </a>
@@ -747,7 +930,6 @@ Help
 Any queries?
 </span>
 
-
 <div class="drawer-social-icons">
 
 <a
@@ -763,7 +945,7 @@ height="26"
 fill="currentColor"
 >
 
-<path d="M20.52 3.48A11.86 11.86 0 0 0 12.05 0C5.5.0.18 5.32.18 11.87c0 2.09.55 4.13 1.59 5.93L.08 24l6.34-1.66a11.86 11.86 0 0 0 5.63 1.43h.01c6.55 0 11.87-5.32 11.87-11.87 0-3.17-1.24-6.15-3.41-8.42z"/>
+<path d="M20.52 3.48A11.86 11.86 0 0 0 12.05 0C5.5 0 .18 5.32.18 11.87c0 2.09.55 4.13 1.59 5.93L.08 24l6.34-1.66a11.86 11.86 0 0 0 5.63 1.43h.01c6.55 0 11.87-5.32 11.87-11.87 0-3.17-1.24-6.15-3.41-8.42zM12.06 21.75h-.01a9.85 9.85 0 0 1-5.02-1.37l-.36-.21-3.76.98 1-3.67-.23-.38a9.86 9.86 0 1 1 8.38 4.65zm5.41-7.39c-.3-.15-1.77-.87-2.05-.97-.28-.1-.48-.15-.68.15-.2.3-.78.97-.95 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.68-1.64-.93-2.25-.25-.6-.5-.52-.68-.53h-.58c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.49s1.07 2.89 1.22 3.09c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.5 1.69.64.71.23 1.36.2 1.87.12.57-.08 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.13-.27-.2-.57-.35z"/>
 
 </svg>
 
@@ -782,7 +964,7 @@ height="26"
 fill="currentColor"
 >
 
-<path d="M6.62 10.79a15.46 15.46 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.61 21 3 13.39 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.24 0 2.45.57 3.57a1 1 0 0 1-.25 1.02l-2.2 2.2z"/>
+<path d="M6.62 10.79a15.46 15.46 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.61 21 3 13.39 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.24.2 2.45.57 3.57a1 1 0 0 1-.25 1.02l-2.2 2.2z"/>
 
 </svg>
 
@@ -875,7 +1057,6 @@ onclick="openBooking()"
 
 </button>
 
-
 <button
 class="track-button"
 onclick="openTrack()"
@@ -888,6 +1069,190 @@ onclick="openTrack()"
 </section>
 
 
+<!-- ================= ABOUT ================= -->
+
+<section
+class="section hidden"
+id="about"
+>
+
+<button
+class="page-back"
+onclick="goBack()"
+>
+← Back
+</button>
+
+<h2 class="about-title">
+About RAXEL GO 24
+</h2>
+
+<div class="about-subtitle">
+OUR SERVICE, YOUR COMFORT
+</div>
+
+<p class="about-text">
+
+गाँव और आसपास के क्षेत्रों में
+जहाँ आपको ऑटो की जरूरत हो,
+हम आपके साथ हैं।
+
+</p>
+
+<div class="about-grid">
+
+<div class="about-card">
+
+<div class="about-icon">
+🌐
+</div>
+
+<h3>
+Rural Coverage
+</h3>
+
+<p>
+गाँव और आसपास के क्षेत्रों में सेवा
+</p>
+
+</div>
+
+
+<div class="about-card">
+
+<div class="about-icon">
+⚡
+</div>
+
+<h3>
+Quick Booking
+</h3>
+
+<p>
+तेज़ और आसान ऑनलाइन बुकिंग
+</p>
+
+</div>
+
+
+<div class="about-card">
+
+<div class="about-icon">
+👍
+</div>
+
+<h3>
+Trusted Service
+</h3>
+
+<p>
+अच्छी और भरोसेमंद सेवा
+</p>
+
+</div>
+
+
+<div class="about-card">
+
+<div class="about-icon">
+👥
+</div>
+
+<h3>
+Customer First
+</h3>
+
+<p>
+ग्राहकों की सुविधा हमारी प्राथमिकता
+</p>
+
+</div>
+
+</div>
+
+<div style="text-align:center;margin-top:25px;color:#6b7280;font-size:12px;">
+
+© 2026 RAXEL GO 24
+<br>
+Managed by Imtiyaz Khan
+
+</div>
+
+</section>
+
+
+<!-- ================= HOW IT WORKS ================= -->
+
+<section
+class="section hidden"
+id="how"
+>
+
+<button
+class="page-back"
+onclick="goBack()"
+>
+← Back
+</button>
+
+<h2 class="how-title">
+HOW IT WORKS?
+</h2>
+
+
+<div class="work-step">
+
+<div class="step-number">
+01
+</div>
+
+<h3>
+BOOK
+</h3>
+
+<p>
+अपना Pickup और Destination बताएं।
+</p>
+
+</div>
+
+
+<div class="work-step">
+
+<div class="step-number">
+02
+</div>
+
+<h3>
+CONFIRM
+</h3>
+
+<p>
+RAXEL GO 24 टीम आपकी Booking को Verify करेगी।
+</p>
+
+</div>
+
+
+<div class="work-step">
+
+<div class="step-number">
+03
+</div>
+
+<h3>
+RIDE
+</h3>
+
+<p>
+Auto Dispatch होगा और आपकी Ride शुरू होगी।
+</p>
+
+</div>
+
+</section>
+
+
 <!-- ================= BOOKING ================= -->
 
 <section
@@ -895,11 +1260,21 @@ class="section hidden"
 id="booking"
 >
 
+<button
+class="page-back"
+onclick="goBack()"
+>
+← Back
+</button>
+
 <h2>
 🚗 Book Your Auto
 </h2>
 
-<label>From</label>
+
+<label>
+From
+</label>
 
 <input
 type="text"
@@ -907,7 +1282,10 @@ value="Ranisagar"
 readonly
 >
 
-<label>To</label>
+
+<label>
+To
+</label>
 
 <input
 type="text"
@@ -915,7 +1293,10 @@ id="to"
 placeholder="Enter destination"
 >
 
-<label>Your Name</label>
+
+<label>
+Your Name
+</label>
 
 <input
 type="text"
@@ -923,37 +1304,35 @@ id="name"
 placeholder="Enter your name"
 >
 
-<label>Mobile Number</label>
+
+<label>
+Mobile Number
+</label>
 
 <input
 type="tel"
 id="mobile"
-placeholder="Enter mobile number"
+placeholder="Enter 10-digit mobile number"
+inputmode="numeric"
+maxlength="10"
+autocomplete="tel"
 >
 
-<label>Date</label>
 
-<input
-type="date"
-id="date"
->
-
-<label>Time</label>
-
-<input
-type="time"
-id="time"
->
-
-<label>Number of Passengers</label>
+<label>
+Number of Passengers
+</label>
 
 <input
 type="number"
 id="passengers"
 min="1"
 max="10"
-placeholder="Passengers"
+step="1"
+placeholder="1 to 10"
+inputmode="numeric"
 >
+
 
 <button
 class="action"
@@ -961,15 +1340,6 @@ onclick="goToReview()"
 >
 
 Review Booking
-
-</button>
-
-<button
-class="secondary"
-onclick="goHome()"
->
-
-← Back
 
 </button>
 
@@ -983,44 +1353,74 @@ class="section hidden"
 id="review"
 >
 
+<button
+class="page-back"
+onclick="goBack()"
+>
+← Back
+</button>
+
 <h2>
 📋 Review Your Booking
 </h2>
 
-<div class="detail">
-<strong>From:</strong>
-<span>Ranisagar</span>
-</div>
 
 <div class="detail">
-<strong>To:</strong>
+
+<strong>
+From:
+</strong>
+
+<span>
+Ranisagar
+</span>
+
+</div>
+
+
+<div class="detail">
+
+<strong>
+To:
+</strong>
+
 <span id="rTo"></span>
+
 </div>
 
+
 <div class="detail">
-<strong>Name:</strong>
+
+<strong>
+Name:
+</strong>
+
 <span id="rName"></span>
+
 </div>
 
+
 <div class="detail">
-<strong>Mobile:</strong>
+
+<strong>
+Mobile:
+</strong>
+
 <span id="rMobile"></span>
+
 </div>
 
-<div class="detail">
-<strong>Date:</strong>
-<span id="rDate"></span>
-</div>
 
 <div class="detail">
-<strong>Time:</strong>
-<span id="rTime"></span>
-</div>
 
-<div class="detail">
-<strong>Passengers:</strong>
+<strong>
+Passengers:
+</strong>
+
 <span id="rPassengers"></span>
+
 </div>
+
 
 <button
 class="action"
@@ -1030,6 +1430,7 @@ onclick="goToPayment()"
 Confirm & Continue
 
 </button>
+
 
 <button
 class="secondary"
@@ -1050,9 +1451,17 @@ class="section hidden"
 id="payment"
 >
 
+<button
+class="page-back"
+onclick="goBack()"
+>
+← Back
+</button>
+
 <h2>
 💳 Payment Mode
 </h2>
+
 
 <div class="payment-option">
 
@@ -1070,6 +1479,7 @@ UPI
 
 </div>
 
+
 <div class="payment-option">
 
 <label>
@@ -1086,6 +1496,7 @@ COD / Cash
 
 </div>
 
+
 <div class="notice">
 
 Your booking will be sent to
@@ -1096,6 +1507,7 @@ accepted by our team.
 
 </div>
 
+
 <button
 class="action"
 onclick="submitBooking()"
@@ -1104,6 +1516,7 @@ onclick="submitBooking()"
 🚗 Submit Booking
 
 </button>
+
 
 <button
 class="secondary"
@@ -1124,6 +1537,13 @@ class="section success hidden"
 id="success"
 >
 
+<button
+class="page-back"
+onclick="goBack()"
+>
+← Back
+</button>
+
 <h2>
 ⏳ Booking Request Sent
 </h2>
@@ -1132,671 +1552,5 @@ id="success"
 Your booking request has been submitted successfully.
 </p>
 
-<div class="booking-id">
 
-Booking ID:
-
-<span id="bookingId"></span>
-
-</div>
-
-<p>
-Please save this Booking ID to track your booking.
-</p>
-
-<p style="margin-top:10px;">
-Please wait for RAXEL GO 24 to accept your booking.
-</p>
-
-<button
-class="action"
-onclick="openTrackWithCurrentId()"
->
-
-🔎 Track This Booking
-
-</button>
-
-<button
-class="secondary"
-onclick="goHome()"
->
-
-← Home
-
-</button>
-
-</section>
-
-
-<!-- ================= TRACK ================= -->
-
-<section
-class="section hidden"
-id="track"
->
-
-<h2>
-🔎 Track My Bookings
-</h2>
-
-<p style="text-align:center;color:#6b7280;margin-bottom:18px;">
-
-Enter your Booking ID to check the latest status.
-
-</p>
-
-<label>
-Booking ID
-</label>
-
-<input
-type="text"
-id="trackBookingId"
-placeholder="Example: RAXEL123456"
-autocomplete="off"
->
-
-<button
-class="action"
-onclick="trackBooking()"
->
-
-🔎 Track Booking
-
-</button>
-
-<button
-class="secondary"
-onclick="goBack()"
->
-
-← Back
-
-</button>
-
-<div
-id="trackResult"
-class="track-result"
-></div>
-
-</section>
-
-
-<!-- ================= SUPPORT ================= -->
-
-<section class="support">
-
-<h2>
-Need Help?
-</h2>
-
-<p>
-Our support team is here for you.
-</p>
-
-<a href="tel:+918294741267">
-📞 Help / Support
-</a>
-
-</section>
-
-
-<!-- ================= FOOTER ================= -->
-
-<footer>
-
-<p>
-© 2026 RAXEL GO 24
-</p>
-
-<p style="margin-top:8px;">
-Managed by Imtiyaz Khan
-</p>
-
-</footer>
-
-
-<!-- ================= SUPABASE ================= -->
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<script>
-
-const SUPABASE_URL =
-"https://phrlnhzbqqzeoxhpdeyt.supabase.co";
-
-const SUPABASE_KEY =
-"sb_publishable_cLNIvPuSPOrU6Ro6Leq9Hg_45You9FO";
-
-const supabaseClient =
-window.supabase.createClient(
-SUPABASE_URL,
-SUPABASE_KEY
-);
-
-
-/* ================= PAGE HISTORY ================= */
-
-let pageHistory = ["home"];
-
-
-function showPage(pageId){
-
-    const pages = [
-        "home",
-        "booking",
-        "review",
-        "payment",
-        "success",
-        "track"
-    ];
-
-    pages.forEach(id => {
-
-        const element =
-            document.getElementById(id);
-
-        if(element){
-
-            element.classList.add("hidden");
-
-        }
-
-    });
-
-
-    document
-        .getElementById(pageId)
-        .classList.remove("hidden");
-
-
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
-
-}
-
-
-function navigateTo(pageId){
-
-    const current =
-        pageHistory[pageHistory.length - 1];
-
-    if(current !== pageId){
-
-        pageHistory.push(pageId);
-
-    }
-
-    showPage(pageId);
-
-}
-
-
-function goBack(){
-
-    if(pageHistory.length > 1){
-
-        pageHistory.pop();
-
-        const previous =
-            pageHistory[pageHistory.length - 1];
-
-        showPage(previous);
-
-    }else{
-
-        showPage("home");
-
-    }
-
-}
-
-
-function goHome(){
-
-    pageHistory = ["home"];
-
-    showPage("home");
-
-}
-
-
-/* ================= MENU ================= */
-
-function toggleMenu(){
-
-    const drawer =
-        document.getElementById("menuDrawer");
-
-    drawer.classList.toggle("active");
-
-}
-
-
-/* ================= BOOKING ================= */
-
-function openBooking(){
-
-    navigateTo("booking");
-
-}
-
-
-/* ================= REVIEW ================= */
-
-function goToReview(){
-
-    const to =
-        document.getElementById("to").value.trim();
-
-    const name =
-        document.getElementById("name").value.trim();
-
-    const mobile =
-        document.getElementById("mobile").value.trim();
-
-    const date =
-        document.getElementById("date").value;
-
-    const time =
-        document.getElementById("time").value;
-
-    const passengers =
-        document.getElementById("passengers").value;
-
-
-    if(
-        !to ||
-        !name ||
-        !mobile ||
-        !date ||
-        !time ||
-        !passengers
-    ){
-
-        alert(
-            "Please fill all booking details."
-        );
-
-        return;
-
-    }
-
-
-    document.getElementById("rTo").textContent =
-        to;
-
-    document.getElementById("rName").textContent =
-        name;
-
-    document.getElementById("rMobile").textContent =
-        mobile;
-
-    document.getElementById("rDate").textContent =
-        date;
-
-    document.getElementById("rTime").textContent =
-        time;
-
-    document.getElementById("rPassengers").textContent =
-        passengers;
-
-
-    navigateTo("review");
-
-}
-
-
-/* ================= PAYMENT ================= */
-
-function goToPayment(){
-
-    navigateTo("payment");
-
-}
-
-
-function backToBooking(){
-
-    goBack();
-
-}
-
-
-function backToReview(){
-
-    goBack();
-
-}
-
-
-/* ================= CREATE BOOKING ID ================= */
-
-function createBookingId(){
-
-    return "RAXEL" +
-        Math.floor(
-            100000 +
-            Math.random() * 900000
-        );
-
-}
-
-
-/* ================= SUBMIT BOOKING ================= */
-
-async function submitBooking(){
-
-    const payment =
-        document.querySelector(
-            'input[name="payment"]:checked'
-        );
-
-
-    if(!payment){
-
-        alert(
-            "Please select a payment mode."
-        );
-
-        return;
-
-    }
-
-
-    const bookingId =
-        createBookingId();
-
-
-    const name =
-        document.getElementById("name").value.trim();
-
-    const mobile =
-        document.getElementById("mobile").value.trim();
-
-    const to =
-        document.getElementById("to").value.trim();
-
-    const date =
-        document.getElementById("date").value;
-
-    const time =
-        document.getElementById("time").value;
-
-    const passengers =
-        document.getElementById("passengers").value;
-
-
-    const { error } =
-        await supabaseClient
-        .from("bookings")
-        .insert({
-
-            booking_id:
-                bookingId,
-
-            customer_name:
-                name,
-
-            phone:
-                mobile,
-
-            pickup:
-                "Ranisagar",
-
-            destination:
-                to,
-
-            booking_date:
-                date,
-
-            booking_time:
-                time,
-
-            status:
-                "pending"
-
-        });
-
-
-    if(error){
-
-        console.error(error);
-
-        alert(
-            "Booking submit nahi ho paayi. Please try again."
-        );
-
-        return;
-
-    }
-
-
-    document
-        .getElementById("bookingId")
-        .textContent =
-        bookingId;
-
-
-    document
-        .getElementById("trackBookingId")
-        .value =
-        bookingId;
-
-
-    navigateTo("success");
-
-}
-
-
-/* ================= TRACK ================= */
-
-function openTrack(){
-
-    navigateTo("track");
-
-    document
-        .getElementById("trackResult")
-        .innerHTML = "";
-
-}
-
-
-function openTrackWithCurrentId(){
-
-    navigateTo("track");
-
-    const currentId =
-        document
-        .getElementById("bookingId")
-        .textContent
-        .trim();
-
-
-    document
-        .getElementById("trackBookingId")
-        .value =
-        currentId;
-
-
-    if(currentId){
-
-        trackBooking();
-
-    }
-
-}
-
-
-/* ================= TRACK BOOKING ================= */
-
-async function trackBooking(){
-
-    const input =
-        document
-        .getElementById("trackBookingId");
-
-    const result =
-        document
-        .getElementById("trackResult");
-
-
-    const bookingId =
-        input.value.trim();
-
-
-    if(!bookingId){
-
-        result.innerHTML =
-        '<div class="track-error">Please enter your Booking ID.</div>';
-
-        return;
-
-    }
-
-
-    result.innerHTML =
-    '<div class="loading" style="text-align:center;padding:15px;color:#6b7280;">Searching booking...</div>';
-
-
-    const { data, error } =
-        await supabaseClient
-        .from("bookings")
-        .select(
-            "booking_id, customer_name, phone, pickup, destination, booking_date, booking_time, status"
-        )
-        .eq(
-            "booking_id",
-            bookingId
-        )
-        .maybeSingle();
-
-
-    if(error){
-
-        console.error(error);
-
-        result.innerHTML =
-        '<div class="track-error">Unable to check booking. Please try again.</div>';
-
-        return;
-
-    }
-
-
-    if(!data){
-
-        result.innerHTML =
-        '<div class="track-error">Booking ID not found. Please check the ID and try again.</div>';
-
-        return;
-
-    }
-
-
-    const status =
-        data.status || "pending";
-
-
-    result.innerHTML = `
-
-        <div class="track-card">
-
-            <div class="track-detail">
-
-                <strong>Booking ID</strong>
-
-                ${escapeHtml(data.booking_id)}
-
-            </div>
-
-
-            <div class="track-detail">
-
-                <strong>Customer Name</strong>
-
-                ${escapeHtml(data.customer_name || "-")}
-
-            </div>
-
-
-            <div class="track-detail">
-
-                <strong>Pickup</strong>
-
-                ${escapeHtml(data.pickup || "Ranisagar")}
-
-            </div>
-
-
-            <div class="track-detail">
-
-                <strong>Destination</strong>
-
-                ${escapeHtml(data.destination || "-")}
-
-            </div>
-
-
-            <div class="track-detail">
-
-                <strong>Booking Date</strong>
-
-                ${escapeHtml(data.booking_date || "-")}
-
-            </div>
-
-
-            <div class="track-detail">
-
-                <strong>Booking Time</strong>
-
-                ${escapeHtml(data.booking_time || "-")}
-
-            </div>
-
-
-            <div class="track-detail">
-
-                <strong>Status</strong>
-
-                <span class="track-status">
-
-                    ${escapeHtml(status)}
-
-                </span>
-
-            </div>
-
-        </div>
-
-    `;
-
-}
-
-
-/* ================= SAFE HTML ================= */
-
-function escapeHtml(value){
-
-    return String(value)
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
-
-}
-
-
-/* ================= INITIAL ================= */
-
-showPage("home");
-
-</script>
-
-</body>
-</html>
+<d
