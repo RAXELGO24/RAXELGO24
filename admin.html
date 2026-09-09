@@ -148,6 +148,7 @@ input{
     align-items:center;
     justify-content:space-between;
     gap:15px;
+    flex-wrap:wrap;
 }
 
 .topbar h1{
@@ -237,6 +238,7 @@ input{
     justify-content:space-between;
     gap:10px;
     margin-bottom:15px;
+    flex-wrap:wrap;
 }
 
 .booking-header h2{
@@ -276,6 +278,11 @@ input{
     padding:17px;
     margin-top:12px;
     background:#fff;
+    transition:0.2s;
+}
+
+.booking-card:hover{
+    box-shadow:0 4px 12px rgba(0,0,0,.08);
 }
 
 .booking-top{
@@ -284,6 +291,7 @@ input{
     align-items:center;
     gap:10px;
     margin-bottom:12px;
+    flex-wrap:wrap;
 }
 
 .booking-id{
@@ -298,6 +306,31 @@ input{
     font-weight:bold;
     background:#f3f4f6;
     text-transform:capitalize;
+}
+
+.status-pending{
+    background:#fef3c7;
+    color:#92400e;
+}
+
+.status-accepted{
+    background:#dbeafe;
+    color:#1e40af;
+}
+
+.status-rejected{
+    background:#fee2e2;
+    color:#991b1b;
+}
+
+.status-completed{
+    background:#d1fae5;
+    color:#065f46;
+}
+
+.status-cancelled{
+    background:#f3f4f6;
+    color:#374151;
 }
 
 .booking-info{
@@ -343,26 +376,82 @@ input{
     font-weight:bold;
     font-size:13px;
     cursor:pointer;
+    transition:0.2s;
+}
+
+.action-btn:hover{
+    transform:scale(1.02);
 }
 
 .action-btn:disabled{
     opacity:.6;
     cursor:not-allowed;
+    transform:none;
 }
 
 .accept-btn{
     background:#16a34a;
 }
 
+.accept-btn:hover{
+    background:#15803d;
+}
+
 .reject-btn{
     background:#dc2626;
+}
+
+.reject-btn:hover{
+    background:#b91c1c;
 }
 
 .cancel-btn{
     background:#f59e0b;
 }
 
+.cancel-btn:hover{
+    background:#d97706;
+}
+
 .complete-btn{
+    background:#2563eb;
+}
+
+.complete-btn:hover{
+    background:#1d4ed8;
+}
+
+/* ================= TOAST ================= */
+
+.toast{
+    position:fixed;
+    top:20px;
+    right:20px;
+    background:#111827;
+    color:white;
+    padding:16px 22px;
+    border-radius:12px;
+    font-weight:bold;
+    box-shadow:0 10px 30px rgba(0,0,0,.2);
+    z-index:9999;
+    transform:translateX(120%);
+    transition:0.4s ease;
+    max-width:90%;
+}
+
+.toast.show{
+    transform:translateX(0);
+}
+
+.toast-success{
+    background:#16a34a;
+}
+
+.toast-error{
+    background:#dc2626;
+}
+
+.toast-info{
     background:#2563eb;
 }
 
@@ -424,12 +513,30 @@ input{
         width:100%;
     }
 
+    .stats{
+        grid-template-columns:1fr 1fr;
+        gap:10px;
+    }
+
+    .stat{
+        padding:14px;
+    }
+
+    .stat strong{
+        font-size:20px;
+    }
+
 }
 
 </style>
 </head>
 
 <body>
+
+
+<!-- ================= TOAST ================= -->
+
+<div class="toast" id="toast"></div>
 
 
 <!-- ================= LOGIN ================= -->
@@ -541,7 +648,7 @@ input{
             </h2>
 
             <p>
-                Live booking management
+                Live booking management — auto-refresh every 30 seconds
             </p>
 
         </section>
@@ -592,6 +699,9 @@ input{
 
                 <h2>
                     📋 Live Bookings
+                    <span style="font-size:14px;color:#6b7280;font-weight:normal;">
+                        (Auto-refresh)
+                    </span>
                 </h2>
 
                 <button
@@ -635,6 +745,36 @@ const supabaseClient =
         SUPABASE_URL,
         SUPABASE_KEY
     );
+
+
+/* ================= TOAST ================= */
+
+function showToast(message, type = "info"){
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.textContent = message;
+
+    toast.className = "toast";
+
+    if(type === "success"){
+        toast.classList.add("toast-success");
+    }else if(type === "error"){
+        toast.classList.add("toast-error");
+    }else{
+        toast.classList.add("toast-info");
+    }
+
+    setTimeout(() => {
+        toast.classList.add("show");
+    }, 100);
+
+    setTimeout(() => {
+        toast.classList.remove("show");
+    }, 3500);
+
+}
 
 
 /* ================= PASSWORD ================= */
@@ -846,6 +986,21 @@ function renderBookings(bookings){
                     ).toLowerCase();
 
 
+                let statusClass = "status";
+
+                if(status === "pending"){
+                    statusClass += " status-pending";
+                }else if(status === "accepted"){
+                    statusClass += " status-accepted";
+                }else if(status === "rejected"){
+                    statusClass += " status-rejected";
+                }else if(status === "completed"){
+                    statusClass += " status-completed";
+                }else if(status === "cancelled"){
+                    statusClass += " status-cancelled";
+                }
+
+
                 let actions = "";
 
 
@@ -914,10 +1069,10 @@ function renderBookings(bookings){
                     <div class="booking-top">
 
                         <div class="booking-id">
-                            🆔 Booking #${escapeHtml(booking.id)}
+                            🆔 #${escapeHtml(booking.id)}
                         </div>
 
-                        <div class="status">
+                        <div class="${statusClass}">
                             ${escapeHtml(status)}
                         </div>
 
@@ -1050,8 +1205,9 @@ async function updateBookingStatus(
 
         console.error(error);
 
-        alert(
-            "Unable to update booking status. Please check Supabase permissions."
+        showToast(
+            "Status update failed!",
+            "error"
         );
 
         buttons.forEach(
@@ -1064,6 +1220,11 @@ async function updateBookingStatus(
 
     }
 
+
+    showToast(
+        `Booking ${newStatus} successfully! ✅`,
+        "success"
+    );
 
     await loadBookings();
 
@@ -1106,6 +1267,11 @@ async function logout(){
         .getElementById("password")
         .value = "";
 
+    showToast(
+        "Logged out successfully",
+        "info"
+    );
+
 }
 
 
@@ -1126,6 +1292,22 @@ async function checkSession(){
 
 
 checkSession();
+
+
+/* ================= AUTO-REFRESH ================= */
+
+setInterval(() => {
+
+    const dashboard =
+        document.getElementById("dashboard");
+
+    if(dashboard.style.display === "block"){
+
+        loadBookings();
+
+    }
+
+}, 30000);
 
 </script>
 
