@@ -863,6 +863,12 @@ async function login(){
     }
 
 
+    // 🔔 SOUND ENABLE (User interaction ke baad)
+    const sound = document.getElementById("notificationSound");
+    sound.load();
+    sound.volume = 0.8;
+    sound.play().catch(function(){});
+
     showDashboard();
 
     button.disabled = false;
@@ -940,11 +946,17 @@ async function loadBookings(){
     // Agar naya booking aaya hai toh sound bajao
     if(previousBookingCount > 0 && (data || []).length > previousBookingCount){
         
-        // Sound play karo
+        // 🔔 SOUND PLAY
         const sound = document.getElementById("notificationSound");
         sound.currentTime = 0;
+        sound.volume = 0.8;
+        
         sound.play().catch(function(e){
             console.log("Sound play error:", e);
+            // Retry after 500ms
+            setTimeout(function(){
+                sound.play().catch(function(){});
+            }, 500);
         });
         
         showToast("🔔 New booking received!", "success");
