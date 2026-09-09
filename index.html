@@ -495,24 +495,6 @@ input[readonly]{
     border-radius:8px;
 }
 
-/* ================= SUPPORT ================= */
-
-.support{
-    text-align:center;
-    padding:30px 20px;
-}
-
-.support a{
-    display:inline-block;
-    margin-top:12px;
-    background:#2563eb;
-    color:white;
-    padding:13px 22px;
-    border-radius:9px;
-    text-decoration:none;
-    font-weight:bold;
-}
-
 /* ================= TOAST ================= */
 
 .toast{
@@ -548,6 +530,24 @@ input[readonly]{
 
 .toast-info{
     background:#2563eb;
+}
+
+/* ================= SUPPORT ================= */
+
+.support{
+    text-align:center;
+    padding:30px 20px;
+}
+
+.support a{
+    display:inline-block;
+    margin-top:12px;
+    background:#2563eb;
+    color:white;
+    padding:13px 22px;
+    border-radius:9px;
+    text-decoration:none;
+    font-weight:bold;
 }
 
 /* ================= FOOTER ================= */
@@ -1766,3 +1766,94 @@ async function trackBooking(){
         </div>
 
         <div class="track-detail">
+            <strong>Customer Name</strong>
+            ${escapeHtml(data.customer_name || "-")}
+        </div>
+
+        <div class="track-detail">
+            <strong>Pickup</strong>
+            ${escapeHtml(data.pickup || "Ranisagar")}
+        </div>
+
+        <div class="track-detail">
+            <strong>Destination</strong>
+            ${escapeHtml(data.destination || "-")}
+        </div>
+
+        <div class="track-detail">
+            <strong>Booking Date</strong>
+            ${escapeHtml(data.booking_date || "-")}
+        </div>
+
+        <div class="track-detail">
+            <strong>Booking Time</strong>
+            ${escapeHtml(data.booking_time || "-")}
+        </div>
+
+        <div class="track-detail">
+            <strong>Status</strong>
+            <span style="
+                display:inline-block;
+                padding:8px 14px;
+                border-radius:20px;
+                font-weight:bold;
+                background:${statusColor};
+                color:#111827;
+            ">
+                ${statusEmoji} ${escapeHtml(status)}
+            </span>
+        </div>
+
+    </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   HTML SECURITY
+========================================================= */
+
+function escapeHtml(value){
+
+    return String(value)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/* =========================================================
+   START WEBSITE
+========================================================= */
+
+createInitialHistory();
+
+</script>
+
+</body>
+</html>
