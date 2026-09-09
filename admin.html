@@ -932,19 +932,23 @@ async function loadBookings(){
 
     /* CHECK FOR NEW BOOKING */
 
-    if(previousBookingCount > 0 && (data || []).length > previousBookingCount){
-
-        document
-            .getElementById("notificationSound")
-            .play();
-
-        showToast(
-            "🔔 New booking received!",
-            "success"
-        );
-
+    // Pehli baar load ho raha hai toh count set karo
+    if(previousBookingCount === 0){
+        previousBookingCount = (data || []).length;
     }
 
+    // Agar naya booking aaya hai toh sound bajao
+    if(previousBookingCount > 0 && (data || []).length > previousBookingCount){
+        
+        // Sound play karo
+        const sound = document.getElementById("notificationSound");
+        sound.currentTime = 0;
+        sound.play().catch(function(e){
+            console.log("Sound play error:", e);
+        });
+        
+        showToast("🔔 New booking received!", "success");
+    }
 
     previousBookingCount = (data || []).length;
 
