@@ -421,26 +421,30 @@ input{
     background:#1d4ed8;
 }
 
+
 /* ================= TOAST ================= */
 
 .toast{
     position:fixed;
-    top:20px;
-    right:20px;
+    bottom:30px;
+    left:50%;
+    transform:translateX(-50%) translateY(120px);
     background:#111827;
     color:white;
-    padding:16px 22px;
+    padding:14px 24px;
     border-radius:12px;
     font-weight:bold;
     box-shadow:0 10px 30px rgba(0,0,0,.2);
     z-index:9999;
-    transform:translateX(120%);
     transition:0.4s ease;
     max-width:90%;
+    text-align:center;
+    opacity:0;
 }
 
 .toast.show{
-    transform:translateX(0);
+    transform:translateX(-50%) translateY(0);
+    opacity:1;
 }
 
 .toast-success{
@@ -533,11 +537,11 @@ input{
 
 <body>
 
-
 <!-- ================= TOAST ================= -->
-
 <div class="toast" id="toast"></div>
 
+<!-- ================= NOTIFICATION SOUND ================= -->
+<audio id="notificationSound" src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3"></audio>
 
 <!-- ================= LOGIN ================= -->
 
@@ -747,6 +751,11 @@ const supabaseClient =
     );
 
 
+/* ================= GLOBALS ================= */
+
+let previousBookingCount = 0;
+
+
 /* ================= TOAST ================= */
 
 function showToast(message, type = "info"){
@@ -919,6 +928,25 @@ async function loadBookings(){
     updateStats(data || []);
 
     renderBookings(data || []);
+
+
+    /* CHECK FOR NEW BOOKING */
+
+    if(previousBookingCount > 0 && (data || []).length > previousBookingCount){
+
+        document
+            .getElementById("notificationSound")
+            .play();
+
+        showToast(
+            "🔔 New booking received!",
+            "success"
+        );
+
+    }
+
+
+    previousBookingCount = (data || []).length;
 
 }
 
