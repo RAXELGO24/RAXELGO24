@@ -540,6 +540,20 @@ input[readonly]{
     display: none !important;
 }
 
+/* ================= TOGGLE BUTTONS ================= */
+.toggle-btn-active{
+    background: #6C63FF !important;
+    color: white !important;
+    box-shadow: 0 4px 15px rgba(108, 99, 255, 0.3);
+}
+.toggle-btn-inactive{
+    background: transparent !important;
+    color: #8888a0 !important;
+}
+.toggle-btn-inactive:hover{
+    background: rgba(108, 99, 255, 0.08) !important;
+}
+
 /* ================= REVIEW ================= */
 .detail{
     background: #f8f8ff;
@@ -893,28 +907,54 @@ footer strong{
         <i class="fas fa-arrow-left"></i> Back
     </button>
     <h2><i class="fas fa-rickshaw"></i> Book Your Auto</h2>
-    
+
     <label><i class="fas fa-map-pin"></i> From</label>
     <input type="text" value="Ranisagar" readonly>
-    
+
     <label><i class="fas fa-map-marker-alt"></i> To</label>
     <input type="text" id="to" placeholder="Enter destination">
-    
+
     <label><i class="fas fa-user"></i> Your Name</label>
     <input type="text" id="name" placeholder="Enter your name">
-    
+
     <label><i class="fas fa-phone"></i> Mobile Number</label>
     <input type="tel" id="mobile" placeholder="Enter mobile number">
-    
-    <label><i class="fas fa-calendar-alt"></i> Date</label>
-    <input type="date" id="date">
-    
-    <label><i class="fas fa-clock"></i> Time</label>
-    <input type="time" id="time">
-    
+
+    <!-- ================= BOOKING TYPE TOGGLE ================= -->
+    <label style="margin-top:8px;">
+        <i class="fas fa-clock"></i> Booking Type
+    </label>
+
+    <div style="display:flex;gap:10px;background:#f0f2f8;padding:6px;border-radius:12px;margin-bottom:6px;">
+        <button 
+            id="bookNowBtn" 
+            onclick="setBookingType('now')" 
+            style="flex:1;padding:10px;border:none;border-radius:10px;font-weight:700;font-size:14px;cursor:pointer;background:#6C63FF;color:white;transition:all 0.3s;">
+            <i class="fas fa-bolt"></i> Book Now
+        </button>
+        <button 
+            id="bookLaterBtn" 
+            onclick="setBookingType('later')" 
+            style="flex:1;padding:10px;border:none;border-radius:10px;font-weight:700;font-size:14px;cursor:pointer;background:transparent;color:#8888a0;transition:all 0.3s;">
+            <i class="fas fa-calendar-alt"></i> Book Later
+        </button>
+    </div>
+
+    <!-- ================= DATE & TIME (Sirf "Book Later" mein dikhega) ================= -->
+    <div id="dateTimeSection" style="display:none;">
+        <label><i class="fas fa-calendar-alt"></i> Date</label>
+        <input type="date" id="date">
+
+        <label><i class="fas fa-clock"></i> Time</label>
+        <input type="time" id="time">
+    </div>
+
+    <!-- Hidden field for booking type -->
+    <input type="hidden" id="bookingType" value="now">
+
     <label><i class="fas fa-users"></i> Passengers</label>
-    <input type="number" id="passengers" min="1" max="10" placeholder="Number of passengers">
-    
+    <input type="number" id="passengers" min="1" max="10" placeholder="Number of passengers (1-10)">
+
     <button class="action-btn" onclick="goToReview()">
         <i class="fas fa-eye"></i> Review Booking
     </button>
@@ -926,7 +966,7 @@ footer strong{
         <i class="fas fa-arrow-left"></i> Back
     </button>
     <h2><i class="fas fa-clipboard-list"></i> Review Your Booking</h2>
-    
+
     <div class="detail"><strong>From:</strong> <span>Ranisagar</span></div>
     <div class="detail"><strong>To:</strong> <span id="rTo"></span></div>
     <div class="detail"><strong>Name:</strong> <span id="rName"></span></div>
@@ -934,7 +974,8 @@ footer strong{
     <div class="detail"><strong>Date:</strong> <span id="rDate"></span></div>
     <div class="detail"><strong>Time:</strong> <span id="rTime"></span></div>
     <div class="detail"><strong>Passengers:</strong> <span id="rPassengers"></span></div>
-    
+    <div class="detail"><strong>Booking Type:</strong> <span id="rBookingType"></span></div>
+
     <button class="action-btn" onclick="goToPayment()">
         <i class="fas fa-check-circle"></i> Confirm & Continue
     </button>
@@ -946,7 +987,7 @@ footer strong{
         <i class="fas fa-arrow-left"></i> Back
     </button>
     <h2><i class="fas fa-credit-card"></i> Payment Mode</h2>
-    
+
     <div class="payment-option">
         <label>
             <input type="radio" name="payment" value="UPI">
@@ -959,11 +1000,11 @@ footer strong{
             <i class="fas fa-money-bill-wave"></i> COD / Cash
         </label>
     </div>
-    
+
     <div class="notice">
         <i class="fas fa-info-circle"></i> Your booking will be sent to RAXEL GO 24 for confirmation.
     </div>
-    
+
     <button class="action-btn" onclick="submitBooking()">
         <i class="fas fa-paper-plane"></i> Submit Booking
     </button>
@@ -977,15 +1018,15 @@ footer strong{
     <div class="big-icon">🎉</div>
     <h2>Booking Request Sent</h2>
     <p>Your booking request has been submitted successfully.</p>
-    
+
     <div class="booking-id-box">
         <span>Booking ID:</span><br>
         <span id="bookingId">RAXEL123456</span>
     </div>
-    
+
     <p>Please save this Booking ID to track your booking.</p>
     <p style="margin-top:10px;">Please wait for RAXEL GO 24 to accept your booking.</p>
-    
+
     <button class="action-btn" onclick="openTrackWithCurrentId()">
         <i class="fas fa-search"></i> Track This Booking
     </button>
@@ -1003,14 +1044,14 @@ footer strong{
     <p style="text-align:center;color:var(--text-light);margin-bottom:18px;font-size:14px;">
         Enter your Booking ID to check the latest status.
     </p>
-    
+
     <label><i class="fas fa-ticket-alt"></i> Booking ID</label>
     <input type="text" id="trackBookingId" placeholder="Example: RAXEL123456" autocomplete="off">
-    
+
     <button class="action-btn" onclick="trackBooking()">
         <i class="fas fa-search"></i> Track Booking
     </button>
-    
+
     <div id="trackResult" class="track-result"></div>
 </section>
 
@@ -1113,39 +1154,147 @@ function menuNavigate(pageId){
 ========================================================= */
 function goHome(){ navigateTo("home"); }
 function goBack(){ history.back(); }
-function openBooking(){ navigateTo("booking"); }
+
+function openBooking(){
+    navigateTo("booking");
+    // Auto-select "Book Now" when booking page opens
+    setBookingType('now');
+}
+
 function openTrack(){ 
     navigateTo("track"); 
     document.getElementById("trackResult").innerHTML = ""; 
 }
 
 /* =========================================================
+   BOOKING TYPE TOGGLE
+========================================================= */
+
+let selectedBookingType = "now"; // "now" ya "later"
+
+function setBookingType(type){
+
+    selectedBookingType = type;
+
+    const nowBtn = document.getElementById("bookNowBtn");
+    const laterBtn = document.getElementById("bookLaterBtn");
+    const dateTimeSection = document.getElementById("dateTimeSection");
+    const dateInput = document.getElementById("date");
+    const timeInput = document.getElementById("time");
+
+    if(type === "now"){
+
+        nowBtn.className = "toggle-btn-active";
+        nowBtn.style.background = "#6C63FF";
+        nowBtn.style.color = "white";
+
+        laterBtn.className = "toggle-btn-inactive";
+        laterBtn.style.background = "transparent";
+        laterBtn.style.color = "#8888a0";
+
+        dateTimeSection.style.display = "none";
+
+        // Clear date/time fields
+        dateInput.value = "";
+        timeInput.value = "";
+
+        document.getElementById("bookingType").value = "now";
+
+    }else{
+
+        laterBtn.className = "toggle-btn-active";
+        laterBtn.style.background = "#6C63FF";
+        laterBtn.style.color = "white";
+
+        nowBtn.className = "toggle-btn-inactive";
+        nowBtn.style.background = "transparent";
+        nowBtn.style.color = "#8888a0";
+
+        dateTimeSection.style.display = "block";
+
+        document.getElementById("bookingType").value = "later";
+
+    }
+
+}
+
+/* =========================================================
    REVIEW
 ========================================================= */
 function goToReview(){
+
     const to = document.getElementById("to").value.trim();
     const name = document.getElementById("name").value.trim();
     const mobile = document.getElementById("mobile").value.trim();
-    const date = document.getElementById("date").value;
-    const time = document.getElementById("time").value;
     const passengers = document.getElementById("passengers").value;
-    
-    if(!to || !name || !mobile || !date || !time || !passengers){
+    const bookingType = document.getElementById("bookingType").value;
+
+    // ================= CHECK EMPTY FIELDS =================
+    if(!to || !name || !mobile || !passengers){
         showToast("Please fill all booking details.", "error");
         return;
     }
+
+    // ================= VALIDATE MOBILE NUMBER =================
     if(!/^[6-9]\d{9}$/.test(mobile)){
         showToast("Please enter a valid 10-digit Indian mobile number.", "error");
         return;
     }
-    
+
+    // ================= VALIDATE PASSENGERS (1 to 10) =================
+    const passengerCount = parseInt(passengers);
+    if(isNaN(passengerCount) || passengerCount < 1 || passengerCount > 10){
+        showToast("Passengers must be between 1 and 10.", "error");
+        return;
+    }
+
+    let date = "";
+    let time = "";
+
+    // ================= BOOK LATER - Validate Date/Time =================
+    if(bookingType === "later"){
+
+        date = document.getElementById("date").value;
+        time = document.getElementById("time").value;
+
+        if(!date || !time){
+            showToast("Please select date and time for later booking.", "error");
+            return;
+        }
+
+        const selectedDateTime = new Date(`${date}T${time}:00`);
+        const currentDateTime = new Date();
+
+        if(isNaN(selectedDateTime.getTime())){
+            showToast("Invalid date or time selected.", "error");
+            return;
+        }
+
+        if(selectedDateTime < currentDateTime){
+            showToast("You cannot book for a past date or time. Please select a future time.", "error");
+            return;
+        }
+
+    }else{
+
+        // Book Now - Current date/time use karenge
+        const now = new Date();
+        date = now.toISOString().split("T")[0]; // YYYY-MM-DD
+        time = now.toTimeString().slice(0,5);   // HH:MM
+
+    }
+
+    // ================= SAVE TO REVIEW PAGE =================
     document.getElementById("rTo").textContent = to;
     document.getElementById("rName").textContent = name;
     document.getElementById("rMobile").textContent = mobile;
     document.getElementById("rDate").textContent = date;
     document.getElementById("rTime").textContent = time;
     document.getElementById("rPassengers").textContent = passengers;
+    document.getElementById("rBookingType").textContent = bookingType === "now" ? "🚀 Immediate" : "📅 Scheduled";
+
     navigateTo("review");
+
 }
 
 function goToPayment(){ navigateTo("payment"); }
@@ -1169,15 +1318,15 @@ async function submitBooking(){
         showToast("Please select a payment mode.", "error");
         return;
     }
-    
+
     const bookingId = await createUniqueBookingId();
     const name = document.getElementById("name").value.trim();
     const mobile = document.getElementById("mobile").value.trim();
     const to = document.getElementById("to").value.trim();
-    const date = document.getElementById("date").value;
-    const time = document.getElementById("time").value;
-    const passengers = document.getElementById("passengers").value;
-    
+    const date = document.getElementById("rDate").textContent;
+    const time = document.getElementById("rTime").textContent;
+    const passengers = document.getElementById("rPassengers").textContent;
+
     const { error } = await supabaseClient.from("bookings").insert({
         booking_id: bookingId,
         customer_name: name,
@@ -1189,13 +1338,13 @@ async function submitBooking(){
         passengers: passengers,
         status: "pending"
     });
-    
+
     if(error){
         console.error(error);
         showToast("Booking failed. Please try again.", "error");
         return;
     }
-    
+
     document.getElementById("bookingId").textContent = bookingId;
     document.getElementById("trackBookingId").value = bookingId;
     showToast("Booking submitted successfully! 🎉", "success");
@@ -1216,24 +1365,24 @@ async function trackBooking(){
     const input = document.getElementById("trackBookingId");
     const result = document.getElementById("trackResult");
     const bookingId = input.value.trim();
-    
+
     if(!bookingId){
         result.innerHTML = '<div class="track-error"><i class="fas fa-exclamation-circle"></i> Please enter your Booking ID.</div>';
         return;
     }
-    
+
     result.innerHTML = '<div style="text-align:center;padding:15px;color:var(--text-light);"><i class="fas fa-spinner fa-spin"></i> Searching booking...</div>';
-    
+
     const { data, error } = await supabaseClient.from("bookings")
         .select("booking_id, customer_name, phone, pickup, destination, booking_date, booking_time, status")
         .eq("booking_id", bookingId)
         .maybeSingle();
-    
+
     if(error || !data){
         result.innerHTML = '<div class="track-error"><i class="fas fa-exclamation-circle"></i> Booking ID not found. Please check and try again.</div>';
         return;
     }
-    
+
     const status = data.status || "pending";
     let statusColor = "", statusEmoji = "";
     if(status === "pending"){ statusColor = "#fef3c7"; statusEmoji = "⏳"; }
@@ -1241,7 +1390,7 @@ async function trackBooking(){
     else if(status === "rejected"){ statusColor = "#fee2e2"; statusEmoji = "❌"; }
     else if(status === "completed"){ statusColor = "#d1fae5"; statusEmoji = "🎉"; }
     else if(status === "cancelled"){ statusColor = "#f3f4f6"; statusEmoji = "🚫"; }
-    
+
     result.innerHTML = `
         <div class="track-card">
             <div class="track-detail"><strong>Booking ID</strong><span>${escapeHtml(data.booking_id)}</span></div>
