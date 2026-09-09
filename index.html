@@ -513,6 +513,43 @@ input[readonly]{
     font-weight:bold;
 }
 
+/* ================= TOAST ================= */
+
+.toast{
+    position:fixed;
+    bottom:30px;
+    left:50%;
+    transform:translateX(-50%) translateY(120px);
+    background:#111827;
+    color:white;
+    padding:14px 24px;
+    border-radius:12px;
+    font-weight:bold;
+    box-shadow:0 10px 30px rgba(0,0,0,.2);
+    z-index:9999;
+    transition:0.4s ease;
+    max-width:90%;
+    text-align:center;
+    opacity:0;
+}
+
+.toast.show{
+    transform:translateX(-50%) translateY(0);
+    opacity:1;
+}
+
+.toast-success{
+    background:#16a34a;
+}
+
+.toast-error{
+    background:#dc2626;
+}
+
+.toast-info{
+    background:#2563eb;
+}
+
 /* ================= FOOTER ================= */
 
 footer{
@@ -559,6 +596,10 @@ footer{
 </head>
 
 <body>
+
+<!-- ================= TOAST ================= -->
+
+<div class="toast" id="toast"></div>
 
 <!-- ================= HEADER ================= -->
 
@@ -1096,6 +1137,38 @@ window.supabase.createClient(
 
 
 /* =========================================================
+   TOAST
+========================================================= */
+
+function showToast(message, type = "info"){
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.textContent = message;
+
+    toast.className = "toast";
+
+    if(type === "success"){
+        toast.classList.add("toast-success");
+    }else if(type === "error"){
+        toast.classList.add("toast-error");
+    }else{
+        toast.classList.add("toast-info");
+    }
+
+    setTimeout(() => {
+        toast.classList.add("show");
+    }, 100);
+
+    setTimeout(() => {
+        toast.classList.remove("show");
+    }, 3500);
+
+}
+
+
+/* =========================================================
    PAGE SYSTEM
 ========================================================= */
 
@@ -1110,10 +1183,6 @@ const pages = [
 
 let currentPage = "home";
 
-
-/*
-   Show only the requested page.
-*/
 
 function showPage(pageId){
 
@@ -1152,25 +1221,6 @@ function showPage(pageId){
    BROWSER HISTORY
 ========================================================= */
 
-
-/*
-   IMPORTANT:
-
-   The website now uses the browser's real history.
-
-   Example:
-
-   #home
-   #booking
-   #review
-   #payment
-
-   Therefore phone Back / Chrome swipe-back can move
-   between website pages instead of immediately leaving
-   the website.
-*/
-
-
 function navigateTo(pageId){
 
     if(!pages.includes(pageId)){
@@ -1193,10 +1243,6 @@ function navigateTo(pageId){
     showPage(pageId);
 }
 
-
-/*
-   Browser Back / Chrome swipe-back
-*/
 
 window.addEventListener("popstate", function(event){
 
@@ -1224,12 +1270,6 @@ window.addEventListener("popstate", function(event){
 });
 
 
-/*
-   If the user tries to go back from the very first
-   website page, keep the website open instead of
-   immediately leaving it.
-*/
-
 function createInitialHistory(){
 
     let hash =
@@ -1239,10 +1279,6 @@ function createInitialHistory(){
         hash = "home";
     }
 
-    /*
-       Replace the current browser entry.
-    */
-
     history.replaceState(
         {
             page:hash,
@@ -1251,14 +1287,6 @@ function createInitialHistory(){
         "",
         "#" + hash
     );
-
-    /*
-       Add one extra home state.
-
-       This gives the browser a website-level history
-       entry so the first Back does not immediately
-       close the website.
-    */
 
     history.pushState(
         {
@@ -1313,15 +1341,6 @@ function goHome(){
 
 function goBack(){
 
-    /*
-       Use browser history.
-
-       This is the same history used by:
-       - website Back button
-       - phone Back
-       - Chrome swipe Back
-    */
-
     history.back();
 
 }
@@ -1372,33 +1391,28 @@ function goToReview(){
         !passengers
     ){
 
-        alert(
-            "Please fill all booking details."
+        showToast(
+            "Please fill all booking details.",
+            "error"
         );
 
         return;
     }
 
-
-    /* Mobile validation */
 
     const mobileRegex =
         /^[6-9]\d{9}$/;
 
     if(!mobileRegex.test(mobile)){
 
-        alert(
-            "Kripya sahi 10-digit Indian mobile number darj karein.\n" +
-            "(Jaise: 9876543210)"
+        showToast(
+            "Please enter a valid 10-digit Indian mobile number.",
+            "error"
         );
 
         return;
     }
 
-
-    /*
-       Put booking details into review page.
-    */
 
     document.getElementById("rTo").textContent =
         to;
@@ -1486,8 +1500,9 @@ async function submitBooking(){
 
     if(!payment){
 
-        alert(
-            "Please select a payment mode."
+        showToast(
+            "Please select a payment mode.",
+            "error"
         );
 
         return;
@@ -1557,6 +1572,9 @@ async function submitBooking(){
                 booking_time:
                     time,
 
+                passengers:
+                    passengers,
+
                 status:
                     "pending"
 
@@ -1567,8 +1585,9 @@ async function submitBooking(){
 
         console.error(error);
 
-        alert(
-            "Booking submit nahi ho paayi. Please try again."
+        showToast(
+            "Booking failed. Please try again.",
+            "error"
         );
 
         return;
@@ -1585,6 +1604,12 @@ async function submitBooking(){
         "trackBookingId"
     ).value =
         bookingId;
+
+
+    showToast(
+        "Booking submitted successfully! 🎉",
+        "success"
+    );
 
 
     navigateTo("success");
@@ -1631,7 +1656,7 @@ function openTrackWithCurrentId(){
 
 
 /* =========================================================
-   TRACK BOOKING
+   TRACK BOOKING (UPDATED WITH STATUS COLORS)
 ========================================================= */
 
 async function trackBooking(){
@@ -1710,6 +1735,27 @@ async function trackBooking(){
         data.status || "pending";
 
 
+    let statusColor = "";
+    let statusEmoji = "";
+
+    if(status === "pending"){
+        statusColor = "#fef3c7";
+        statusEmoji = "⏳";
+    }else if(status === "accepted"){
+        statusColor = "#dbeafe";
+        statusEmoji = "✅";
+    }else if(status === "rejected"){
+        statusColor = "#fee2e2";
+        statusEmoji = "❌";
+    }else if(status === "completed"){
+        statusColor = "#d1fae5";
+        statusEmoji = "🎉";
+    }else if(status === "cancelled"){
+        statusColor = "#f3f4f6";
+        statusEmoji = "🚫";
+    }
+
+
     result.innerHTML = `
 
     <div class="track-card">
@@ -1720,87 +1766,3 @@ async function trackBooking(){
         </div>
 
         <div class="track-detail">
-            <strong>Customer Name</strong>
-            ${escapeHtml(data.customer_name || "-")}
-        </div>
-
-        <div class="track-detail">
-            <strong>Pickup</strong>
-            ${escapeHtml(data.pickup || "Ranisagar")}
-        </div>
-
-        <div class="track-detail">
-            <strong>Destination</strong>
-            ${escapeHtml(data.destination || "-")}
-        </div>
-
-        <div class="track-detail">
-            <strong>Booking Date</strong>
-            ${escapeHtml(data.booking_date || "-")}
-        </div>
-
-        <div class="track-detail">
-            <strong>Booking Time</strong>
-            ${escapeHtml(data.booking_time || "-")}
-        </div>
-
-        <div class="track-detail">
-            <strong>Status</strong>
-            <span class="track-status">
-                ${escapeHtml(status)}
-            </span>
-        </div>
-
-    </div>
-
-    `;
-
-}
-
-
-/* =========================================================
-   HTML SECURITY
-========================================================= */
-
-function escapeHtml(value){
-
-    return String(value)
-
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-
-        .replace(
-            /</g,
-            "&lt;"
-        )
-
-        .replace(
-            />/g,
-            "&gt;"
-        )
-
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-
-        .replace(
-            /'/g,
-            "&#039;"
-        );
-
-}
-
-
-/* =========================================================
-   START WEBSITE
-========================================================= */
-
-createInitialHistory();
-
-</script>
-
-</body>
-</html>
