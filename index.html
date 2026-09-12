@@ -909,7 +909,7 @@ footer strong{
     <h2><i class="fas fa-rickshaw"></i> Book Your Auto</h2>
 
     <label><i class="fas fa-map-pin"></i> From</label>
-    <input type="text" value="Ranisagar" readonly>
+    <input type="text" id="from" placeholder="Enter pickup location">
 
     <label><i class="fas fa-map-marker-alt"></i> To</label>
     <input type="text" id="to" placeholder="Enter destination">
@@ -967,7 +967,7 @@ footer strong{
     </button>
     <h2><i class="fas fa-clipboard-list"></i> Review Your Booking</h2>
 
-    <div class="detail"><strong>From:</strong> <span>Ranisagar</span></div>
+    <div class="detail"><strong>From:</strong> <span id="rFrom"></span></div>
     <div class="detail"><strong>To:</strong> <span id="rTo"></span></div>
     <div class="detail"><strong>Name:</strong> <span id="rName"></span></div>
     <div class="detail"><strong>Mobile:</strong> <span id="rMobile"></span></div>
@@ -1223,6 +1223,7 @@ function setBookingType(type){
 ========================================================= */
 function goToReview(){
 
+    const from = document.getElementById("from").value.trim();
     const to = document.getElementById("to").value.trim();
     const name = document.getElementById("name").value.trim();
     const mobile = document.getElementById("mobile").value.trim();
@@ -1230,7 +1231,7 @@ function goToReview(){
     const bookingType = document.getElementById("bookingType").value;
 
     // ================= CHECK EMPTY FIELDS =================
-    if(!to || !name || !mobile || !passengers){
+    if(!from || !to || !name || !mobile || !passengers){
         showToast("Please fill all booking details.", "error");
         return;
     }
@@ -1285,6 +1286,7 @@ function goToReview(){
     }
 
     // ================= SAVE TO REVIEW PAGE =================
+    document.getElementById("rFrom").textContent = from;
     document.getElementById("rTo").textContent = to;
     document.getElementById("rName").textContent = name;
     document.getElementById("rMobile").textContent = mobile;
@@ -1322,6 +1324,7 @@ async function submitBooking(){
     const bookingId = await createUniqueBookingId();
     const name = document.getElementById("name").value.trim();
     const mobile = document.getElementById("mobile").value.trim();
+    const from = document.getElementById("from").value.trim();
     const to = document.getElementById("to").value.trim();
     const date = document.getElementById("rDate").textContent;
     const time = document.getElementById("rTime").textContent;
@@ -1331,7 +1334,7 @@ async function submitBooking(){
         booking_id: bookingId,
         customer_name: name,
         phone: mobile,
-        pickup: "Ranisagar",
+        pickup: from,
         destination: to,
         booking_date: date,
         booking_time: time,
@@ -1395,7 +1398,7 @@ async function trackBooking(){
         <div class="track-card">
             <div class="track-detail"><strong>Booking ID</strong><span>${escapeHtml(data.booking_id)}</span></div>
             <div class="track-detail"><strong>Customer</strong><span>${escapeHtml(data.customer_name || "-")}</span></div>
-            <div class="track-detail"><strong>Pickup</strong><span>${escapeHtml(data.pickup || "Ranisagar")}</span></div>
+            <div class="track-detail"><strong>Pickup</strong><span>${escapeHtml(data.pickup || "-")}</span></div>
             <div class="track-detail"><strong>Destination</strong><span>${escapeHtml(data.destination || "-")}</span></div>
             <div class="track-detail"><strong>Date</strong><span>${escapeHtml(data.booking_date || "-")}</span></div>
             <div class="track-detail"><strong>Time</strong><span>${escapeHtml(data.booking_time || "-")}</span></div>
