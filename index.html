@@ -5,13 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RAXEL GO 24</title>
 
-<!-- ================= GOOGLE FONTS ================= -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-<!-- ================= FONT AWESOME ================= -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<!-- ================= OLA MAPS SDK ================= -->
-<script src="https://unpkg.com/olamaps-web-sdk@latest/dist/olamaps-web-sdk.umd.js"></script>
+
 <style>
 /* ================= ROOT VARIABLES ================= */
 :root{
@@ -36,11 +32,7 @@
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+*{ margin: 0; padding: 0; box-sizing: border-box; }
 
 body{
     font-family: 'Poppins', sans-serif;
@@ -50,20 +42,10 @@ body{
     overflow-x: hidden;
 }
 
-/* ================= SCROLLBAR ================= */
-::-webkit-scrollbar{
-    width: 8px;
-}
-::-webkit-scrollbar-track{
-    background: #1a1a3e;
-}
-::-webkit-scrollbar-thumb{
-    background: var(--primary);
-    border-radius: 10px;
-}
-::-webkit-scrollbar-thumb:hover{
-    background: var(--primary-dark);
-}
+::-webkit-scrollbar{ width: 8px; }
+::-webkit-scrollbar-track{ background: #1a1a3e; }
+::-webkit-scrollbar-thumb{ background: var(--primary); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover{ background: var(--primary-dark); }
 
 /* ================= HEADER ================= */
 header{
@@ -83,15 +65,10 @@ header{
     gap: 15px;
 }
 
-.brand-left{
-    display: flex;
-    align-items: center;
-    gap: 14px;
-}
+.brand-left{ display: flex; align-items: center; gap: 14px; }
 
 .brand-logo{
-    width: 70px;
-    height: 70px;
+    width: 70px; height: 70px;
     object-fit: contain;
     background: white;
     border-radius: 14px;
@@ -99,9 +76,7 @@ header{
     box-shadow: 0 4px 20px rgba(108, 99, 255, 0.3);
     transition: var(--transition);
 }
-.brand-logo:hover{
-    transform: scale(1.05) rotate(-3deg);
-}
+.brand-logo:hover{ transform: scale(1.05) rotate(-3deg); }
 
 .brand-name h1{
     font-size: 24px;
@@ -123,15 +98,10 @@ header{
     font-size: 14px;
     color: rgba(255,255,255,0.7);
 }
-.managed-by strong{
-    color: #facc15;
-    font-weight: 700;
-    font-size: 16px;
-}
+.managed-by strong{ color: #facc15; font-weight: 700; font-size: 16px; }
 
 .menu-btn{
-    width: 44px;
-    height: 44px;
+    width: 44px; height: 44px;
     border-radius: 12px;
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
@@ -143,34 +113,18 @@ header{
     align-items: center;
     justify-content: center;
 }
-.menu-btn:hover{
-    background: rgba(255,255,255,0.15);
-    transform: scale(1.05);
-}
+.menu-btn:hover{ background: rgba(255,255,255,0.15); transform: scale(1.05); }
 
-.header-bottom{
-    max-width: 1100px;
-    margin: 0 auto;
-    text-align: center;
-}
-.header-bottom h2{
-    font-size: 28px;
-    font-weight: 700;
-}
-.header-bottom p{
-    color: rgba(255,255,255,0.7);
-    font-size: 14px;
-    margin-top: 4px;
-}
+.header-bottom{ max-width: 1100px; margin: 0 auto; text-align: center; }
+.header-bottom h2{ font-size: 28px; font-weight: 700; }
+.header-bottom p{ color: rgba(255,255,255,0.7); font-size: 14px; margin-top: 4px; }
 
 /* ================= MENU DRAWER ================= */
 .menu-drawer{
     display: none;
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
     background: rgba(10, 10, 26, 0.95);
     backdrop-filter: blur(20px);
     z-index: 2000;
@@ -179,9 +133,7 @@ header{
     padding: 24px 20px;
     animation: fadeIn 0.3s ease;
 }
-.menu-drawer.active{
-    display: flex;
-}
+.menu-drawer.active{ display: flex; }
 
 @keyframes fadeIn{
     from{ opacity: 0; transform: scale(0.95); }
@@ -196,30 +148,13 @@ header{
     border-bottom: 1px solid var(--glass-border);
 }
 
-.drawer-brand{
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-.drawer-brand img{
-    width: 48px;
-    height: 48px;
-    background: white;
-    border-radius: 10px;
-    padding: 4px;
-}
-.drawer-brand h3{
-    color: white;
-    font-size: 18px;
-}
-.drawer-brand p{
-    color: rgba(255,255,255,0.5);
-    font-size: 11px;
-}
+.drawer-brand{ display: flex; align-items: center; gap: 12px; }
+.drawer-brand img{ width: 48px; height: 48px; background: white; border-radius: 10px; padding: 4px; }
+.drawer-brand h3{ color: white; font-size: 18px; }
+.drawer-brand p{ color: rgba(255,255,255,0.5); font-size: 11px; }
 
 .close-btn{
-    width: 44px;
-    height: 44px;
+    width: 44px; height: 44px;
     border-radius: 12px;
     border: 1px solid var(--glass-border);
     background: var(--glass-bg);
@@ -228,17 +163,10 @@ header{
     cursor: pointer;
     transition: var(--transition);
 }
-.close-btn:hover{
-    background: rgba(255,255,255,0.15);
-}
+.close-btn:hover{ background: rgba(255,255,255,0.15); }
 
-.menu-links{
-    list-style: none;
-    margin: 16px 0;
-}
-.menu-links li{
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-}
+.menu-links{ list-style: none; margin: 16px 0; }
+.menu-links li{ border-bottom: 1px solid rgba(255,255,255,0.05); }
 .menu-links a{
     display: flex;
     align-items: center;
@@ -249,17 +177,9 @@ header{
     font-weight: 500;
     transition: var(--transition);
 }
-.menu-links a:hover{
-    color: var(--primary);
-    padding-left: 12px;
-}
-.menu-links a i{
-    width: 28px;
-    font-size: 18px;
-}
-.menu-links .arrow{
-    color: rgba(255,255,255,0.3);
-}
+.menu-links a:hover{ color: var(--primary); padding-left: 12px; }
+.menu-links a i{ width: 28px; font-size: 18px; }
+.menu-links .arrow{ color: rgba(255,255,255,0.3); }
 
 .drawer-footer{
     background: var(--glass-bg);
@@ -268,42 +188,14 @@ header{
     padding: 18px;
     text-align: center;
 }
-.drawer-footer img{
-    width: 44px;
-    height: 44px;
-    background: white;
-    border-radius: 10px;
-    padding: 4px;
-    margin-bottom: 8px;
-}
-.drawer-footer h4{
-    color: white;
-    font-size: 15px;
-}
-.drawer-footer p{
-    color: rgba(255,255,255,0.5);
-    font-size: 12px;
-    margin-bottom: 10px;
-}
-.drawer-footer .footer-links a{
-    color: rgba(255,255,255,0.6);
-    text-decoration: none;
-    font-size: 12px;
-    margin: 0 5px;
-    transition: var(--transition);
-}
-.drawer-footer .footer-links a:hover{
-    color: white;
-}
-.drawer-footer .social-icons{
-    display: flex;
-    justify-content: center;
-    gap: 14px;
-    margin: 12px 0 10px;
-}
+.drawer-footer img{ width: 44px; height: 44px; background: white; border-radius: 10px; padding: 4px; margin-bottom: 8px; }
+.drawer-footer h4{ color: white; font-size: 15px; }
+.drawer-footer p{ color: rgba(255,255,255,0.5); font-size: 12px; margin-bottom: 10px; }
+.drawer-footer .footer-links a{ color: rgba(255,255,255,0.6); text-decoration: none; font-size: 12px; margin: 0 5px; transition: var(--transition); }
+.drawer-footer .footer-links a:hover{ color: white; }
+.drawer-footer .social-icons{ display: flex; justify-content: center; gap: 14px; margin: 12px 0 10px; }
 .drawer-footer .social-icons a{
-    width: 44px;
-    height: 44px;
+    width: 44px; height: 44px;
     border-radius: 50%;
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
@@ -314,16 +206,8 @@ header{
     text-decoration: none;
     transition: var(--transition);
 }
-.drawer-footer .social-icons a:hover{
-    background: var(--primary);
-    transform: translateY(-3px);
-}
-.drawer-footer .copy{
-    color: rgba(255,255,255,0.3);
-    font-size: 11px;
-    padding-top: 10px;
-    border-top: 1px solid var(--glass-border);
-}
+.drawer-footer .social-icons a:hover{ background: var(--primary); transform: translateY(-3px); }
+.drawer-footer .copy{ color: rgba(255,255,255,0.3); font-size: 11px; padding-top: 10px; border-top: 1px solid var(--glass-border); }
 
 /* ================= HERO ================= */
 .hero{
@@ -342,34 +226,12 @@ header{
     to{ opacity: 1; transform: translateY(0); }
 }
 
-.hero .icon-big{
-    font-size: 52px;
-    margin-bottom: 10px;
-}
-.hero h2{
-    font-size: 30px;
-    font-weight: 700;
-    color: var(--dark);
-}
-.hero h2 span{
-    background: var(--gradient-primary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-.hero p{
-    color: var(--text-light);
-    margin: 12px auto 28px;
-    max-width: 480px;
-    line-height: 1.8;
-    font-size: 15px;
-}
+.hero .icon-big{ font-size: 52px; margin-bottom: 10px; }
+.hero h2{ font-size: 30px; font-weight: 700; color: var(--dark); }
+.hero h2 span{ background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.hero p{ color: var(--text-light); margin: 12px auto 28px; max-width: 480px; line-height: 1.8; font-size: 15px; }
 
-.btn-group{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    justify-content: center;
-}
+.btn-group{ display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
 
 .btn{
     display: inline-flex;
@@ -384,37 +246,11 @@ header{
     transition: var(--transition);
     text-decoration: none;
 }
-.btn i{
-    font-size: 18px;
-}
-.btn-primary{
-    background: var(--gradient-primary);
-    color: white;
-    box-shadow: 0 4px 20px rgba(108, 99, 255, 0.35);
-}
-.btn-primary:hover{
-    transform: translateY(-3px);
-    box-shadow: 0 8px 32px rgba(108, 99, 255, 0.5);
-}
-.btn-outline{
-    background: transparent;
-    color: var(--dark);
-    border: 2px solid var(--dark);
-}
-.btn-outline:hover{
-    background: var(--dark);
-    color: white;
-    transform: translateY(-3px);
-}
-.btn-success{
-    background: var(--gradient-secondary);
-    color: white;
-    box-shadow: 0 4px 20px rgba(255, 107, 107, 0.35);
-}
-.btn-success:hover{
-    transform: translateY(-3px);
-    box-shadow: 0 8px 32px rgba(255, 107, 107, 0.5);
-}
+.btn i{ font-size: 18px; }
+.btn-primary{ background: var(--gradient-primary); color: white; box-shadow: 0 4px 20px rgba(108, 99, 255, 0.35); }
+.btn-primary:hover{ transform: translateY(-3px); box-shadow: 0 8px 32px rgba(108, 99, 255, 0.5); }
+.btn-outline{ background: transparent; color: var(--dark); border: 2px solid var(--dark); }
+.btn-outline:hover{ background: var(--dark); color: white; transform: translateY(-3px); }
 
 /* ================= SECTIONS ================= */
 .section{
@@ -426,15 +262,8 @@ header{
     box-shadow: var(--shadow);
     animation: slideUp 0.5s ease;
 }
-.section h2{
-    text-align: center;
-    font-size: 24px;
-    font-weight: 700;
-    margin-bottom: 20px;
-}
-.section h2 i{
-    color: var(--primary);
-}
+.section h2{ text-align: center; font-size: 24px; font-weight: 700; margin-bottom: 20px; }
+.section h2 i{ color: var(--primary); }
 
 /* ================= BACK BUTTON ================= */
 .back-btn{
@@ -451,13 +280,8 @@ header{
     margin-bottom: 16px;
     transition: var(--transition);
 }
-.back-btn:hover{
-    color: var(--primary);
-    gap: 12px;
-}
-.back-btn i{
-    font-size: 20px;
-}
+.back-btn:hover{ color: var(--primary); gap: 12px; }
+.back-btn i{ font-size: 20px; }
 
 /* ================= FORM ================= */
 label{
@@ -467,11 +291,7 @@ label{
     margin: 16px 0 6px;
     color: var(--text);
 }
-label i{
-    color: var(--primary);
-    margin-right: 6px;
-    width: 20px;
-}
+label i{ color: var(--primary); margin-right: 6px; width: 20px; }
 
 input, select{
     width: 100%;
@@ -489,11 +309,86 @@ input:focus{
     box-shadow: 0 0 0 4px rgba(108, 99, 255, 0.1);
     outline: none;
 }
-input[readonly]{
-    background: #f0f0f8;
-    border-color: #e0e0ea;
+input[readonly]{ background: #f0f0f8; border-color: #e0e0ea; }
+
+/* ================= AUTOCOMPLETE SUGGESTIONS ================= */
+.autocomplete-wrapper{
+    position: relative;
 }
 
+.suggestions-box{
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 2px solid var(--primary);
+    border-top: none;
+    border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+    max-height: 250px;
+    overflow-y: auto;
+    z-index: 1000;
+    box-shadow: 0 8px 24px rgba(108, 99, 255, 0.15);
+}
+.suggestions-box.active{
+    display: block;
+}
+
+.suggestion-item{
+    padding: 12px 16px;
+    cursor: pointer;
+    border-bottom: 1px solid #f0f2f8;
+    font-size: 14px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    transition: var(--transition);
+}
+.suggestion-item:last-child{
+    border-bottom: none;
+}
+.suggestion-item:hover{
+    background: #f8f8ff;
+    padding-left: 20px;
+}
+.suggestion-item i{
+    color: var(--primary);
+    margin-top: 3px;
+    font-size: 14px;
+}
+.suggestion-item .sugg-text{
+    flex: 1;
+}
+.suggestion-item .sugg-main{
+    font-weight: 600;
+    color: var(--text);
+}
+.suggestion-item .sugg-sub{
+    font-size: 12px;
+    color: var(--text-light);
+    margin-top: 2px;
+}
+
+.suggestion-loading{
+    padding: 14px 16px;
+    text-align: center;
+    color: var(--text-light);
+    font-size: 13px;
+}
+.suggestion-loading i{
+    margin-right: 6px;
+    color: var(--primary);
+}
+
+.suggestion-empty{
+    padding: 14px 16px;
+    text-align: center;
+    color: var(--text-light);
+    font-size: 13px;
+}
+
+/* ================= ACTION BUTTONS ================= */
 .action-btn{
     width: 100%;
     padding: 15px;
@@ -510,14 +405,10 @@ input[readonly]{
     align-items: center;
     justify-content: center;
     gap: 10px;
+    font-family: 'Poppins', sans-serif;
 }
-.action-btn:hover{
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(108, 99, 255, 0.35);
-}
-.action-btn i{
-    font-size: 18px;
-}
+.action-btn:hover{ transform: translateY(-2px); box-shadow: 0 8px 24px rgba(108, 99, 255, 0.35); }
+.action-btn i{ font-size: 18px; }
 
 .secondary-btn{
     width: 100%;
@@ -531,15 +422,11 @@ input[readonly]{
     cursor: pointer;
     transition: var(--transition);
     margin-top: 10px;
+    font-family: 'Poppins', sans-serif;
 }
-.secondary-btn:hover{
-    background: var(--dark);
-    color: white;
-}
+.secondary-btn:hover{ background: var(--dark); color: white; }
 
-.hidden{
-    display: none !important;
-}
+.hidden{ display: none !important; }
 
 /* ================= TOGGLE BUTTONS ================= */
 .toggle-btn-active{
@@ -555,17 +442,6 @@ input[readonly]{
     background: rgba(108, 99, 255, 0.08) !important;
 }
 
-/* ================= MAP CONTAINER ================= */
-#mapContainer{
-    height: 300px;
-    border-radius: 12px;
-    margin: 16px 0;
-    border: 2px solid #e8e8f0;
-    overflow: hidden;
-    display: none;
-    background: #f0f2f8;
-}
-
 /* ================= REVIEW ================= */
 .detail{
     background: #f8f8ff;
@@ -574,13 +450,8 @@ input[readonly]{
     border-radius: var(--radius-sm);
     border-left: 4px solid var(--primary);
 }
-.detail strong{
-    color: var(--text);
-    font-weight: 600;
-}
-.detail span{
-    color: var(--text-light);
-}
+.detail strong{ color: var(--text); font-weight: 600; }
+.detail span{ color: var(--text-light); }
 
 /* ================= PAYMENT ================= */
 .payment-option{
@@ -591,10 +462,7 @@ input[readonly]{
     cursor: pointer;
     transition: var(--transition);
 }
-.payment-option:hover{
-    border-color: var(--primary);
-    background: #f8f8ff;
-}
+.payment-option:hover{ border-color: var(--primary); background: #f8f8ff; }
 .payment-option label{
     margin: 0;
     display: flex;
@@ -603,10 +471,7 @@ input[readonly]{
     font-weight: 500;
     cursor: pointer;
 }
-.payment-option input[type="radio"]{
-    width: auto;
-    accent-color: var(--primary);
-}
+.payment-option input[type="radio"]{ width: auto; accent-color: var(--primary); }
 .notice{
     background: #fff8e8;
     padding: 14px;
@@ -618,13 +483,8 @@ input[readonly]{
 }
 
 /* ================= SUCCESS ================= */
-.success-page{
-    text-align: center;
-}
-.success-page .big-icon{
-    font-size: 56px;
-    margin-bottom: 10px;
-}
+.success-page{ text-align: center; }
+.success-page .big-icon{ font-size: 56px; margin-bottom: 10px; }
 .booking-id-box{
     background: var(--gradient-primary);
     color: white;
@@ -632,37 +492,14 @@ input[readonly]{
     border-radius: var(--radius-sm);
     margin: 16px 0;
 }
-.booking-id-box span{
-    font-size: 22px;
-    font-weight: 700;
-    letter-spacing: 1px;
-}
+.booking-id-box span{ font-size: 22px; font-weight: 700; letter-spacing: 1px; }
 
 /* ================= TRACK ================= */
-.track-result{
-    margin-top: 20px;
-}
-.track-card{
-    background: #f8f8ff;
-    border-radius: var(--radius);
-    padding: 18px;
-}
-.track-detail{
-    background: white;
-    padding: 12px 14px;
-    margin: 6px 0;
-    border-radius: var(--radius-sm);
-}
-.track-detail strong{
-    display: block;
-    font-size: 12px;
-    color: var(--text-light);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-.track-detail span{
-    font-weight: 500;
-}
+.track-result{ margin-top: 20px; }
+.track-card{ background: #f8f8ff; border-radius: var(--radius); padding: 18px; }
+.track-detail{ background: white; padding: 12px 14px; margin: 6px 0; border-radius: var(--radius-sm); }
+.track-detail strong{ display: block; font-size: 12px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; }
+.track-detail span{ font-weight: 500; }
 .track-error{
     text-align: center;
     padding: 16px;
@@ -673,24 +510,10 @@ input[readonly]{
 }
 
 /* ================= SUPPORT ================= */
-.support-section{
-    text-align: center;
-    padding: 40px 20px;
-    max-width: 1100px;
-    margin: 0 auto;
-}
-.support-section h2{
-    font-size: 24px;
-    font-weight: 700;
-}
-.support-section p{
-    color: var(--text-light);
-    margin: 8px 0 20px;
-}
-.support-section .btn{
-    background: var(--gradient-primary);
-    color: white;
-}
+.support-section{ text-align: center; padding: 40px 20px; max-width: 1100px; margin: 0 auto; }
+.support-section h2{ font-size: 24px; font-weight: 700; }
+.support-section p{ color: var(--text-light); margin: 8px 0 20px; }
+.support-section .btn{ background: var(--gradient-primary); color: white; }
 
 /* ================= FOOTER ================= */
 footer{
@@ -700,13 +523,8 @@ footer{
     padding: 24px;
     margin-top: 20px;
 }
-footer p{
-    color: rgba(255,255,255,0.5);
-    font-size: 13px;
-}
-footer strong{
-    color: #facc15;
-}
+footer p{ color: rgba(255,255,255,0.5); font-size: 13px; }
+footer strong{ color: #facc15; }
 
 /* ================= TOAST ================= */
 .toast{
@@ -726,112 +544,43 @@ footer strong{
     text-align: center;
     opacity: 0;
     font-size: 14px;
+    font-family: 'Poppins', sans-serif;
 }
-.toast.show{
-    transform: translateX(-50%) translateY(0);
-    opacity: 1;
-}
-.toast-success{
-    background: #2ecc71;
-}
-.toast-error{
-    background: #e74c3c;
-}
-.toast-info{
-    background: #3498db;
-}
-
-/* ================= ANIMATIONS ================= */
-@keyframes pulse{
-    0%, 100%{ transform: scale(1); }
-    50%{ transform: scale(1.05); }
-}
-.pulse{
-    animation: pulse 2s infinite;
-}
+.toast.show{ transform: translateX(-50%) translateY(0); opacity: 1; }
+.toast-success{ background: #2ecc71; }
+.toast-error{ background: #e74c3c; }
+.toast-info{ background: #3498db; }
 
 /* ================= RESPONSIVE ================= */
 @media(max-width: 768px){
-    .brand-top{
-        flex-wrap: wrap;
-    }
-    .brand-left{
-        flex: 1;
-    }
-    .brand-logo{
-        width: 56px;
-        height: 56px;
-    }
-    .brand-name h1{
-        font-size: 18px;
-    }
-    .managed-by{
-        font-size: 12px;
-    }
-    .managed-by strong{
-        font-size: 13px;
-    }
-    .menu-btn{
-        width: 40px;
-        height: 40px;
-        font-size: 18px;
-    }
-    .header-bottom h2{
-        font-size: 22px;
-    }
-    .hero{
-        padding: 28px 16px;
-        margin: 16px 12px;
-    }
-    .hero h2{
-        font-size: 24px;
-    }
-    .section{
-        margin: 16px 12px;
-        padding: 20px 16px;
-    }
-    .btn{
-        padding: 12px 24px;
-        font-size: 14px;
-        width: 100%;
-        justify-content: center;
-    }
-    .btn-group{
-        flex-direction: column;
-    }
+    .brand-top{ flex-wrap: wrap; }
+    .brand-left{ flex: 1; }
+    .brand-logo{ width: 56px; height: 56px; }
+    .brand-name h1{ font-size: 18px; }
+    .managed-by{ font-size: 12px; }
+    .managed-by strong{ font-size: 13px; }
+    .menu-btn{ width: 40px; height: 40px; font-size: 18px; }
+    .header-bottom h2{ font-size: 22px; }
+    .hero{ padding: 28px 16px; margin: 16px 12px; }
+    .hero h2{ font-size: 24px; }
+    .section{ margin: 16px 12px; padding: 20px 16px; }
+    .btn{ padding: 12px 24px; font-size: 14px; width: 100%; justify-content: center; }
+    .btn-group{ flex-direction: column; }
 }
 
 @media(max-width: 480px){
-    .brand-name h1{
-        font-size: 16px;
-    }
-    .brand-logo{
-        width: 48px;
-        height: 48px;
-    }
-    .header-bottom h2{
-        font-size: 18px;
-    }
-    .hero h2{
-        font-size: 20px;
-    }
-    .section h2{
-        font-size: 20px;
-    }
-    input{
-        padding: 12px 14px;
-        font-size: 14px;
-    }
-    .action-btn{
-        font-size: 15px;
-        padding: 13px;
-    }
+    .brand-name h1{ font-size: 16px; }
+    .brand-logo{ width: 48px; height: 48px; }
+    .header-bottom h2{ font-size: 18px; }
+    .hero h2{ font-size: 20px; }
+    .section h2{ font-size: 20px; }
+    input{ padding: 12px 14px; font-size: 14px; }
+    .action-btn{ font-size: 15px; padding: 13px; }
 }
 </style>
 </head>
 <body>
 
-<!-- ================= TOAST ================= -->
 <div class="toast" id="toast"></div>
 
 <!-- ================= HEADER ================= -->
@@ -920,19 +669,17 @@ footer strong{
     </button>
     <h2><i class="fas fa-rickshaw"></i> Book Your Auto</h2>
 
-    <!-- ================= MAP TOGGLE BUTTON ================= -->
-    <button type="button" id="toggleMapBtn" onclick="toggleMap()" style="width:100%; padding:12px; border:2px dashed #6C63FF; border-radius:10px; background:#f8f8ff; color:#6C63FF; font-weight:700; cursor:pointer; margin-bottom:8px; font-family:'Poppins',sans-serif;">
-        <i class="fas fa-map"></i> Open Map to Select Location
-    </button>
-
-    <!-- ================= MAP CONTAINER ================= -->
-    <div id="mapContainer"></div>
-
     <label><i class="fas fa-map-pin"></i> From</label>
-    <input type="text" id="from" placeholder="Enter pickup location">
+    <div class="autocomplete-wrapper">
+        <input type="text" id="from" placeholder="Type pickup location..." autocomplete="off">
+        <div class="suggestions-box" id="fromSuggestions"></div>
+    </div>
 
     <label><i class="fas fa-map-marker-alt"></i> To</label>
-    <input type="text" id="to" placeholder="Enter destination">
+    <div class="autocomplete-wrapper">
+        <input type="text" id="to" placeholder="Type destination..." autocomplete="off">
+        <div class="suggestions-box" id="toSuggestions"></div>
+    </div>
 
     <label><i class="fas fa-user"></i> Your Name</label>
     <input type="text" id="name" placeholder="Enter your name">
@@ -940,7 +687,6 @@ footer strong{
     <label><i class="fas fa-phone"></i> Mobile Number</label>
     <input type="tel" id="mobile" placeholder="Enter mobile number">
 
-    <!-- ================= BOOKING TYPE TOGGLE ================= -->
     <label style="margin-top:8px;">
         <i class="fas fa-clock"></i> Booking Type
     </label>
@@ -960,7 +706,6 @@ footer strong{
         </button>
     </div>
 
-    <!-- ================= DATE & TIME (Sirf "Book Later" mein dikhega) ================= -->
     <div id="dateTimeSection" style="display:none;">
         <label><i class="fas fa-calendar-alt"></i> Date</label>
         <input type="date" id="date">
@@ -969,7 +714,6 @@ footer strong{
         <input type="time" id="time">
     </div>
 
-    <!-- Hidden field for booking type -->
     <input type="hidden" id="bookingType" value="now">
 
     <label><i class="fas fa-users"></i> Passengers</label>
@@ -1101,6 +845,11 @@ const SUPABASE_KEY = "sb_publishable_cLNIvPuSPOrU6Ro6Leq9Hg_45You9FO";
 const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 /* =========================================================
+   OLA MAPS API KEY
+========================================================= */
+const OLA_MAPS_API_KEY = "nCKMZHbGkUlbqUzKZotvfK3yKf16VOMTProAtSD0";
+
+/* =========================================================
    TOAST
 ========================================================= */
 function showToast(message, type = "info"){
@@ -1186,26 +935,130 @@ function openTrack(){
 }
 
 /* =========================================================
-   MAP TOGGLE
+   AUTOCOMPLETE - OLA MAPS
 ========================================================= */
-let mapVisible = false;
 
-function toggleMap(){
+let fromTimeout = null;
+let toTimeout = null;
 
-    const mapContainer = document.getElementById("mapContainer");
-    const toggleBtn = document.getElementById("toggleMapBtn");
+function setupAutocomplete(inputId, suggestionsId){
 
-    if(mapVisible){
-        mapContainer.style.display = "none";
-        toggleBtn.innerHTML = '<i class="fas fa-map"></i> Open Map to Select Location';
-        mapVisible = false;
-    }else{
-        mapContainer.style.display = "block";
-        toggleBtn.innerHTML = '<i class="fas fa-times"></i> Close Map';
-        mapVisible = true;
+    const input = document.getElementById(inputId);
+    const suggBox = document.getElementById(suggestionsId);
+
+    input.addEventListener("input", function(){
+
+        const query = input.value.trim();
+
+        // Clear previous timeout
+        if(inputId === "from" && fromTimeout) clearTimeout(fromTimeout);
+        if(inputId === "to" && toTimeout) clearTimeout(toTimeout);
+
+        // Minimum 3 characters
+        if(query.length < 3){
+            suggBox.classList.remove("active");
+            suggBox.innerHTML = "";
+            return;
+        }
+
+        // Show loading
+        suggBox.innerHTML = '<div class="suggestion-loading"><i class="fas fa-spinner fa-spin"></i> Searching...</div>';
+        suggBox.classList.add("active");
+
+        // Debounce - wait 400ms after typing stops
+        const timeout = setTimeout(async () => {
+            await fetchSuggestions(query, suggBox, input);
+        }, 400);
+
+        if(inputId === "from") fromTimeout = timeout;
+        else toTimeout = timeout;
+
+    });
+
+    // Hide suggestions on outside click
+    document.addEventListener("click", function(e){
+        if(!input.contains(e.target) && !suggBox.contains(e.target)){
+            suggBox.classList.remove("active");
+        }
+    });
+
+    // Show suggestions again on focus (if there are any)
+    input.addEventListener("focus", function(){
+        if(suggBox.innerHTML.trim() !== ""){
+            suggBox.classList.add("active");
+        }
+    });
+
+}
+
+async function fetchSuggestions(query, suggBox, inputElement){
+
+    try{
+
+        const url = `https://api.olamaps.io/places/v1/autocomplete?input=${encodeURIComponent(query)}&api_key=${OLA_MAPS_API_KEY}&language=en`;
+
+        const response = await fetch(url, {
+            method: "GET",
+            headers: {
+                "Accept": "application/json"
+            }
+        });
+
+        if(!response.ok){
+            throw new Error("API error: " + response.status);
+        }
+
+        const data = await response.json();
+
+        if(!data.predictions || data.predictions.length === 0){
+            suggBox.innerHTML = '<div class="suggestion-empty">No results found</div>';
+            return;
+        }
+
+        suggBox.innerHTML = data.predictions.map((place, index) => {
+
+            const mainText = place.structured_formatting?.main_text || place.description || "";
+            const subText = place.structured_formatting?.secondary_text || "";
+
+            return `
+                <div class="suggestion-item" onclick="selectSuggestion('${inputElement.id}', '${escapeStr(mainText + (subText ? ', ' + subText : ''))}')">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div class="sugg-text">
+                        <div class="sugg-main">${escapeHtml(mainText)}</div>
+                        ${subText ? `<div class="sugg-sub">${escapeHtml(subText)}</div>` : ""}
+                    </div>
+                </div>
+            `;
+
+        }).join("");
+
+    }catch(err){
+
+        console.error("Autocomplete error:", err);
+        suggBox.innerHTML = '<div class="suggestion-empty">Unable to load suggestions</div>';
+
     }
 
 }
+
+function selectSuggestion(inputId, value){
+
+    const input = document.getElementById(inputId);
+    const suggBox = document.getElementById(inputId + "Suggestions");
+
+    input.value = value;
+    suggBox.classList.remove("active");
+    suggBox.innerHTML = "";
+
+}
+
+function escapeStr(str){
+    return String(str).replace(/'/g, "\\'").replace(/"/g, '\\"');
+}
+
+/* Initialize autocomplete on both inputs */
+setupAutocomplete("from", "fromSuggestions");
+setupAutocomplete("to", "toSuggestions");
 
 /* =========================================================
    BOOKING TYPE TOGGLE
