@@ -555,6 +555,17 @@ input[readonly]{
     background: rgba(108, 99, 255, 0.08) !important;
 }
 
+/* ================= MAP CONTAINER ================= */
+#mapContainer{
+    height: 300px;
+    border-radius: 12px;
+    margin: 16px 0;
+    border: 2px solid #e8e8f0;
+    overflow: hidden;
+    display: none;
+    background: #f0f2f8;
+}
+
 /* ================= REVIEW ================= */
 .detail{
     background: #f8f8ff;
@@ -909,6 +920,14 @@ footer strong{
     </button>
     <h2><i class="fas fa-rickshaw"></i> Book Your Auto</h2>
 
+    <!-- ================= MAP TOGGLE BUTTON ================= -->
+    <button type="button" id="toggleMapBtn" onclick="toggleMap()" style="width:100%; padding:12px; border:2px dashed #6C63FF; border-radius:10px; background:#f8f8ff; color:#6C63FF; font-weight:700; cursor:pointer; margin-bottom:8px; font-family:'Poppins',sans-serif;">
+        <i class="fas fa-map"></i> Open Map to Select Location
+    </button>
+
+    <!-- ================= MAP CONTAINER ================= -->
+    <div id="mapContainer"></div>
+
     <label><i class="fas fa-map-pin"></i> From</label>
     <input type="text" id="from" placeholder="Enter pickup location">
 
@@ -1158,7 +1177,6 @@ function goBack(){ history.back(); }
 
 function openBooking(){
     navigateTo("booking");
-    // Auto-select "Book Now" when booking page opens
     setBookingType('now');
 }
 
@@ -1168,10 +1186,32 @@ function openTrack(){
 }
 
 /* =========================================================
+   MAP TOGGLE
+========================================================= */
+let mapVisible = false;
+
+function toggleMap(){
+
+    const mapContainer = document.getElementById("mapContainer");
+    const toggleBtn = document.getElementById("toggleMapBtn");
+
+    if(mapVisible){
+        mapContainer.style.display = "none";
+        toggleBtn.innerHTML = '<i class="fas fa-map"></i> Open Map to Select Location';
+        mapVisible = false;
+    }else{
+        mapContainer.style.display = "block";
+        toggleBtn.innerHTML = '<i class="fas fa-times"></i> Close Map';
+        mapVisible = true;
+    }
+
+}
+
+/* =========================================================
    BOOKING TYPE TOGGLE
 ========================================================= */
 
-let selectedBookingType = "now"; // "now" ya "later"
+let selectedBookingType = "now";
 
 function setBookingType(type){
 
@@ -1195,7 +1235,6 @@ function setBookingType(type){
 
         dateTimeSection.style.display = "none";
 
-        // Clear date/time fields
         dateInput.value = "";
         timeInput.value = "";
 
@@ -1231,19 +1270,16 @@ function goToReview(){
     const passengers = document.getElementById("passengers").value;
     const bookingType = document.getElementById("bookingType").value;
 
-    // ================= CHECK EMPTY FIELDS =================
     if(!from || !to || !name || !mobile || !passengers){
         showToast("Please fill all booking details.", "error");
         return;
     }
 
-    // ================= VALIDATE MOBILE NUMBER =================
     if(!/^[6-9]\d{9}$/.test(mobile)){
         showToast("Please enter a valid 10-digit Indian mobile number.", "error");
         return;
     }
 
-    // ================= VALIDATE PASSENGERS (1 to 10) =================
     const passengerCount = parseInt(passengers);
     if(isNaN(passengerCount) || passengerCount < 1 || passengerCount > 10){
         showToast("Passengers must be between 1 and 10.", "error");
@@ -1253,7 +1289,6 @@ function goToReview(){
     let date = "";
     let time = "";
 
-    // ================= BOOK LATER - Validate Date/Time =================
     if(bookingType === "later"){
 
         date = document.getElementById("date").value;
@@ -1279,14 +1314,12 @@ function goToReview(){
 
     }else{
 
-        // Book Now - Current date/time use karenge
         const now = new Date();
-        date = now.toISOString().split("T")[0]; // YYYY-MM-DD
-        time = now.toTimeString().slice(0,5);   // HH:MM
+        date = now.toISOString().split("T")[0];
+        time = now.toTimeString().slice(0,5);
 
     }
 
-    // ================= SAVE TO REVIEW PAGE =================
     document.getElementById("rFrom").textContent = from;
     document.getElementById("rTo").textContent = to;
     document.getElementById("rName").textContent = name;
