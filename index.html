@@ -9,7 +9,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 <style>
-/* ================= ROOT VARIABLES ================= */
 :root{
     --primary: #6C63FF;
     --primary-dark: #5a52d5;
@@ -245,6 +244,7 @@ header{
     cursor: pointer;
     transition: var(--transition);
     text-decoration: none;
+    font-family: 'Poppins', sans-serif;
 }
 .btn i{ font-size: 18px; }
 .btn-primary{ background: var(--gradient-primary); color: white; box-shadow: 0 4px 20px rgba(108, 99, 255, 0.35); }
@@ -279,6 +279,7 @@ header{
     padding: 6px 0;
     margin-bottom: 16px;
     transition: var(--transition);
+    font-family: 'Poppins', sans-serif;
 }
 .back-btn:hover{ color: var(--primary); gap: 12px; }
 .back-btn i{ font-size: 20px; }
@@ -309,12 +310,13 @@ input:focus{
     box-shadow: 0 0 0 4px rgba(108, 99, 255, 0.1);
     outline: none;
 }
-input[readonly]{ background: #f0f0f8; border-color: #e0e0ea; }
-
-/* ================= AUTOCOMPLETE SUGGESTIONS ================= */
-.autocomplete-wrapper{
-    position: relative;
+input.selected-location{
+    border-color: #2ecc71 !important;
+    background: #f0fdf4 !important;
 }
+
+/* ================= AUTOCOMPLETE ================= */
+.autocomplete-wrapper{ position: relative; }
 
 .suggestions-box{
     display: none;
@@ -326,14 +328,12 @@ input[readonly]{ background: #f0f0f8; border-color: #e0e0ea; }
     border: 2px solid var(--primary);
     border-top: none;
     border-radius: 0 0 var(--radius-sm) var(--radius-sm);
-    max-height: 250px;
+    max-height: 280px;
     overflow-y: auto;
     z-index: 1000;
     box-shadow: 0 8px 24px rgba(108, 99, 255, 0.15);
 }
-.suggestions-box.active{
-    display: block;
-}
+.suggestions-box.active{ display: block; }
 
 .suggestion-item{
     padding: 12px 16px;
@@ -345,29 +345,18 @@ input[readonly]{ background: #f0f0f8; border-color: #e0e0ea; }
     gap: 10px;
     transition: var(--transition);
 }
-.suggestion-item:last-child{
-    border-bottom: none;
-}
-.suggestion-item:hover{
-    background: #f8f8ff;
-    padding-left: 20px;
-}
-.suggestion-item i{
+.suggestion-item:last-child{ border-bottom: none; }
+.suggestion-item:hover{ background: #f8f8ff; padding-left: 20px; }
+.suggestion-item i{ color: var(--primary); margin-top: 3px; font-size: 14px; }
+.suggestion-item .sugg-text{ flex: 1; }
+.suggestion-item .sugg-main{ font-weight: 600; color: var(--text); }
+.suggestion-item .sugg-sub{ font-size: 12px; color: var(--text-light); margin-top: 2px; }
+.suggestion-item .sugg-distance{
+    font-size: 11px;
     color: var(--primary);
-    margin-top: 3px;
-    font-size: 14px;
-}
-.suggestion-item .sugg-text{
-    flex: 1;
-}
-.suggestion-item .sugg-main{
     font-weight: 600;
-    color: var(--text);
-}
-.suggestion-item .sugg-sub{
-    font-size: 12px;
-    color: var(--text-light);
-    margin-top: 2px;
+    white-space: nowrap;
+    margin-top: 3px;
 }
 
 .suggestion-loading{
@@ -376,10 +365,7 @@ input[readonly]{ background: #f0f0f8; border-color: #e0e0ea; }
     color: var(--text-light);
     font-size: 13px;
 }
-.suggestion-loading i{
-    margin-right: 6px;
-    color: var(--primary);
-}
+.suggestion-loading i{ margin-right: 6px; color: var(--primary); }
 
 .suggestion-empty{
     padding: 14px 16px;
@@ -428,7 +414,6 @@ input[readonly]{ background: #f0f0f8; border-color: #e0e0ea; }
 
 .hidden{ display: none !important; }
 
-/* ================= TOGGLE BUTTONS ================= */
 .toggle-btn-active{
     background: #6C63FF !important;
     color: white !important;
@@ -551,7 +536,6 @@ footer strong{ color: #facc15; }
 .toast-error{ background: #e74c3c; }
 .toast-info{ background: #3498db; }
 
-/* ================= RESPONSIVE ================= */
 @media(max-width: 768px){
     .brand-top{ flex-wrap: wrap; }
     .brand-left{ flex: 1; }
@@ -669,15 +653,15 @@ footer strong{ color: #facc15; }
     </button>
     <h2><i class="fas fa-rickshaw"></i> Book Your Auto</h2>
 
-    <label><i class="fas fa-map-pin"></i> From</label>
+    <label><i class="fas fa-map-pin"></i> From (Pickup)</label>
     <div class="autocomplete-wrapper">
-        <input type="text" id="from" placeholder="Type pickup location..." autocomplete="off">
+        <input type="text" id="from" placeholder="Type pickup location..." autocomplete="off" data-selected="false">
         <div class="suggestions-box" id="fromSuggestions"></div>
     </div>
 
-    <label><i class="fas fa-map-marker-alt"></i> To</label>
+    <label><i class="fas fa-map-marker-alt"></i> To (Destination)</label>
     <div class="autocomplete-wrapper">
-        <input type="text" id="to" placeholder="Type destination..." autocomplete="off">
+        <input type="text" id="to" placeholder="Type destination..." autocomplete="off" data-selected="false">
         <div class="suggestions-box" id="toSuggestions"></div>
     </div>
 
@@ -695,13 +679,13 @@ footer strong{ color: #facc15; }
         <button 
             id="bookNowBtn" 
             onclick="setBookingType('now')" 
-            style="flex:1;padding:10px;border:none;border-radius:10px;font-weight:700;font-size:14px;cursor:pointer;background:#6C63FF;color:white;transition:all 0.3s;">
+            style="flex:1;padding:10px;border:none;border-radius:10px;font-weight:700;font-size:14px;cursor:pointer;background:#6C63FF;color:white;transition:all 0.3s;font-family:'Poppins',sans-serif;">
             <i class="fas fa-bolt"></i> Book Now
         </button>
         <button 
             id="bookLaterBtn" 
             onclick="setBookingType('later')" 
-            style="flex:1;padding:10px;border:none;border-radius:10px;font-weight:700;font-size:14px;cursor:pointer;background:transparent;color:#8888a0;transition:all 0.3s;">
+            style="flex:1;padding:10px;border:none;border-radius:10px;font-weight:700;font-size:14px;cursor:pointer;background:transparent;color:#8888a0;transition:all 0.3s;font-family:'Poppins',sans-serif;">
             <i class="fas fa-calendar-alt"></i> Book Later
         </button>
     </div>
@@ -850,6 +834,30 @@ const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 const OLA_MAPS_API_KEY = "nCKMZHbGkUlbqUzKZotvfK3yKf16VOMTProAtSD0";
 
 /* =========================================================
+   USER LOCATION — Default Bihar (Patna)
+========================================================= */
+
+// Default: Patna, Bihar (aapke area ke aas-paas)
+let userLocation = { lat: 25.5941, lng: 85.1376 };
+
+// Try to get user's exact location (agar permission de)
+if(navigator.geolocation){
+    navigator.geolocation.getCurrentPosition(
+        function(pos){
+            userLocation = {
+                lat: pos.coords.latitude,
+                lng: pos.coords.longitude
+            };
+            console.log("✅ User location detected:", userLocation);
+        },
+        function(err){
+            console.log("⚠️ Location permission denied. Using Bihar default.");
+        },
+        { enableHighAccuracy: false, timeout: 5000, maximumAge: 300000 }
+    );
+}
+
+/* =========================================================
    TOAST
 ========================================================= */
 function showToast(message, type = "info"){
@@ -861,6 +869,21 @@ function showToast(message, type = "info"){
     else toast.classList.add("toast-info");
     setTimeout(() => toast.classList.add("show"), 100);
     setTimeout(() => toast.classList.remove("show"), 3500);
+}
+
+/* =========================================================
+   DISTANCE CALCULATION (Haversine Formula)
+========================================================= */
+function calculateDistance(lat1, lon1, lat2, lon2){
+    const R = 6371; // Earth's radius in km
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a = 
+        Math.sin(dLat/2) * Math.sin(dLat/2) +
+        Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+        Math.sin(dLon/2) * Math.sin(dLon/2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    return R * c;
 }
 
 /* =========================================================
@@ -935,7 +958,7 @@ function openTrack(){
 }
 
 /* =========================================================
-   AUTOCOMPLETE - OLA MAPS
+   AUTOCOMPLETE - OLA MAPS (With Bihar Bias + Sorting)
 ========================================================= */
 
 let fromTimeout = null;
@@ -948,24 +971,24 @@ function setupAutocomplete(inputId, suggestionsId){
 
     input.addEventListener("input", function(){
 
+        // Reset selection when user types
+        input.setAttribute("data-selected", "false");
+        input.classList.remove("selected-location");
+
         const query = input.value.trim();
 
-        // Clear previous timeout
         if(inputId === "from" && fromTimeout) clearTimeout(fromTimeout);
         if(inputId === "to" && toTimeout) clearTimeout(toTimeout);
 
-        // Minimum 3 characters
         if(query.length < 3){
             suggBox.classList.remove("active");
             suggBox.innerHTML = "";
             return;
         }
 
-        // Show loading
-        suggBox.innerHTML = '<div class="suggestion-loading"><i class="fas fa-spinner fa-spin"></i> Searching...</div>';
+        suggBox.innerHTML = '<div class="suggestion-loading"><i class="fas fa-spinner fa-spin"></i> Finding nearby places...</div>';
         suggBox.classList.add("active");
 
-        // Debounce - wait 400ms after typing stops
         const timeout = setTimeout(async () => {
             await fetchSuggestions(query, suggBox, input);
         }, 400);
@@ -975,14 +998,12 @@ function setupAutocomplete(inputId, suggestionsId){
 
     });
 
-    // Hide suggestions on outside click
     document.addEventListener("click", function(e){
         if(!input.contains(e.target) && !suggBox.contains(e.target)){
             suggBox.classList.remove("active");
         }
     });
 
-    // Show suggestions again on focus (if there are any)
     input.addEventListener("focus", function(){
         if(suggBox.innerHTML.trim() !== ""){
             suggBox.classList.add("active");
@@ -995,13 +1016,12 @@ async function fetchSuggestions(query, suggBox, inputElement){
 
     try{
 
-        const url = `https://api.olamaps.io/places/v1/autocomplete?input=${encodeURIComponent(query)}&api_key=${OLA_MAPS_API_KEY}&language=en`;
+        // Location bias: results near user's location
+        const url = `https://api.olamaps.io/places/v1/autocomplete?input=${encodeURIComponent(query)}&api_key=${OLA_MAPS_API_KEY}&language=en&location=${userLocation.lat},${userLocation.lng}&radius=100000`;
 
         const response = await fetch(url, {
             method: "GET",
-            headers: {
-                "Accept": "application/json"
-            }
+            headers: { "Accept": "application/json" }
         });
 
         if(!response.ok){
@@ -1011,22 +1031,58 @@ async function fetchSuggestions(query, suggBox, inputElement){
         const data = await response.json();
 
         if(!data.predictions || data.predictions.length === 0){
-            suggBox.innerHTML = '<div class="suggestion-empty">No results found</div>';
+            suggBox.innerHTML = '<div class="suggestion-empty">No places found nearby. Try different spelling.</div>';
             return;
         }
 
-        suggBox.innerHTML = data.predictions.map((place, index) => {
+        // Calculate distance for each result and sort
+        const resultsWithDistance = data.predictions.map(place => {
 
-            const mainText = place.structured_formatting?.main_text || place.description || "";
-            const subText = place.structured_formatting?.secondary_text || "";
+            let distance = null;
+
+            // Try different possible coordinate paths
+            const lat = place.geometry?.location?.lat;
+            const lng = place.geometry?.location?.lng;
+
+            if(lat && lng){
+                distance = calculateDistance(userLocation.lat, userLocation.lng, lat, lng);
+            }
+
+            return {
+                mainText: place.structured_formatting?.main_text || place.description || "",
+                subText: place.structured_formatting?.secondary_text || "",
+                distance: distance
+            };
+
+        });
+
+        // Sort: nearest first
+        resultsWithDistance.sort((a, b) => {
+            if(a.distance === null) return 1;
+            if(b.distance === null) return -1;
+            return a.distance - b.distance;
+        });
+
+        // Limit to 6 results
+        const topResults = resultsWithDistance.slice(0, 6);
+
+        suggBox.innerHTML = topResults.map((place) => {
+
+            const fullText = place.mainText + (place.subText ? ", " + place.subText : "");
+            const distanceText = place.distance !== null 
+                ? (place.distance < 1 
+                    ? Math.round(place.distance * 1000) + " m"
+                    : place.distance.toFixed(1) + " km")
+                : "";
 
             return `
-                <div class="suggestion-item" onclick="selectSuggestion('${inputElement.id}', '${escapeStr(mainText + (subText ? ', ' + subText : ''))}')">
+                <div class="suggestion-item" onclick="selectSuggestion('${inputElement.id}', '${escapeStr(fullText)}')">
                     <i class="fas fa-map-marker-alt"></i>
                     <div class="sugg-text">
-                        <div class="sugg-main">${escapeHtml(mainText)}</div>
-                        ${subText ? `<div class="sugg-sub">${escapeHtml(subText)}</div>` : ""}
+                        <div class="sugg-main">${escapeHtml(place.mainText)}</div>
+                        ${place.subText ? `<div class="sugg-sub">${escapeHtml(place.subText)}</div>` : ""}
                     </div>
+                    ${distanceText ? `<div class="sugg-distance">${distanceText}</div>` : ""}
                 </div>
             `;
 
@@ -1035,7 +1091,7 @@ async function fetchSuggestions(query, suggBox, inputElement){
     }catch(err){
 
         console.error("Autocomplete error:", err);
-        suggBox.innerHTML = '<div class="suggestion-empty">Unable to load suggestions</div>';
+        suggBox.innerHTML = '<div class="suggestion-empty">Unable to load suggestions. Check connection.</div>';
 
     }
 
@@ -1047,6 +1103,8 @@ function selectSuggestion(inputId, value){
     const suggBox = document.getElementById(inputId + "Suggestions");
 
     input.value = value;
+    input.setAttribute("data-selected", "true"); // ✅ Mark as selected
+    input.classList.add("selected-location");    // ✅ Green border
     suggBox.classList.remove("active");
     suggBox.innerHTML = "";
 
@@ -1056,7 +1114,7 @@ function escapeStr(str){
     return String(str).replace(/'/g, "\\'").replace(/"/g, '\\"');
 }
 
-/* Initialize autocomplete on both inputs */
+/* Initialize autocomplete */
 setupAutocomplete("from", "fromSuggestions");
 setupAutocomplete("to", "toSuggestions");
 
@@ -1079,15 +1137,9 @@ function setBookingType(type){
     if(type === "now"){
 
         nowBtn.className = "toggle-btn-active";
-        nowBtn.style.background = "#6C63FF";
-        nowBtn.style.color = "white";
-
         laterBtn.className = "toggle-btn-inactive";
-        laterBtn.style.background = "transparent";
-        laterBtn.style.color = "#8888a0";
 
         dateTimeSection.style.display = "none";
-
         dateInput.value = "";
         timeInput.value = "";
 
@@ -1096,12 +1148,7 @@ function setBookingType(type){
     }else{
 
         laterBtn.className = "toggle-btn-active";
-        laterBtn.style.background = "#6C63FF";
-        laterBtn.style.color = "white";
-
         nowBtn.className = "toggle-btn-inactive";
-        nowBtn.style.background = "transparent";
-        nowBtn.style.color = "#8888a0";
 
         dateTimeSection.style.display = "block";
 
@@ -1112,18 +1159,50 @@ function setBookingType(type){
 }
 
 /* =========================================================
-   REVIEW
+   REVIEW (With Location Validation)
 ========================================================= */
 function goToReview(){
 
-    const from = document.getElementById("from").value.trim();
-    const to = document.getElementById("to").value.trim();
+    const fromInput = document.getElementById("from");
+    const toInput = document.getElementById("to");
+
+    const from = fromInput.value.trim();
+    const to = toInput.value.trim();
     const name = document.getElementById("name").value.trim();
     const mobile = document.getElementById("mobile").value.trim();
     const passengers = document.getElementById("passengers").value;
     const bookingType = document.getElementById("bookingType").value;
 
-    if(!from || !to || !name || !mobile || !passengers){
+    // ================= VALIDATE FROM LOCATION =================
+    if(!from){
+        showToast("Please enter pickup location.", "error");
+        fromInput.focus();
+        return;
+    }
+
+    if(fromInput.getAttribute("data-selected") !== "true"){
+        showToast("Please select pickup location from the suggestions list.", "error");
+        fromInput.focus();
+        fromInput.scrollIntoView({behavior:"smooth", block:"center"});
+        return;
+    }
+
+    // ================= VALIDATE TO LOCATION =================
+    if(!to){
+        showToast("Please enter destination.", "error");
+        toInput.focus();
+        return;
+    }
+
+    if(toInput.getAttribute("data-selected") !== "true"){
+        showToast("Please select destination from the suggestions list.", "error");
+        toInput.focus();
+        toInput.scrollIntoView({behavior:"smooth", block:"center"});
+        return;
+    }
+
+    // ================= OTHER VALIDATIONS =================
+    if(!name || !mobile || !passengers){
         showToast("Please fill all booking details.", "error");
         return;
     }
@@ -1161,7 +1240,7 @@ function goToReview(){
         }
 
         if(selectedDateTime < currentDateTime){
-            showToast("You cannot book for a past date or time. Please select a future time.", "error");
+            showToast("You cannot book for a past date or time.", "error");
             return;
         }
 
