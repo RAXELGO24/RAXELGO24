@@ -284,6 +284,22 @@ header{
 .back-btn:hover{ color: var(--primary); gap: 12px; }
 .back-btn i{ font-size: 20px; }
 
+/* ================= LOCATION BAR ================= */
+#locationBar{
+    background:#fff8e8;
+    border:2px solid #f39c12;
+    border-radius:12px;
+    padding:14px;
+    margin-bottom:16px;
+    transition: var(--transition);
+}
+#locationBar.success{
+    background:#f0fdf4;
+    border-color:#2ecc71;
+}
+#locationBar.success .fa-map-marker-alt{ color:#2ecc71 !important; }
+#locationBar.success #detectBtn{ background:#2ecc71; }
+
 /* ================= FORM ================= */
 label{
     display: block;
@@ -653,6 +669,20 @@ footer strong{ color: #facc15; }
     </button>
     <h2><i class="fas fa-rickshaw"></i> Book Your Auto</h2>
 
+    <!-- ================= LOCATION SETUP BAR ================= -->
+    <div id="locationBar">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+            <i class="fas fa-map-marker-alt" style="color:#f39c12; font-size:20px;"></i>
+            <div style="flex:1;">
+                <div style="font-weight:700; font-size:14px; color:#2d2d3f;">Set Your Location</div>
+                <div style="font-size:12px; color:#8888a0;" id="locationStatus">Detecting...</div>
+            </div>
+        </div>
+        <button type="button" onclick="detectLocation()" id="detectBtn" style="width:100%; padding:10px; border:none; border-radius:8px; background:#f39c12; color:white; font-weight:700; cursor:pointer; font-family:'Poppins',sans-serif; font-size:14px;">
+            <i class="fas fa-crosshairs"></i> Detect My Location
+        </button>
+    </div>
+
     <label><i class="fas fa-map-pin"></i> From (Pickup)</label>
     <div class="autocomplete-wrapper">
         <input type="text" id="from" placeholder="Type pickup location..." autocomplete="off" data-selected="false">
@@ -834,28 +864,115 @@ const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 const OLA_MAPS_API_KEY = "nCKMZHbGkUlbqUzKZotvfK3yKf16VOMTProAtSD0";
 
 /* =========================================================
-   USER LOCATION — Default Bihar (Patna)
+   USER LOCATION — Manual + Auto Detection
 ========================================================= */
 
-// Default: Patna, Bihar (aapke area ke aas-paas)
+// Default location (Patna, Bihar) if nothing detected
 let userLocation = { lat: 25.5941, lng: 85.1376 };
 
-// Try to get user's exact location (agar permission de)
-if(navigator.geolocation){
+// Try to load saved location from localStorage
+const savedLocation = localStorage.getItem("raxel_userLocation");
+if(savedLocation){
+    try{
+        const parsed = JSON.parse(savedLocation);
+        userLocation = { lat: parsed.lat, lng: parsed.lng };
+        console.log("✅ Loaded saved location:", userLocation);
+    }catch(e){
+        console.log("⚠️ Invalid saved location");
+    }
+}
+
+// Auto-detect location on page load
+function autoDetectLocation(){
+    if(navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(
+            function(pos){
+                userLocation = {
+                    lat: pos.coords.latitude,
+                    lng: pos.coords.longitude
+                };
+                localStorage.setItem("raxel_userLocation", JSON.stringify({
+                    lat: userLocation.lat,
+                    lng: userLocation.lng
+                }));
+                updateLocationUI(true, "📍 Location detected successfully!");
+                console.log("✅ Auto-detected:", userLocation);
+            },
+            function(err){
+                console.log("⚠️ Auto-detect failed:", err.message);
+                updateLocationUI(false, "Tap below to detect location");
+            },
+            { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+        );
+    }
+}
+
+// Manual detection with button click
+function detectLocation(){
+    const btn = document.getElementById("detectBtn");
+    const status = document.getElementById("locationStatus");
+
+    if(!navigator.geolocation){
+        status.textContent = "Location not supported on this device.";
+        return;
+    }
+
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Detecting...';
+    status.textContent = "Please allow location permission...";
+
     navigator.geolocation.getCurrentPosition(
         function(pos){
             userLocation = {
                 lat: pos.coords.latitude,
                 lng: pos.coords.longitude
             };
-            console.log("✅ User location detected:", userLocation);
+
+            localStorage.setItem("raxel_userLocation", JSON.stringify({
+                lat: userLocation.lat,
+                lng: userLocation.lng
+            }));
+
+            updateLocationUI(true, "✅ Location set! Now search locations.");
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-check"></i> Location Set';
+            console.log("✅ Manual location set:", userLocation);
         },
         function(err){
-            console.log("⚠️ Location permission denied. Using Bihar default.");
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-crosshairs"></i> Try Again';
+            if(err.code === 1){
+                status.textContent = "❌ Permission denied. Allow location in browser.";
+            }else{
+                status.textContent = "❌ Location failed. Try again.";
+            }
         },
-        { enableHighAccuracy: false, timeout: 5000, maximumAge: 300000 }
+        { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 }
     );
 }
+
+function updateLocationUI(success, message){
+    const bar = document.getElementById("locationBar");
+    const status = document.getElementById("locationStatus");
+    const btn = document.getElementById("detectBtn");
+
+    if(success){
+        bar.classList.add("success");
+        status.textContent = message;
+        status.style.color = "#2ecc71";
+        btn.innerHTML = '<i class="fas fa-redo"></i> Re-detect Location';
+        btn.style.background = "#2ecc71";
+    }else{
+        bar.classList.remove("success");
+        status.textContent = message;
+        status.style.color = "#8888a0";
+        btn.innerHTML = '<i class="fas fa-crosshairs"></i> Detect My Location';
+        btn.style.background = "#f39c12";
+    }
+}
+
+// Start auto-detect immediately
+autoDetectLocation();
 
 /* =========================================================
    TOAST
@@ -958,7 +1075,7 @@ function openTrack(){
 }
 
 /* =========================================================
-   AUTOCOMPLETE - OLA MAPS (With Bihar Bias + Sorting)
+   AUTOCOMPLETE - OLA MAPS
 ========================================================= */
 
 let fromTimeout = null;
@@ -971,7 +1088,6 @@ function setupAutocomplete(inputId, suggestionsId){
 
     input.addEventListener("input", function(){
 
-        // Reset selection when user types
         input.setAttribute("data-selected", "false");
         input.classList.remove("selected-location");
 
@@ -1015,9 +1131,8 @@ function setupAutocomplete(inputId, suggestionsId){
 async function fetchSuggestions(query, suggBox, inputElement){
 
     try{
-
-        // Location bias: results near user's location
-        const url = `https://api.olamaps.io/places/v1/autocomplete?input=${encodeURIComponent(query)}&api_key=${OLA_MAPS_API_KEY}&language=en&location=${userLocation.lat},${userLocation.lng}&radius=100000`;
+        // API URL with 50km radius bias around user's location
+        const url = `https://api.olamaps.io/places/v1/autocomplete?input=${encodeURIComponent(query)}&api_key=${OLA_MAPS_API_KEY}&language=en&location=${userLocation.lat},${userLocation.lng}&radius=50000`;
 
         const response = await fetch(url, {
             method: "GET",
@@ -1039,8 +1154,6 @@ async function fetchSuggestions(query, suggBox, inputElement){
         const resultsWithDistance = data.predictions.map(place => {
 
             let distance = null;
-
-            // Try different possible coordinate paths
             const lat = place.geometry?.location?.lat;
             const lng = place.geometry?.location?.lng;
 
@@ -1089,32 +1202,27 @@ async function fetchSuggestions(query, suggBox, inputElement){
         }).join("");
 
     }catch(err){
-
         console.error("Autocomplete error:", err);
         suggBox.innerHTML = '<div class="suggestion-empty">Unable to load suggestions. Check connection.</div>';
-
     }
-
 }
 
 function selectSuggestion(inputId, value){
-
     const input = document.getElementById(inputId);
     const suggBox = document.getElementById(inputId + "Suggestions");
 
     input.value = value;
-    input.setAttribute("data-selected", "true"); // ✅ Mark as selected
-    input.classList.add("selected-location");    // ✅ Green border
+    input.setAttribute("data-selected", "true");
+    input.classList.add("selected-location");
     suggBox.classList.remove("active");
     suggBox.innerHTML = "";
-
 }
 
 function escapeStr(str){
     return String(str).replace(/'/g, "\\'").replace(/"/g, '\\"');
 }
 
-/* Initialize autocomplete */
+// Initialize autocomplete
 setupAutocomplete("from", "fromSuggestions");
 setupAutocomplete("to", "toSuggestions");
 
@@ -1125,9 +1233,7 @@ setupAutocomplete("to", "toSuggestions");
 let selectedBookingType = "now";
 
 function setBookingType(type){
-
     selectedBookingType = type;
-
     const nowBtn = document.getElementById("bookNowBtn");
     const laterBtn = document.getElementById("bookLaterBtn");
     const dateTimeSection = document.getElementById("dateTimeSection");
@@ -1135,31 +1241,22 @@ function setBookingType(type){
     const timeInput = document.getElementById("time");
 
     if(type === "now"){
-
         nowBtn.className = "toggle-btn-active";
         laterBtn.className = "toggle-btn-inactive";
-
         dateTimeSection.style.display = "none";
         dateInput.value = "";
         timeInput.value = "";
-
         document.getElementById("bookingType").value = "now";
-
     }else{
-
         laterBtn.className = "toggle-btn-active";
         nowBtn.className = "toggle-btn-inactive";
-
         dateTimeSection.style.display = "block";
-
         document.getElementById("bookingType").value = "later";
-
     }
-
 }
 
 /* =========================================================
-   REVIEW (With Location Validation)
+   REVIEW (With Strict Validation)
 ========================================================= */
 function goToReview(){
 
@@ -1173,7 +1270,7 @@ function goToReview(){
     const passengers = document.getElementById("passengers").value;
     const bookingType = document.getElementById("bookingType").value;
 
-    // ================= VALIDATE FROM LOCATION =================
+    // Validate locations
     if(!from){
         showToast("Please enter pickup location.", "error");
         fromInput.focus();
@@ -1181,13 +1278,12 @@ function goToReview(){
     }
 
     if(fromInput.getAttribute("data-selected") !== "true"){
-        showToast("Please select pickup location from the suggestions list.", "error");
+        showToast("Please select pickup location from the list.", "error");
         fromInput.focus();
         fromInput.scrollIntoView({behavior:"smooth", block:"center"});
         return;
     }
 
-    // ================= VALIDATE TO LOCATION =================
     if(!to){
         showToast("Please enter destination.", "error");
         toInput.focus();
@@ -1195,13 +1291,13 @@ function goToReview(){
     }
 
     if(toInput.getAttribute("data-selected") !== "true"){
-        showToast("Please select destination from the suggestions list.", "error");
+        showToast("Please select destination from the list.", "error");
         toInput.focus();
         toInput.scrollIntoView({behavior:"smooth", block:"center"});
         return;
     }
 
-    // ================= OTHER VALIDATIONS =================
+    // Other validations
     if(!name || !mobile || !passengers){
         showToast("Please fill all booking details.", "error");
         return;
@@ -1222,7 +1318,6 @@ function goToReview(){
     let time = "";
 
     if(bookingType === "later"){
-
         date = document.getElementById("date").value;
         time = document.getElementById("time").value;
 
@@ -1243,13 +1338,10 @@ function goToReview(){
             showToast("You cannot book for a past date or time.", "error");
             return;
         }
-
     }else{
-
         const now = new Date();
         date = now.toISOString().split("T")[0];
         time = now.toTimeString().slice(0,5);
-
     }
 
     document.getElementById("rFrom").textContent = from;
@@ -1262,7 +1354,6 @@ function goToReview(){
     document.getElementById("rBookingType").textContent = bookingType === "now" ? "🚀 Immediate" : "📅 Scheduled";
 
     navigateTo("review");
-
 }
 
 function goToPayment(){ navigateTo("payment"); }
